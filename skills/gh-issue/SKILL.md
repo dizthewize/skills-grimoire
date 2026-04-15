@@ -224,7 +224,7 @@ Present a structured, scannable view. Use this format:
 ```
 ## Milestone: {title}
 
-**State:** {open/closed}  |  **Due:** {date or "No due date"}
+**State:** {open/closed}  |  **Due:** {date, or "No due date" if dueOn is null or absent}
 **Progress:** {closed}/{total} issues closed ({percent}%)
 
 ---
@@ -295,6 +295,8 @@ Create `.gh-issue/` directory if needed, then write:
 }
 ```
 
+> **Null fields:** Write `milestone.dueOn` as `null` (not omitted) when the milestone has no due date. If `milestone` itself is null (issue not in a milestone), write `"milestone": null`.
+
 **For milestone mode**, the JSON is structured as:
 
 ```json
@@ -304,7 +306,7 @@ Create `.gh-issue/` directory if needed, then write:
   "title": "v2.1",
   "state": "open",
   "dueOn": "2026-05-01",
-  "description": "...",
+  "description": "Sprint goals for v2.1",
   "openIssues": 8,
   "closedIssues": 14,
   "issues": [
@@ -316,6 +318,24 @@ Create `.gh-issue/` directory if needed, then write:
       "assignees": ["jane-doe"]
     }
   ],
+  "fetchedAt": "2026-04-14T08:30:00Z",
+  "repo": "owner/repo"
+}
+```
+
+When `due_on` is null in the GitHub API response, write `dueOn` explicitly as `null` (never omit the key):
+
+```json
+{
+  "type": "milestone",
+  "number": 5,
+  "title": "v2.2",
+  "state": "open",
+  "dueOn": null,
+  "description": null,
+  "openIssues": 3,
+  "closedIssues": 0,
+  "issues": [],
   "fetchedAt": "2026-04-14T08:30:00Z",
   "repo": "owner/repo"
 }
