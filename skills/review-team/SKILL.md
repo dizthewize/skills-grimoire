@@ -14,6 +14,12 @@ Orchestrate a team-based PR review using Agent Teams (TeamCreate + SendMessage).
 - **When you want fewer, better findings** - Devil's Advocate filters noise
 - **For PRs with ticket context** - Auto-detects ticket for acceptance criteria validation
 
+## Dependencies
+
+**External tools:**
+- `gh` CLI — [cli.github.com](https://cli.github.com/) (`gh auth login` required)
+- git — pre-installed on most systems
+
 ## Parameters
 
 | Parameter | Default | Description |

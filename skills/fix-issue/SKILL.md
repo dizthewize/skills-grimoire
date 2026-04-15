@@ -17,6 +17,15 @@ Automate the full lifecycle of a GitHub issue bug: read the issue, implement the
 - User says "fix this issue", "resolve this bug", "fix and ship #123"
 - Any bug issue that needs the full fix-review-commit-handoff cycle
 
+## Dependencies
+
+**External tools:**
+- `gh` CLI — [cli.github.com](https://cli.github.com/) (`gh auth login` required)
+- git — pre-installed on most systems
+
+**Companion suite (optional but recommended):**
+- Install `dizthewize/web-studio-skills` (`npx skills add dizthewize/web-studio-skills -g`) if fixing bugs in a site built with web-studio — provides `/web-studio`, `/site-builder`, and related skills
+
 ## Parameters
 
 | Parameter | Default | Description |

@@ -14,6 +14,11 @@ Fetch, enrich, and display rich context for a GitHub issue or milestone. Surface
 - Standalone — explore an issue, review a milestone, check project board status
 - Understanding a bug's history — linked PRs, past comments, who touched this area
 
+## Dependencies
+
+**External tools:**
+- `gh` CLI — [cli.github.com](https://cli.github.com/) (`gh auth login` required)
+
 ## Parameters
 
 | Parameter | Default | Description |

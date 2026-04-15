@@ -13,6 +13,15 @@ Orchestrate a full feature development cycle using parallel sub-agents. Takes a 
 - **Exploring before implementing** - Use `plan-only=true` to get a researched plan without writing code
 - **Structured development** - Parallel research + review instead of ad-hoc implementation
 
+## Dependencies
+
+**External tools:**
+- `gh` CLI — [cli.github.com](https://cli.github.com/) (`gh auth login` required)
+- git — pre-installed on most systems
+
+**Companion suite (optional but recommended):**
+- Install `dizthewize/web-studio-skills` (`npx skills add dizthewize/web-studio-skills -g`) if developing features for a site built with web-studio — provides `/site-builder`, `/site-designer`, and related skills
+
 ## Parameters
 
 | Parameter | Default | Description |
