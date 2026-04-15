@@ -1,0 +1,115 @@
+<h2>Design Section 4 — gh-pr</h2>
+<p class="subtitle">PR lifecycle: open → review → merge → cleanup</p>
+
+<div style="max-width:700px; margin:0 auto; font-family:sans-serif; font-size:13px;">
+
+  <!-- LIFECYCLE FLOW -->
+  <div style="background:#0f172a; border:1px solid #334155; border-radius:10px; padding:16px 20px; margin-bottom:14px; font-family:monospace; font-size:12px;">
+    <div style="color:#94a3b8; font-size:10px; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">PR lifecycle</div>
+    <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+      <div style="background:#052e16; border:1px solid #16a34a; border-radius:6px; padding:5px 10px; color:#4ade80;">open</div>
+      <div style="color:#334155;">──▶</div>
+      <div style="background:#0a1628; border:1px solid #1e3a5f; border-radius:6px; padding:5px 10px; color:#60a5fa;">review pending</div>
+      <div style="color:#334155;">──▶</div>
+      <div style="background:#2a1200; border:1px solid #92400e; border-radius:6px; padding:5px 10px; color:#fbbf24;">approved</div>
+      <div style="color:#334155;">──▶</div>
+      <div style="background:#2a0a0a; border:1px solid #dc2626; border-radius:6px; padding:5px 10px; color:#f87171;">merged</div>
+      <div style="color:#334155;">──▶</div>
+      <div style="background:#1a0a2a; border:1px solid #6d28d9; border-radius:6px; padding:5px 10px; color:#a78bfa;">branch deleted</div>
+    </div>
+  </div>
+
+  <!-- THREE MODES -->
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:14px;">
+
+    <div style="background:#052e16; border:1px solid #16a34a; border-radius:8px; padding:12px 14px;">
+      <div style="color:#4ade80; font-size:11px; font-weight:bold; margin-bottom:6px;">open</div>
+      <div style="color:#86efac; font-size:11px; font-family:sans-serif; line-height:1.9;">
+        Reads current branch<br/>
+        Fetches issue context<br/>
+        (via gh-issue if issue= set)<br/>
+        Generates PR body from<br/>
+        references/pr-template.md<br/>
+        Sets labels from commit types<br/>
+        Assigns reviewers (optional)<br/>
+        Posts PR to GitHub
+      </div>
+    </div>
+
+    <div style="background:#0d2137; border:1px solid #0369a1; border-radius:8px; padding:12px 14px;">
+      <div style="color:#38bdf8; font-size:11px; font-weight:bold; margin-bottom:6px;">status</div>
+      <div style="color:#7dd3fc; font-size:11px; font-family:sans-serif; line-height:1.9;">
+        Show open PRs for repo<br/>
+        Current branch's PR state<br/>
+        Review status + approvals<br/>
+        CI checks (pass/fail/pending)<br/>
+        Merge conflict warnings<br/>
+        "Ready to merge?" verdict
+      </div>
+    </div>
+
+    <div style="background:#2a0a0a; border:1px solid #dc2626; border-radius:8px; padding:12px 14px;">
+      <div style="color:#f87171; font-size:11px; font-weight:bold; margin-bottom:6px;">merge</div>
+      <div style="color:#fca5a5; font-size:11px; font-family:sans-serif; line-height:1.9;">
+        Verify approval + CI green<br/>
+        Confirm merge strategy<br/>
+        (squash default)<br/>
+        Merge the PR<br/>
+        Delete remote branch<br/>
+        Pull main locally<br/>
+        Report merged commit hash
+      </div>
+    </div>
+
+  </div>
+
+  <!-- AUTO-MERGE -->
+  <div style="background:#1a1200; border:1px solid #ca8a04; border-radius:10px; padding:14px 18px; margin-bottom:14px;">
+    <div style="color:#fbbf24; font-size:11px; font-weight:bold; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Auto-merge mode (auto=true or set in references/conventions.md)</div>
+    <div style="color:#fde68a; font-size:12px; font-family:sans-serif; line-height:1.9;">
+      When <code style="background:#2a1900; padding:1px 5px; border-radius:3px;">auto=true</code> is set (default when called from <code style="background:#2a1900; padding:1px 5px; border-radius:3px;">/gh ship</code>):<br/>
+      ✦ gh-pr polls PR status every 60s (up to 30 min)<br/>
+      ✦ When conditions met (1 approval + CI green) → merges automatically<br/>
+      ✦ Reports: "PR #42 auto-merged — [commit hash]"<br/>
+      ✦ If conditions not met after 30 min → reports status + exits without merging
+    </div>
+  </div>
+
+  <!-- GH-ISSUE INTEGRATION -->
+  <div style="background:#111827; border:1px dashed #374151; border-radius:8px; padding:12px 16px; margin-bottom:14px;">
+    <div style="color:#9ca3af; font-size:11px; font-weight:bold; margin-bottom:6px;">gh-issue integration (when issue= is passed)</div>
+    <div style="color:#6b7280; font-size:11px; font-family:sans-serif; line-height:1.9;">
+      gh-pr invokes gh-issue to fetch context → reads .gh-issue/context.json<br/>
+      PR title inherits issue title &nbsp;·&nbsp; PR body links "Closes #N" &nbsp;·&nbsp; Labels carried over from issue
+    </div>
+  </div>
+
+  <!-- PR TEMPLATE PREVIEW -->
+  <div style="background:#0f172a; border:1px solid #334155; border-radius:8px; padding:12px 16px;">
+    <div style="color:#94a3b8; font-size:10px; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">PR body (from references/pr-template.md)</div>
+    <div style="background:#020617; border-radius:6px; padding:10px 14px; font-family:monospace; font-size:11px; line-height:1.9; color:#64748b;">
+      <div style="color:#e2e8f0;">## Summary</div>
+      <div>- [auto-generated from commit messages]</div>
+      <div style="margin-top:6px; color:#e2e8f0;">## Changes</div>
+      <div>- [list of changed files by category]</div>
+      <div style="margin-top:6px; color:#e2e8f0;">## Closes</div>
+      <div>Closes #[issue] &nbsp;<span style="color:#334155;">(only if issue= was passed)</span></div>
+      <div style="margin-top:6px; color:#e2e8f0;">## Checklist</div>
+      <div>- [ ] Tests pass &nbsp;·&nbsp; - [ ] No secrets committed &nbsp;·&nbsp; - [ ] Branch up to date</div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;">
+    <div class="options">
+      <div class="option" data-choice="good" onclick="toggleSelect(this)">
+        <div class="letter">✓</div>
+        <div class="content"><h3>Looks right</h3><p>Move to Section 5 — references + repo structure</p></div>
+      </div>
+      <div class="option" data-choice="adjust" onclick="toggleSelect(this)">
+        <div class="letter">✎</div>
+        <div class="content"><h3>Adjust something</h3><p>Tell me in the terminal</p></div>
+      </div>
+    </div>
+  </div>
+
+</div>

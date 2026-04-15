@@ -1,0 +1,108 @@
+<h2>Design Section 5 — site-reviewer + site-deploy (revised)</h2>
+<p class="subtitle">A team-based PR review gate between build and deploy. Only surviving findings ship.</p>
+
+<div style="max-width:740px; margin:0 auto; font-family:sans-serif; font-size:13px;">
+
+  <!-- UPDATED SKILL TREE -->
+  <div style="background:#0f172a; border:1px solid #334155; border-radius:10px; padding:16px 20px; margin-bottom:14px; font-family:monospace; font-size:12px; line-height:2;">
+    <div style="color:#94a3b8; font-size:10px; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Updated flow — build → review → deploy</div>
+    <div style="color:#fbbf24;">④ site-builder &nbsp;&nbsp;</div>
+    <div style="color:#64748b; padding-left:16px;">↓ pushes branch + opens GitHub PR</div>
+    <div style="color:#34d399; font-weight:bold;">⑤ site-reviewer &nbsp;&nbsp;<span style="color:#64748b; font-weight:normal;">← NEW</span></div>
+    <div style="color:#64748b; padding-left:16px;">↓ PR approved with surviving findings only</div>
+    <div style="color:#fb7185;">⑥ site-deploy &nbsp;&nbsp;&nbsp;<span style="color:#64748b;">(optional)</span></div>
+  </div>
+
+  <!-- SITE-REVIEWER -->
+  <div style="background:#0a1f14; border:1px solid #16a34a; border-radius:10px; padding:20px 24px; margin-bottom:14px;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+      <div style="background:#15803d; color:#fff; font-weight:bold; padding:4px 10px; border-radius:6px; font-size:12px;">⑤ site-reviewer</div>
+      <div style="color:#64748b; font-size:12px;">TeamCreate + SendMessage — adversarial review loop</div>
+    </div>
+
+    <!-- TEAM MEMBERS -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px;">
+      <div style="background:#052e16; border:1px solid #166534; border-radius:8px; padding:11px 13px;">
+        <div style="color:#4ade80; font-size:11px; font-weight:bold; margin-bottom:5px;">Frontend Specialist</div>
+        <div style="color:#86efac; font-size:11px; line-height:1.8; font-family:monospace;">agent: code-refactorer<br/>Reviews: component structure, CSS vars, responsive layout, Tailwind usage, accessibility</div>
+      </div>
+      <div style="background:#052e16; border:1px solid #166534; border-radius:8px; padding:11px 13px;">
+        <div style="color:#4ade80; font-size:11px; font-weight:bold; margin-bottom:5px;">SEO + Performance Reviewer</div>
+        <div style="color:#86efac; font-size:11px; line-height:1.8; font-family:monospace;">agent: general-purpose<br/>Reviews: meta tags, schema markup, Core Web Vitals, image optimization, sitemap</div>
+      </div>
+      <div style="background:#052e16; border:1px solid #166534; border-radius:8px; padding:11px 13px;">
+        <div style="color:#4ade80; font-size:11px; font-weight:bold; margin-bottom:5px;">Conversion + Copy Auditor</div>
+        <div style="color:#86efac; font-size:11px; line-height:1.8; font-family:monospace;">agent: general-purpose<br/>Reviews: CTA placements, click-to-call, form UX, copy accuracy vs site-plan.md</div>
+      </div>
+      <div style="background:#052e16; border:1px solid #166534; border-radius:8px; padding:11px 13px;">
+        <div style="color:#4ade80; font-size:11px; font-weight:bold; margin-bottom:5px;">Security + Deploy Reviewer</div>
+        <div style="color:#86efac; font-size:11px; line-height:1.8; font-family:monospace;">agent: general-purpose<br/>Reviews: env var handling, form security, Supabase RLS (if used), deploy config</div>
+      </div>
+    </div>
+
+    <!-- DEVIL'S ADVOCATE -->
+    <div style="background:#0d2e0a; border:2px solid #ca8a04; border-radius:8px; padding:12px 15px; margin-bottom:12px;">
+      <div style="color:#fbbf24; font-size:11px; font-weight:bold; margin-bottom:6px;">Devil's Advocate &nbsp;<span style="font-family:monospace; font-weight:normal; color:#64748b;">agent: code-refactorer</span></div>
+      <div style="color:#fde68a; font-size:12px; line-height:1.9;">
+        Receives all 4 reviewer reports → challenges every finding with:<br/>
+        &nbsp;&nbsp;· "Is this actually a problem in context?"<br/>
+        &nbsp;&nbsp;· "Does this match the site-plan.md spec or contradict it?"<br/>
+        &nbsp;&nbsp;· "Is the severity justified given the site type?"<br/>
+        &nbsp;&nbsp;· "Could this be a false positive from the design-system.md choices?"
+      </div>
+    </div>
+
+    <!-- DEFENSE ROUND -->
+    <div style="background:#052e16; border:1px solid #166534; border-radius:8px; padding:12px 15px; margin-bottom:12px;">
+      <div style="color:#4ade80; font-size:11px; font-weight:bold; margin-bottom:6px;">Defense round — original reviewers respond</div>
+      <div style="color:#86efac; font-size:12px; line-height:1.9; font-family:monospace;">
+        Each finding → DEFENDED (stays, confidence rated) | ADJUSTED (revised) | WITHDRAWN
+      </div>
+    </div>
+
+    <!-- FINAL REPORT -->
+    <div style="background:#0d2e1a; border:1px solid #15803d; border-radius:8px; padding:12px 15px;">
+      <div style="color:#4ade80; font-size:11px; font-weight:bold; margin-bottom:6px;">Final report — PR comment posted to GitHub</div>
+      <div style="color:#86efac; font-size:12px; line-height:1.9;">
+        ✦ Only surviving findings listed, each with confidence: HIGH / MEDIUM / LOW<br/>
+        ✦ Withdrawn + overruled findings logged separately (not blocking)<br/>
+        ✦ Critical findings → auto-fix attempted by coordinator before PR approval<br/>
+        ✦ Medium/low findings → listed as suggestions, PR approved<br/>
+        ✦ PR merged → site-deploy proceeds (if enabled)
+      </div>
+    </div>
+  </div>
+
+  <!-- SITE-DEPLOY (unchanged) -->
+  <div style="background:#0f172a; border:1px solid #e11d48; border-radius:10px; padding:16px 22px; margin-bottom:14px;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+      <div style="background:#be123c; color:#fff; font-weight:bold; padding:4px 10px; border-radius:6px; font-size:12px;">⑥ site-deploy</div>
+      <div style="color:#64748b; font-size:12px;">optional — Netlify (default) or Vercel</div>
+    </div>
+    <div style="color:#fda4af; font-size:12px; line-height:1.9;">
+      Triggers after PR merge → polls for live URL → posts deploy summary<br/>
+      Returns: live URL, page count, SEO checklist, recommended next steps
+    </div>
+  </div>
+
+  <!-- FUTURE COMPANION -->
+  <div style="background:#0a1628; border:2px dashed #1e3a5f; border-radius:10px; padding:16px 22px; margin-bottom:14px;">
+    <div style="color:#38bdf8; font-size:11px; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Future companion — /web-issue</div>
+    <div style="color:#7dd3fc; font-size:12px; line-height:1.8;">
+      GitHub Projects-aware feature + bug skill. Reads issues/milestones, invokes specialist skills, writes progress back. Built after /web-studio is in real use.
+    </div>
+  </div>
+
+  <div style="margin-top:8px;">
+    <div class="options">
+      <div class="option" data-choice="good" onclick="toggleSelect(this)">
+        <div class="letter">✓</div>
+        <div class="content"><h3>Full design approved</h3><p>Write the spec doc and move to implementation planning</p></div>
+      </div>
+      <div class="option" data-choice="adjust" onclick="toggleSelect(this)">
+        <div class="letter">✎</div>
+        <div class="content"><h3>Adjust something</h3><p>Tell me below</p></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<h2>Design Section 1 — Overall Flow</h2>
+<p class="subtitle">How a single <code>/web-studio</code> invocation produces a live website</p>
+
+<div style="font-family: monospace; background: #0f172a; color: #e2e8f0; border-radius: 12px; padding: 28px 32px; font-size: 13px; line-height: 1.8; max-width: 720px; margin: 0 auto; overflow-x: auto;">
+
+<div style="color:#64748b;">┌─────────────────────────────────────────────────────────────┐</div>
+<div style="color:#64748b;">│  User runs: <span style="color:#a78bfa; font-weight:bold;">/web-studio</span>  (or passes GitHub issue URL)          │</div>
+<div style="color:#64748b;">└──────────────────────────┬──────────────────────────────────┘</div>
+<div style="color:#64748b; text-align:center;">                           │</div>
+<div style="color:#64748b;">                           ▼</div>
+
+<div style="background:#1e1b4b; border:1px solid #4338ca; border-radius:8px; padding:12px 16px; margin:8px 0;">
+  <span style="color:#818cf8; font-weight:bold;">web-studio</span> <span style="color:#64748b;">(coordinator)</span>
+  <div style="color:#94a3b8; font-size:12px; margin-top:4px;">reads GitHub issue → validates prerequisites → invokes phases in order</div>
+</div>
+
+<div style="display:flex; gap:8px; margin:8px 0; flex-wrap:wrap;">
+  <div style="flex:1; background:#14532d; border:1px solid #16a34a; border-radius:8px; padding:10px 12px; min-width:120px;">
+    <div style="color:#4ade80; font-weight:bold; font-size:12px;">① site-discovery</div>
+    <div style="color:#86efac; font-size:11px; margin-top:4px;">Intake Q&A<br/>→ product-marketing-context.md<br/>→ GitHub milestone created</div>
+  </div>
+  <div style="flex:1; background:#1e3a5f; border:1px solid #2563eb; border-radius:8px; padding:10px 12px; min-width:120px;">
+    <div style="color:#60a5fa; font-weight:bold; font-size:12px;">② site-planner</div>
+    <div style="color:#93c5fd; font-size:11px; margin-top:4px;">→ site-architecture<br/>→ seo-audit<br/>→ copywriting</div>
+  </div>
+  <div style="flex:1; background:#3b1f6e; border:1px solid #7c3aed; border-radius:8px; padding:10px 12px; min-width:120px;">
+    <div style="color:#c4b5fd; font-weight:bold; font-size:12px;">③ site-designer</div>
+    <div style="color:#ddd6fe; font-size:11px; margin-top:4px;">→ ui-ux-pro-max<br/>→ frontend-design</div>
+  </div>
+</div>
+<div style="display:flex; gap:8px; margin:8px 0; flex-wrap:wrap;">
+  <div style="flex:2; background:#1c1917; border:1px solid #d97706; border-radius:8px; padding:10px 12px;">
+    <div style="color:#fbbf24; font-weight:bold; font-size:12px;">④ site-builder</div>
+    <div style="color:#fcd34d; font-size:11px; margin-top:4px;">5-6 parallel research agents → phased build → per-page commits<br/>Supabase schema + auth wired during build</div>
+  </div>
+  <div style="flex:1; background:#1a1a2e; border:1px solid #e11d48; border-radius:8px; padding:10px 12px;">
+    <div style="color:#fb7185; font-weight:bold; font-size:12px;">⑤ site-deploy</div>
+    <div style="color:#fda4af; font-size:11px; margin-top:4px;">Netlify (default)<br/>or Vercel w/ credentials<br/>→ GitHub PR → auto-deploy</div>
+  </div>
+</div>
+
+<div style="margin-top:16px; color:#64748b; font-size:12px;">
+  Shared: <span style="color:#94a3b8;">./product-marketing-context.md</span> written by site-discovery, read by all downstream skills<br/>
+  State: <span style="color:#94a3b8;">.web-studio/state.json</span> — tracks phase completion, enables resume<br/>
+  GitHub: <span style="color:#94a3b8;">issue read at start → sub-issues + milestone updated after each phase</span>
+</div>
+
+</div>
+
+<div style="margin-top:20px;">
+  <div class="options">
+    <div class="option" data-choice="good" onclick="toggleSelect(this)">
+      <div class="letter">✓</div>
+      <div class="content"><h3>This flow looks right</h3><p>Move on to the next section</p></div>
+    </div>
+    <div class="option" data-choice="adjust" onclick="toggleSelect(this)">
+      <div class="letter">✎</div>
+      <div class="content"><h3>I want to adjust something</h3><p>Tell me below what needs to change</p></div>
+    </div>
+  </div>
+</div>

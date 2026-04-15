@@ -1,0 +1,55 @@
+<h2>Design Section 2 — site-discovery intake questions</h2>
+<p class="subtitle">Everything asked before any planning or building begins. Output: <code>docs/product-marketing-context.md</code></p>
+
+<div style="max-width:720px; margin:0 auto;">
+
+  <div style="background:#0f172a; border:1px solid #334155; border-radius:10px; padding:20px 24px; font-size:13px; line-height:1.9; font-family:monospace;">
+
+    <div style="color:#94a3b8; margin-bottom:12px; font-size:11px; letter-spacing:1px; text-transform:uppercase;">Phase 0 — asked by web-studio at invocation</div>
+    <div style="color:#fbbf24;">? Deploy when done? <span style="color:#64748b;">(yes / no / ask-me-later)</span></div>
+
+    <div style="color:#64748b; margin:16px 0 8px; font-size:11px; letter-spacing:1px; text-transform:uppercase; border-top:1px solid #1e293b; padding-top:12px;">Phase 1 — site-discovery: business context</div>
+    <div style="color:#4ade80;">? What is the name of the business or product?</div>
+    <div style="color:#4ade80;">? What type of site is this?</div>
+    <div style="color:#86efac; padding-left:16px; font-size:12px; color:#64748b;">→ SaaS / E-commerce / Service-based / Blog / Portfolio / Landing page / Other</div>
+    <div style="color:#4ade80;">? Who is the target audience? <span style="color:#64748b;">(brief description)</span></div>
+    <div style="color:#4ade80;">? What is the primary goal of the site? <span style="color:#64748b;">(convert leads / sell products / educate / etc.)</span></div>
+    <div style="color:#4ade80;">? Describe the business in 2–3 sentences.</div>
+
+    <div style="color:#64748b; margin:16px 0 8px; font-size:11px; letter-spacing:1px; text-transform:uppercase; border-top:1px solid #1e293b; padding-top:12px;">Phase 2 — site-discovery: tech decisions</div>
+    <div style="color:#60a5fa;">? Which frontend stack?</div>
+    <div style="color:#93c5fd; padding-left:16px; font-size:12px; color:#64748b;">→ Next.js (recommended for SaaS/e-comm) / Astro (recommended for blogs/marketing) / Vite+React / Other</div>
+    <div style="color:#60a5fa;">? Does the site need user authentication?</div>
+    <div style="color:#93c5fd; padding-left:16px; font-size:12px; color:#64748b;">→ No (public site) / Yes — Supabase Auth / Yes — other (describe)</div>
+    <div style="color:#60a5fa;">? Does the site need a database or backend?</div>
+    <div style="color:#93c5fd; padding-left:16px; font-size:12px; color:#64748b;">→ No / Yes — Supabase (preferred) / Yes — other (describe)</div>
+    <div style="color:#60a5fa; color:#fde68a;">  ↳ If Supabase: request SUPABASE_URL + SUPABASE_ANON_KEY now</div>
+    <div style="color:#60a5fa;">? Preferred deployment platform?</div>
+    <div style="color:#93c5fd; padding-left:16px; font-size:12px; color:#64748b;">→ Netlify (default, via GitHub integration) / Vercel (request credentials)</div>
+
+    <div style="color:#64748b; margin:16px 0 8px; font-size:11px; letter-spacing:1px; text-transform:uppercase; border-top:1px solid #1e293b; padding-top:12px;">Phase 3 — site-discovery: content & design hints</div>
+    <div style="color:#c4b5fd;">? Do you have brand colors, fonts, or a style reference? <span style="color:#64748b;">(optional)</span></div>
+    <div style="color:#c4b5fd;">? List the pages you know you need. <span style="color:#64748b;">(or leave blank — site-planner will suggest)</span></div>
+    <div style="color:#c4b5fd;">? Any competitors or sites you admire? <span style="color:#64748b;">(optional — informs design direction)</span></div>
+    <div style="color:#c4b5fd;">? What tone should the copy have?</div>
+    <div style="color:#ddd6fe; padding-left:16px; font-size:12px; color:#64748b;">→ Professional / Friendly & casual / Bold & direct / Luxurious / Playful / Technical</div>
+
+    <div style="color:#64748b; margin:16px 0 8px; font-size:11px; letter-spacing:1px; text-transform:uppercase; border-top:1px solid #1e293b; padding-top:12px;">Output</div>
+    <div style="color:#fde68a;">→ writes docs/product-marketing-context.md</div>
+    <div style="color:#fde68a;">→ writes .web-studio/state.json (phase: discovery complete)</div>
+    <div style="color:#fde68a;">→ summarizes back to user for confirmation before proceeding</div>
+  </div>
+
+  <div style="margin-top:20px;">
+    <div class="options">
+      <div class="option" data-choice="good" onclick="toggleSelect(this)">
+        <div class="letter">✓</div>
+        <div class="content"><h3>These questions cover it</h3><p>Move to Section 3: site-planner + site-designer</p></div>
+      </div>
+      <div class="option" data-choice="add" onclick="toggleSelect(this)">
+        <div class="letter">+</div>
+        <div class="content"><h3>Add or remove some questions</h3><p>Tell me below what to change</p></div>
+      </div>
+    </div>
+  </div>
+</div>

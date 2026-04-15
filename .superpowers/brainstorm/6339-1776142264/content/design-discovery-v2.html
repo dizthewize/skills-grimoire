@@ -1,0 +1,81 @@
+<h2>Design Section 2 — site-discovery (revised)</h2>
+<p class="subtitle">Questions branch by site type. Service-based businesses get a targeted intake flow.</p>
+
+<div style="max-width:740px; margin:0 auto; font-family:monospace; font-size:13px;">
+
+  <!-- UNIVERSAL PHASE -->
+  <div style="background:#0f172a; border:1px solid #334155; border-radius:10px; padding:18px 22px; margin-bottom:12px;">
+    <div style="color:#94a3b8; font-size:11px; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;">Phase 1 — universal (all site types)</div>
+    <div style="color:#4ade80;">? What is the business name?</div>
+    <div style="color:#4ade80;">? What type of site is this?</div>
+    <div style="color:#64748b; padding-left:14px; font-size:11px;">→ Service-based business  /  SaaS  /  E-commerce  /  Blog / Content  /  Portfolio  /  Landing page</div>
+    <div style="color:#4ade80; margin-top:6px;">? What city or region does the business serve? <span style="color:#64748b;">(used for local SEO + branding)</span></div>
+  </div>
+
+  <!-- SERVICE-BASED BRANCH -->
+  <div style="background:#0f1f0f; border:1px solid #16a34a; border-radius:10px; padding:18px 22px; margin-bottom:12px;">
+    <div style="color:#4ade80; font-size:11px; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;">Phase 2A — service-based business branch</div>
+
+    <div style="color:#4ade80;">? What trade or industry?</div>
+    <div style="color:#64748b; padding-left:14px; font-size:11px;">→ Flooring  /  Roofing  /  Remodeling  /  Landscaping  /  HVAC  /  Plumbing  /  Auto / Mobile Mechanic  /  Cleaning  /  Other (describe)</div>
+
+    <div style="color:#4ade80; margin-top:6px;">? What is the primary contact phone number? <span style="color:#64748b;">(appears in 3+ placements on site)</span></div>
+    <div style="color:#4ade80;">? What services do you offer? <span style="color:#64748b;">(list them — becomes the services section)</span></div>
+    <div style="color:#4ade80;">? What cities/areas do you serve? <span style="color:#64748b;">(service area section + local SEO)</span></div>
+    <div style="color:#4ade80;">? What is your primary lead capture offer?</div>
+    <div style="color:#64748b; padding-left:14px; font-size:11px;">→ Free estimate  /  Free consultation  /  Free inspection  /  Discount on first job  /  Custom (describe)</div>
+    <div style="color:#4ade80;">? Any key trust signals to highlight?</div>
+    <div style="color:#64748b; padding-left:14px; font-size:11px;">→ Years in business, # customers served, licensed/insured, certifications, warranties</div>
+    <div style="color:#4ade80;">? Do you have brand colors? <span style="color:#64748b;">(or let the skill pick industry-appropriate colors)</span></div>
+    <div style="color:#4ade80;">? What copy tone fits this business?</div>
+    <div style="color:#64748b; padding-left:14px; font-size:11px;">→ Bold & direct  /  Friendly & local  /  Premium & refined  /  Technical & expert</div>
+    <div style="color:#4ade80;">? Any competitor or reference sites you admire? <span style="color:#64748b;">(optional)</span></div>
+  </div>
+
+  <!-- SAAS BRANCH (collapsed preview) -->
+  <div style="background:#0f0f2a; border:1px solid #3730a3; border-radius:10px; padding:14px 22px; margin-bottom:12px; opacity:0.75;">
+    <div style="color:#818cf8; font-size:11px; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Phase 2B — SaaS branch <span style="font-weight:normal;">(different questions)</span></div>
+    <div style="color:#64748b; font-size:12px;">Target persona, pricing model, key features, trial/freemium offer, integrations, tech stack preference…</div>
+  </div>
+
+  <!-- ECOMM BRANCH (collapsed preview) -->
+  <div style="background:#1a0f0a; border:1px solid #92400e; border-radius:10px; padding:14px 22px; margin-bottom:12px; opacity:0.75;">
+    <div style="color:#fbbf24; font-size:11px; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Phase 2C — E-commerce branch <span style="font-weight:normal;">(different questions)</span></div>
+    <div style="color:#64748b; font-size:12px;">Product catalog size, payment processor, shipping logistics, Supabase vs Shopify, collections structure…</div>
+  </div>
+
+  <!-- UNIVERSAL PHASE 3 -->
+  <div style="background:#0f172a; border:1px solid #334155; border-radius:10px; padding:18px 22px; margin-bottom:12px;">
+    <div style="color:#94a3b8; font-size:11px; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;">Phase 3 — tech decisions (all types)</div>
+    <div style="color:#60a5fa;">? Frontend stack? <span style="color:#64748b;">(recommended based on site type: Next.js for SaaS/e-comm, Astro for service/blog)</span></div>
+    <div style="color:#60a5fa;">? Does this site need user accounts / authentication?</div>
+    <div style="color:#64748b; padding-left:14px; font-size:11px;">→ No  /  Yes — Supabase Auth  /  Yes — other (describe)</div>
+    <div style="color:#60a5fa;">? Does it need a database or backend?</div>
+    <div style="color:#64748b; padding-left:14px; font-size:11px;">→ No  /  Yes — Supabase (preferred, credentials requested now)  /  Yes — other</div>
+    <div style="color:#60a5fa;">? Deployment platform?</div>
+    <div style="color:#64748b; padding-left:14px; font-size:11px;">→ Netlify via GitHub (default)  /  Vercel (credentials requested)</div>
+  </div>
+
+  <!-- OUTPUT -->
+  <div style="background:#1a1200; border:1px solid #ca8a04; border-radius:10px; padding:14px 22px;">
+    <div style="color:#fbbf24; font-size:11px; letter-spacing:1px; text-transform:uppercase; margin-bottom:8px;">Output</div>
+    <div style="color:#fde68a; line-height:2;">
+      → writes <span style="color:#fff;">docs/product-marketing-context.md</span><br/>
+      → summarizes back to user: "Here's what I captured — does this look right?"<br/>
+      → only proceeds once confirmed
+    </div>
+  </div>
+
+  <div style="margin-top:20px;">
+    <div class="options">
+      <div class="option" data-choice="good" onclick="toggleSelect(this)">
+        <div class="letter">✓</div>
+        <div class="content"><h3>This captures it well</h3><p>Move to Section 3: site-planner + site-designer</p></div>
+      </div>
+      <div class="option" data-choice="adjust" onclick="toggleSelect(this)">
+        <div class="letter">✎</div>
+        <div class="content"><h3>Adjust something</h3><p>Tell me below</p></div>
+      </div>
+    </div>
+  </div>
+</div>

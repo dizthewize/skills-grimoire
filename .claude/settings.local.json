@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /home/ubuntu24/.claude/plugins/cache/dizthewize/gh-management)",
+      "Bash(rmdir /home/ubuntu24/.claude/plugins/cache/dizthewize/gh-management)",
+      "Bash(ln -s /mnt/c/Users/tez/projects/gh-management /home/ubuntu24/.claude/plugins/cache/dizthewize/gh-management)",
+      "Read(//home/ubuntu24/.claude/plugins/cache/dizthewize/**)"
+    ]
+  }
+}

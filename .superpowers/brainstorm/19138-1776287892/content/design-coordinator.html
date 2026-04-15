@@ -1,0 +1,78 @@
+<h2>Design Section 2 — /gh Coordinator</h2>
+<p class="subtitle">Entry point, routing logic, and chained workflow support</p>
+
+<div style="max-width:700px; margin:0 auto; font-family:sans-serif; font-size:13px;">
+
+  <!-- INVOCATION EXAMPLES -->
+  <div style="background:#0f172a; border:1px solid #334155; border-radius:10px; padding:16px 20px; margin-bottom:14px; font-family:monospace; font-size:12px;">
+    <div style="color:#94a3b8; font-size:10px; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Invocation examples</div>
+    <div style="color:#4ade80;">/gh repo new my-project</div>
+    <div style="color:#4ade80;">/gh repo new my-project private=true</div>
+    <div style="color:#60a5fa; margin-top:6px;">/gh commit "add hero section"</div>
+    <div style="color:#60a5fa;">/gh commit revert a3f2c1</div>
+    <div style="color:#60a5fa;">/gh commit --all</div>
+    <div style="color:#f87171; margin-top:6px;">/gh pr open</div>
+    <div style="color:#f87171;">/gh pr open issue=42</div>
+    <div style="color:#f87171;">/gh pr merge</div>
+    <div style="color:#f87171;">/gh pr merge auto=true</div>
+    <div style="color:#f87171;">/gh pr status</div>
+    <div style="color:#a78bfa; margin-top:6px;">/gh &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#64748b;"># no args → interactive menu</span></div>
+  </div>
+
+  <!-- ROUTING LOGIC -->
+  <div style="background:#0f172a; border:1px solid #334155; border-radius:10px; padding:16px 20px; margin-bottom:14px;">
+    <div style="color:#94a3b8; font-size:10px; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Routing logic</div>
+    <div style="display:grid; grid-template-columns:120px 1fr; gap:6px 16px; align-items:start;">
+      <div style="color:#4ade80; font-family:monospace;">/gh repo …</div>
+      <div style="color:#86efac;">→ invokes gh-repo with remaining args</div>
+      <div style="color:#60a5fa; font-family:monospace;">/gh commit …</div>
+      <div style="color:#93c5fd;">→ invokes gh-commit with remaining args</div>
+      <div style="color:#f87171; font-family:monospace;">/gh pr …</div>
+      <div style="color:#fca5a5;">→ invokes gh-pr with remaining args</div>
+      <div style="color:#a78bfa; font-family:monospace;">/gh (no args)</div>
+      <div style="color:#ddd6fe;">→ interactive menu — choose action</div>
+    </div>
+  </div>
+
+  <!-- CHAINED WORKFLOWS -->
+  <div style="background:#0f1a0f; border:1px solid #166534; border-radius:10px; padding:16px 20px; margin-bottom:14px;">
+    <div style="color:#4ade80; font-size:10px; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Chained workflows (coordinator only)</div>
+    <div style="color:#86efac; font-size:12px; line-height:2.1; font-family:monospace;">
+      <div><span style="color:#fbbf24;">/gh init</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ repo new → initial commit → done</div>
+      <div><span style="color:#fbbf24;">/gh ship</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ commit → push → pr open → (auto-merge if approved)</div>
+      <div><span style="color:#fbbf24;">/gh ship issue=42</span> → gh-issue fetch → commit → push → pr open (linked to #42)</div>
+    </div>
+    <div style="margin-top:10px; font-family:sans-serif; color:#64748b; font-size:11px;">Chained commands are the coordinator's superpower — specialists handle their phase, coordinator sequences them without stopping.</div>
+  </div>
+
+  <!-- INTERACTIVE MENU -->
+  <div style="background:#0f172a; border:1px solid #334155; border-radius:10px; padding:16px 20px; margin-bottom:14px;">
+    <div style="color:#94a3b8; font-size:10px; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Interactive menu (no-args invocation)</div>
+    <div style="background:#020617; border-radius:6px; padding:12px 16px; font-family:monospace; font-size:12px; line-height:2;">
+      <div style="color:#a78bfa;">What would you like to do?</div>
+      <div style="color:#64748b;">──────────────────────────────</div>
+      <div style="color:#4ade80;">1. Create a new GitHub repo</div>
+      <div style="color:#60a5fa;">2. Stage and commit changes</div>
+      <div style="color:#60a5fa;">3. Revert a commit</div>
+      <div style="color:#60a5fa;">4. Resolve merge conflicts</div>
+      <div style="color:#f87171;">5. Open a pull request</div>
+      <div style="color:#f87171;">6. Check PR status</div>
+      <div style="color:#f87171;">7. Merge an approved PR</div>
+      <div style="color:#fbbf24;">8. Ship (commit + push + PR)</div>
+    </div>
+  </div>
+
+  <div style="margin-top:8px;">
+    <div class="options">
+      <div class="option" data-choice="good" onclick="toggleSelect(this)">
+        <div class="letter">✓</div>
+        <div class="content"><h3>Looks right</h3><p>Move to Section 3 — gh-repo + gh-commit design</p></div>
+      </div>
+      <div class="option" data-choice="adjust" onclick="toggleSelect(this)">
+        <div class="letter">✎</div>
+        <div class="content"><h3>Adjust something</h3><p>Tell me in the terminal</p></div>
+      </div>
+    </div>
+  </div>
+
+</div>

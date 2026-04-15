@@ -1,0 +1,111 @@
+<h2>Design Section 3 — gh-repo + gh-commit</h2>
+<p class="subtitle">Repository initialization and commit lifecycle</p>
+
+<div style="max-width:700px; margin:0 auto; font-family:sans-serif; font-size:13px;">
+
+  <!-- GH-REPO -->
+  <div style="background:#0f2a14; border:1px solid #16a34a; border-radius:10px; padding:18px 22px; margin-bottom:14px;">
+    <div style="color:#4ade80; font-size:12px; font-weight:bold; text-transform:uppercase; letter-spacing:1px; margin-bottom:14px;">gh-repo</div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+      <div style="background:#052e16; border:1px solid #166534; border-radius:8px; padding:11px 13px;">
+        <div style="color:#4ade80; font-size:11px; font-weight:bold; margin-bottom:6px;">Parameters</div>
+        <div style="color:#86efac; font-size:11px; font-family:monospace; line-height:2;">
+          name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;required<br/>
+          private &nbsp;&nbsp;&nbsp;false<br/>
+          description &nbsp;""<br/>
+          org &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(current user)<br/>
+          clone &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;true
+        </div>
+      </div>
+      <div style="background:#052e16; border:1px solid #166534; border-radius:8px; padding:11px 13px;">
+        <div style="color:#4ade80; font-size:11px; font-weight:bold; margin-bottom:6px;">What it does</div>
+        <div style="color:#86efac; font-size:11px; font-family:sans-serif; line-height:1.9;">
+          ✦ gh repo create (public/private)<br/>
+          ✦ Add README.md + .gitignore<br/>
+          ✦ Set default branch to main<br/>
+          ✦ Apply branch protection rules<br/>
+          ✦ Add standard labels (bug, feat,<br/>
+          &nbsp;&nbsp;chore, docs, breaking)<br/>
+          ✦ Clone locally (if clone=true)
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#0d2e1a; border:1px solid #15803d; border-radius:8px; padding:10px 14px;">
+      <div style="color:#4ade80; font-size:10px; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Branch protection defaults (from references/repo-defaults.md)</div>
+      <div style="color:#86efac; font-size:11px; font-family:monospace; line-height:1.9;">
+        require PR before merging &nbsp;·&nbsp; require 1 approval &nbsp;·&nbsp; dismiss stale reviews<br/>
+        block direct push to main &nbsp;·&nbsp; delete branch on merge
+      </div>
+    </div>
+  </div>
+
+  <!-- GH-COMMIT -->
+  <div style="background:#0d1f3a; border:1px solid #2563eb; border-radius:10px; padding:18px 22px; margin-bottom:14px;">
+    <div style="color:#60a5fa; font-size:12px; font-weight:bold; text-transform:uppercase; letter-spacing:1px; margin-bottom:14px;">gh-commit</div>
+
+    <!-- MODES -->
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:12px;">
+
+      <div style="background:#0a1628; border:1px solid #1e3a5f; border-radius:8px; padding:10px 12px;">
+        <div style="color:#60a5fa; font-size:11px; font-weight:bold; margin-bottom:5px;">Normal commit</div>
+        <div style="color:#93c5fd; font-size:11px; font-family:sans-serif; line-height:1.8;">
+          Stage files<br/>
+          Validate message format<br/>
+          (conventional + custom)<br/>
+          Commit + push<br/>
+          Report commit hash
+        </div>
+      </div>
+
+      <div style="background:#0a1628; border:1px solid #1e3a5f; border-radius:8px; padding:10px 12px;">
+        <div style="color:#60a5fa; font-size:11px; font-weight:bold; margin-bottom:5px;">Revert</div>
+        <div style="color:#93c5fd; font-size:11px; font-family:sans-serif; line-height:1.8;">
+          Accept hash or "last"<br/>
+          Show what will be undone<br/>
+          STOP — confirm<br/>
+          git revert (no --hard)<br/>
+          Push revert commit
+        </div>
+      </div>
+
+      <div style="background:#0a1628; border:1px solid #1e3a5f; border-radius:8px; padding:10px 12px;">
+        <div style="color:#60a5fa; font-size:11px; font-weight:bold; margin-bottom:5px;">Conflict resolver</div>
+        <div style="color:#93c5fd; font-size:11px; font-family:sans-serif; line-height:1.8;">
+          Detect conflict markers<br/>
+          Show each conflict<br/>
+          Resolve (ours/theirs/manual)<br/>
+          Stage resolved files<br/>
+          Complete the merge commit
+        </div>
+      </div>
+    </div>
+
+    <!-- COMMIT VALIDATION -->
+    <div style="background:#0d2137; border:1px solid #0369a1; border-radius:8px; padding:10px 14px;">
+      <div style="color:#38bdf8; font-size:10px; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Commit message validation (references/commit-template.md)</div>
+      <div style="color:#7dd3fc; font-size:11px; font-family:monospace; line-height:2;">
+        <span style="color:#4ade80;">feat</span>|<span style="color:#f87171;">fix</span>|<span style="color:#fbbf24;">chore</span>|<span style="color:#a78bfa;">docs</span>|<span style="color:#60a5fa;">refactor</span>|<span style="color:#fb7185;">perf</span>|<span style="color:#34d399;">test</span>|<span style="color:#f97316;">style</span>(<span style="color:#e2e8f0;">scope?</span>)!?: &lt;description&gt;<br/>
+        <span style="color:#64748b;">─── custom additions ───────────────────────────</span><br/>
+        <span style="color:#fbbf24;">build</span> &nbsp;— scaffold, tooling, deps<br/>
+        <span style="color:#f97316;">deploy</span> — deploy config, netlify/vercel changes<br/>
+        <span style="color:#34d399;">skill</span> &nbsp;— skill suite authoring / updates
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:8px;">
+    <div class="options">
+      <div class="option" data-choice="good" onclick="toggleSelect(this)">
+        <div class="letter">✓</div>
+        <div class="content"><h3>Looks right</h3><p>Move to Section 4 — gh-pr design</p></div>
+      </div>
+      <div class="option" data-choice="adjust" onclick="toggleSelect(this)">
+        <div class="letter">✎</div>
+        <div class="content"><h3>Adjust something</h3><p>Tell me in the terminal</p></div>
+      </div>
+    </div>
+  </div>
+
+</div>

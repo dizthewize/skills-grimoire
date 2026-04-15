@@ -1,0 +1,96 @@
+<h2>Design Section 2 — site-discovery (v4)</h2>
+<p class="subtitle">Business name is now optional — skill generates name options if not provided.</p>
+
+<div style="max-width:740px; margin:0 auto; font-family:monospace; font-size:13px;">
+
+  <!-- UNIVERSAL PHASE 1 -->
+  <div style="background:#0f172a; border:1px solid #334155; border-radius:10px; padding:18px 22px; margin-bottom:12px;">
+    <div style="color:#94a3b8; font-size:11px; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;">Phase 1 — universal (all site types)</div>
+
+    <div style="color:#4ade80;">? Do you have a business name? <span style="color:#64748b;">(optional — skip and we'll suggest some)</span></div>
+    <div style="background:#0a1f0a; border:1px dashed #166534; border-radius:6px; padding:10px 14px; margin:8px 0 8px 14px; font-family:sans-serif; font-size:12px;">
+      <div style="color:#4ade80; font-size:10px; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">If no name given → skill generates 3–5 name options based on:</div>
+      <div style="color:#86efac; line-height:1.9;">
+        ✦ Trade / industry<br/>
+        ✦ City or region<br/>
+        ✦ Name style: location-based ("Flooring Dixon"), descriptive ("Premier Floors"), memorable/brandable ("FloorCraft Co.")<br/>
+        ✦ User picks one or requests more options before continuing
+      </div>
+    </div>
+
+    <div style="color:#4ade80; margin-top:6px;">? What type of site is this?</div>
+    <div style="color:#64748b; padding-left:14px; font-size:11px;">→ Service-based business  /  SaaS  /  E-commerce  /  Blog / Content  /  Portfolio  /  Landing page</div>
+    <div style="color:#4ade80; margin-top:6px;">? What city or region is the business based in? <span style="color:#64748b;">(for local SEO + branding)</span></div>
+  </div>
+
+  <!-- SERVICE-BASED BRANCH -->
+  <div style="background:#0f1f0f; border:1px solid #16a34a; border-radius:10px; padding:18px 22px; margin-bottom:12px;">
+    <div style="color:#4ade80; font-size:11px; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Phase 2A — service-based business</div>
+    <div style="color:#86efac; font-size:11px; margin-bottom:14px; font-family:sans-serif; font-style:italic;">5 questions only — rest is inferred by site-planner &amp; site-designer</div>
+
+    <div style="color:#4ade80;">? What trade or industry?</div>
+    <div style="color:#64748b; padding-left:14px; font-size:11px;">→ Flooring  /  Roofing  /  Remodeling  /  Landscaping  /  HVAC  /  Plumbing  /  Auto / Mobile Mechanic  /  Cleaning  /  Painting  /  Other (describe)</div>
+
+    <div style="color:#4ade80; margin-top:8px;">? Primary contact phone number?</div>
+    <div style="color:#4ade80; margin-top:8px;">? What cities or areas do you serve?</div>
+    <div style="color:#4ade80; margin-top:8px;">? Do you have brand colors? <span style="color:#64748b;">(or let the skill pick)</span></div>
+    <div style="color:#4ade80; margin-top:8px;">? Any competitor or reference sites you admire? <span style="color:#64748b;">(optional)</span></div>
+
+    <div style="margin-top:16px; padding:12px 16px; background:#0a1f0a; border:1px dashed #166534; border-radius:8px; font-family:sans-serif;">
+      <div style="color:#4ade80; font-size:10px; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Inferred by site-planner + site-designer (not asked)</div>
+      <div style="color:#86efac; font-size:12px; line-height:2;">
+        ✦ Services list — derived from industry<br/>
+        ✦ Lead capture offer — recommended by site-planner per trade norms<br/>
+        ✦ Copy tone — recommended by industry (auto → bold/direct, landscaping → friendly/local)<br/>
+        ✦ Trust signals — standard per trade (licensed &amp; insured, years in business, etc.)<br/>
+        ✦ Color palette — industry-appropriate if no brand colors given<br/>
+        ✦ Page structure &amp; urgency copy — site-planner recommends
+      </div>
+    </div>
+  </div>
+
+  <!-- COLLAPSED BRANCHES -->
+  <div style="background:#0f0f2a; border:1px solid #3730a3; border-radius:10px; padding:14px 22px; margin-bottom:12px; opacity:0.75;">
+    <div style="color:#818cf8; font-size:11px; letter-spacing:1px; text-transform:uppercase; margin-bottom:4px;">Phase 2B — SaaS branch</div>
+    <div style="color:#64748b; font-size:12px; font-family:sans-serif;">Target persona, pricing model, key differentiators, trial/freemium, integrations…</div>
+  </div>
+  <div style="background:#1a0f0a; border:1px solid #92400e; border-radius:10px; padding:14px 22px; margin-bottom:12px; opacity:0.75;">
+    <div style="color:#fbbf24; font-size:11px; letter-spacing:1px; text-transform:uppercase; margin-bottom:4px;">Phase 2C — E-commerce branch</div>
+    <div style="color:#64748b; font-size:12px; font-family:sans-serif;">Product catalog, payment processor, shipping, collections structure…</div>
+  </div>
+
+  <!-- TECH DECISIONS -->
+  <div style="background:#0f172a; border:1px solid #334155; border-radius:10px; padding:18px 22px; margin-bottom:12px;">
+    <div style="color:#94a3b8; font-size:11px; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;">Phase 3 — tech decisions</div>
+    <div style="color:#60a5fa;">? Frontend stack? <span style="color:#64748b;">(skill recommends based on type — user can override)</span></div>
+    <div style="color:#60a5fa; margin-top:6px;">? User authentication needed?</div>
+    <div style="color:#64748b; padding-left:14px; font-size:11px;">→ No  /  Yes — Supabase Auth  /  Yes — other</div>
+    <div style="color:#60a5fa; margin-top:6px;">? Database / backend needed?</div>
+    <div style="color:#64748b; padding-left:14px; font-size:11px;">→ No  /  Yes — Supabase (credentials requested now)  /  Yes — other</div>
+    <div style="color:#60a5fa; margin-top:6px;">? Deployment platform?</div>
+    <div style="color:#64748b; padding-left:14px; font-size:11px;">→ Netlify via GitHub (default)  /  Vercel (credentials requested)</div>
+  </div>
+
+  <!-- OUTPUT -->
+  <div style="background:#1a1200; border:1px solid #ca8a04; border-radius:10px; padding:14px 22px;">
+    <div style="color:#fbbf24; font-size:11px; letter-spacing:1px; text-transform:uppercase; margin-bottom:8px;">Output</div>
+    <div style="color:#fde68a; line-height:2; font-family:sans-serif; font-size:12px;">
+      → writes <code style="color:#fff;">docs/product-marketing-context.md</code><br/>
+      → summarizes captured info + what planner/designer will infer<br/>
+      → waits for user confirmation before proceeding
+    </div>
+  </div>
+
+  <div style="margin-top:20px;">
+    <div class="options">
+      <div class="option" data-choice="good" onclick="toggleSelect(this)">
+        <div class="letter">✓</div>
+        <div class="content"><h3>This is right</h3><p>Move to Section 3: site-planner + site-designer</p></div>
+      </div>
+      <div class="option" data-choice="adjust" onclick="toggleSelect(this)">
+        <div class="letter">✎</div>
+        <div class="content"><h3>One more tweak</h3><p>Tell me below</p></div>
+      </div>
+    </div>
+  </div>
+</div>

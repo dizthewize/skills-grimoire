@@ -1,0 +1,85 @@
+<h2>Design Section 5 — References + Repo Structure</h2>
+<p class="subtitle">Shared conventions layer and how the suite lives as its own repository</p>
+
+<div style="max-width:700px; margin:0 auto; font-family:sans-serif; font-size:13px;">
+
+  <!-- REPO STRUCTURE -->
+  <div style="background:#0f172a; border:1px solid #334155; border-radius:10px; padding:16px 20px; margin-bottom:14px; font-family:monospace; font-size:12px; line-height:2;">
+    <div style="color:#94a3b8; font-size:10px; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Repository structure — gh-management (its own repo)</div>
+    <div style="color:#e2e8f0;">gh-management/</div>
+    <div style="color:#4ade80; padding-left:16px;">skills/</div>
+    <div style="color:#86efac; padding-left:32px;">gh/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← coordinator</div>
+    <div style="color:#86efac; padding-left:48px;">SKILL.md</div>
+    <div style="color:#86efac; padding-left:32px;">gh-repo/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← specialist</div>
+    <div style="color:#86efac; padding-left:48px;">SKILL.md</div>
+    <div style="color:#86efac; padding-left:32px;">gh-commit/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← specialist</div>
+    <div style="color:#86efac; padding-left:48px;">SKILL.md</div>
+    <div style="color:#86efac; padding-left:32px;">gh-pr/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← specialist (wraps gh-issue)</div>
+    <div style="color:#86efac; padding-left:48px;">SKILL.md</div>
+    <div style="color:#fbbf24; padding-left:16px;">references/</div>
+    <div style="color:#fde68a; padding-left:32px;">conventions.md &nbsp;&nbsp;&nbsp;&nbsp;← master rules doc (human-readable)</div>
+    <div style="color:#fde68a; padding-left:32px;">commit-template.md ← types, scopes, format + custom additions</div>
+    <div style="color:#fde68a; padding-left:32px;">pr-template.md &nbsp;&nbsp;&nbsp;&nbsp;← PR body structure + checklist</div>
+    <div style="color:#fde68a; padding-left:32px;">repo-defaults.md &nbsp;&nbsp;← branch protection, labels, README boilerplate</div>
+    <div style="color:#94a3b8; padding-left:16px;">README.md &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← how to install + use in any project</div>
+    <div style="color:#94a3b8; padding-left:16px;">.gitignore</div>
+  </div>
+
+  <!-- REFERENCES DETAIL -->
+  <div style="background:#1a1200; border:1px solid #ca8a04; border-radius:10px; padding:16px 20px; margin-bottom:14px;">
+    <div style="color:#fbbf24; font-size:11px; font-weight:bold; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">references/ — what each file contains</div>
+
+    <div style="display:grid; grid-template-columns:1fr; gap:8px;">
+
+      <div style="background:#2a1900; border:1px solid #92400e; border-radius:8px; padding:10px 14px;">
+        <div style="color:#fbbf24; font-size:11px; font-weight:bold; margin-bottom:4px;">conventions.md</div>
+        <div style="color:#fde68a; font-size:11px; font-family:sans-serif; line-height:1.8;">The master human-readable reference. Branch naming rules, commit format, PR standards, merge strategy, label taxonomy. This is what a new developer (or AI) reads to understand how this project manages GitHub.</div>
+      </div>
+
+      <div style="background:#2a1900; border:1px solid #92400e; border-radius:8px; padding:10px 14px;">
+        <div style="color:#fbbf24; font-size:11px; font-weight:bold; margin-bottom:4px;">commit-template.md</div>
+        <div style="color:#fde68a; font-size:11px; font-family:sans-serif; line-height:1.8;">Standard types (feat/fix/chore/docs/refactor/perf/test/style) + custom additions (build/deploy/skill). Scope rules, description length, breaking change footer format. Read by gh-commit for validation.</div>
+      </div>
+
+      <div style="background:#2a1900; border:1px solid #92400e; border-radius:8px; padding:10px 14px;">
+        <div style="color:#fbbf24; font-size:11px; font-weight:bold; margin-bottom:4px;">pr-template.md</div>
+        <div style="color:#fde68a; font-size:11px; font-family:sans-serif; line-height:1.8;">PR body sections (Summary, Changes, Closes, Checklist), label-to-commit-type mapping, reviewer assignment rules, merge strategy (squash default). Read by gh-pr when generating PR bodies.</div>
+      </div>
+
+      <div style="background:#2a1900; border:1px solid #92400e; border-radius:8px; padding:10px 14px;">
+        <div style="color:#fbbf24; font-size:11px; font-weight:bold; margin-bottom:4px;">repo-defaults.md</div>
+        <div style="color:#fde68a; font-size:11px; font-family:sans-serif; line-height:1.8;">Branch protection ruleset, default labels + hex colors, README boilerplate sections, .gitignore defaults. Read by gh-repo at creation time. Projects can override per-repo.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- INSTALL IN OTHER PROJECTS -->
+  <div style="background:#0f172a; border:1px solid #334155; border-radius:10px; padding:14px 18px;">
+    <div style="color:#94a3b8; font-size:10px; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Using the suite in another project</div>
+    <div style="color:#64748b; font-size:11px; font-family:monospace; line-height:2;">
+      <div style="color:#e2e8f0;"># Install via Claude Code plugin system</div>
+      <div>claude plugin add github.com/[you]/gh-management</div>
+      <div style="margin-top:6px; color:#e2e8f0;"># Or clone references into project for customization</div>
+      <div>cp gh-management/references/ ./references/</div>
+      <div style="margin-top:6px; color:#e2e8f0;"># Then just use it</div>
+      <div style="color:#4ade80;">/gh repo new my-new-project</div>
+      <div style="color:#60a5fa;">/gh commit "feat: add homepage"</div>
+      <div style="color:#f87171;">/gh ship issue=12</div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;">
+    <div class="options">
+      <div class="option" data-choice="good" onclick="toggleSelect(this)">
+        <div class="letter">✓</div>
+        <div class="content"><h3>Full design approved</h3><p>Write the spec doc and move to planning</p></div>
+      </div>
+      <div class="option" data-choice="adjust" onclick="toggleSelect(this)">
+        <div class="letter">✎</div>
+        <div class="content"><h3>Adjust something</h3><p>Tell me in the terminal</p></div>
+      </div>
+    </div>
+  </div>
+
+</div>

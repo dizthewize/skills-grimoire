@@ -1,0 +1,63 @@
+<h2>Proposed skill tree — does this shape feel right?</h2>
+<p class="subtitle">The coordinator delegates to specialist skills. New skills shown in <span style="color:#a78bfa">purple</span>, existing skills in <span style="color:#34d399">green</span>.</p>
+
+<div style="font-family: monospace; background: #0f172a; color: #e2e8f0; border-radius: 12px; padding: 28px 32px; font-size: 14px; line-height: 2; max-width: 680px; margin: 0 auto;">
+  <div style="color:#94a3b8; margin-bottom:8px;"># skills/</div>
+
+  <div style="color:#a78bfa; font-weight:bold;">📁 build-site/          <span style="color:#64748b; font-weight:normal;">← NEW: coordinator (entry point)</span></div>
+  <div style="padding-left:20px; color:#cbd5e1;">SKILL.md</div>
+  <div style="padding-left:20px; color:#cbd5e1;">references/questions.md</div>
+  <div style="padding-left:20px; color:#cbd5e1;">references/deploy-config.md</div>
+  <br>
+
+  <div style="color:#a78bfa; font-weight:bold;">📁 site-discovery/      <span style="color:#64748b; font-weight:normal;">← NEW: intake questionnaire + context file</span></div>
+  <div style="padding-left:20px; color:#cbd5e1;">SKILL.md</div>
+  <div style="padding-left:20px; color:#cbd5e1;">references/site-types.md</div>
+  <br>
+
+  <div style="color:#a78bfa; font-weight:bold;">📁 site-planner/        <span style="color:#64748b; font-weight:normal;">← NEW: architecture + copy + SEO planning</span></div>
+  <div style="padding-left:20px; color:#cbd5e1;">SKILL.md  <span style="color:#64748b;">(calls: site-architecture, seo-audit, copywriting)</span></div>
+  <br>
+
+  <div style="color:#a78bfa; font-weight:bold;">📁 site-designer/       <span style="color:#64748b; font-weight:normal;">← NEW: visual design system + component plan</span></div>
+  <div style="padding-left:20px; color:#cbd5e1;">SKILL.md  <span style="color:#64748b;">(calls: ui-ux-pro-max, frontend-design)</span></div>
+  <br>
+
+  <div style="color:#a78bfa; font-weight:bold;">📁 site-builder/        <span style="color:#64748b; font-weight:normal;">← NEW: web-focused develop-team equivalent</span></div>
+  <div style="padding-left:20px; color:#cbd5e1;">SKILL.md</div>
+  <div style="padding-left:20px; color:#cbd5e1;">references/agent-prompts.md</div>
+  <div style="padding-left:20px; color:#cbd5e1;">references/supabase-setup.md</div>
+  <br>
+
+  <div style="color:#a78bfa; font-weight:bold;">📁 site-deploy/         <span style="color:#64748b; font-weight:normal;">← NEW: Netlify/Vercel deployment</span></div>
+  <div style="padding-left:20px; color:#cbd5e1;">SKILL.md</div>
+  <div style="padding-left:20px; color:#cbd5e1;">references/netlify.md</div>
+  <div style="padding-left:20px; color:#cbd5e1;">references/vercel.md</div>
+  <br>
+
+  <div style="color:#64748b;">─────────────────────────── existing skills ───</div>
+  <br>
+  <div style="color:#34d399;">📁 site-architecture/   <span style="color:#64748b; font-weight:normal;">← called by site-planner</span></div>
+  <div style="color:#34d399;">📁 seo-audit/           <span style="color:#64748b; font-weight:normal;">← called by site-planner</span></div>
+  <div style="color:#34d399;">📁 copywriting/         <span style="color:#64748b; font-weight:normal;">← called by site-planner</span></div>
+  <div style="color:#34d399;">📁 ui-ux-pro-max/       <span style="color:#64748b; font-weight:normal;">← called by site-designer</span></div>
+  <div style="color:#34d399;">📁 frontend-design/     <span style="color:#64748b; font-weight:normal;">← called by site-designer</span></div>
+</div>
+
+<div style="margin-top:24px;">
+  <h3 style="margin-bottom:8px;">Does this skill breakdown feel right?</h3>
+  <div class="options">
+    <div class="option" data-choice="yes" onclick="toggleSelect(this)">
+      <div class="letter">✓</div>
+      <div class="content"><h3>Yes, this looks right</h3><p>6 new skills + reusing 5 existing ones</p></div>
+    </div>
+    <div class="option" data-choice="merge-planner-designer" onclick="toggleSelect(this)">
+      <div class="letter">~</div>
+      <div class="content"><h3>Merge planner + designer</h3><p>Combine site-planner and site-designer into one "site-strategy" skill — fewer files</p></div>
+    </div>
+    <div class="option" data-choice="different" onclick="toggleSelect(this)">
+      <div class="letter">✎</div>
+      <div class="content"><h3>I want to adjust the names or structure</h3><p>Tell me below what you'd change</p></div>
+    </div>
+  </div>
+</div>

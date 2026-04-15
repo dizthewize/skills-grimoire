@@ -1,0 +1,40 @@
+<h2>How should the skill system be structured?</h2>
+<p class="subtitle">This shapes everything — naming, invocation, and how sub-skills connect</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Single Orchestrator Skill</h3>
+      <p>One entry point: <code>/build-site</code>. Handles the full lifecycle — questions, architecture, design, copy, code, deploy. Calls existing skills internally as phases. No separate sub-skills needed.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Simple to invoke</li><li>One place to configure</li><li>Clear phase ordering</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Large, harder to maintain</li><li>Can't run individual phases standalone</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Coordinator + Specialist Skills</h3>
+      <p>A thin <code>/build-site</code> coordinator that delegates to purpose-built skills: <code>/site-discovery</code>, <code>/site-design</code>, <code>/site-build</code>, <code>/site-deploy</code>. Each skill is independently invocable.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Each skill reusable in isolation</li><li>Easier to test/improve one phase</li><li>Skills usable across other contexts</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>More files to author</li><li>State must be passed between skills</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Pipeline with Resume Points</h3>
+      <p>One <code>/build-site</code> skill with clearly named phases, each checkpoint-gated. State saved to <code>.build-site/state.json</code>. Can resume mid-pipeline, jump to a phase, or run a single phase with <code>/build-site phase=design</code>.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Resumable after interruptions</li><li>Flexible entry points</li><li>Single source of truth for state</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>More complex state management</li><li>Longer skill file</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>

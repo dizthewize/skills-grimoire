@@ -1,0 +1,95 @@
+<h2>Design Section 4 — site-builder</h2>
+<p class="subtitle">Parallel research agents first, then phased implementation with per-phase commits.</p>
+
+<div style="max-width:740px; margin:0 auto; font-family:sans-serif; font-size:13px;">
+
+  <!-- RESEARCH PHASE -->
+  <div style="background:#0f172a; border:1px solid #d97706; border-radius:10px; padding:20px 24px; margin-bottom:14px;">
+    <div style="color:#fbbf24; font-size:11px; text-transform:uppercase; letter-spacing:1px; margin-bottom:14px;">Phase R — parallel research agents (all run simultaneously)</div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
+      <div style="background:#1c1400; border:1px solid #78350f; border-radius:8px; padding:10px 12px;">
+        <div style="color:#fbbf24; font-size:11px; font-weight:bold; margin-bottom:6px;">Stack Scout</div>
+        <div style="color:#fcd34d; font-size:11px; line-height:1.8;">Confirms framework setup, dependencies, folder structure, config files needed</div>
+      </div>
+      <div style="background:#1c1400; border:1px solid #78350f; border-radius:8px; padding:10px 12px;">
+        <div style="color:#fbbf24; font-size:11px; font-weight:bold; margin-bottom:6px;">Component Analyst</div>
+        <div style="color:#fcd34d; font-size:11px; line-height:1.8;">Maps design-system.md specs to buildable components. Flags any gaps or ambiguities.</div>
+      </div>
+      <div style="background:#1c1400; border:1px solid #78350f; border-radius:8px; padding:10px 12px;">
+        <div style="color:#fbbf24; font-size:11px; font-weight:bold; margin-bottom:6px;">SEO Mapper</div>
+        <div style="color:#fcd34d; font-size:11px; line-height:1.8;">Maps site-plan.md keywords to page files. Plans meta tags, schema markup, sitemap.xml.</div>
+      </div>
+      <div style="background:#1c1400; border:1px solid #78350f; border-radius:8px; padding:10px 12px;">
+        <div style="color:#fbbf24; font-size:11px; font-weight:bold; margin-bottom:6px;">Copy Integrator</div>
+        <div style="color:#fcd34d; font-size:11px; line-height:1.8;">Structures copy from site-plan.md into component-ready text blocks, CTAs, and form labels.</div>
+      </div>
+      <div style="background:#1c1400; border:1px solid #78350f; border-radius:8px; padding:10px 12px;">
+        <div style="color:#fbbf24; font-size:11px; font-weight:bold; margin-bottom:6px;">Auth + DB Planner</div>
+        <div style="color:#fcd34d; font-size:11px; line-height:1.8;">Only active if auth/Supabase selected. Plans schema, RLS policies, env vars, auth flow pages.</div>
+      </div>
+      <div style="background:#1c1400; border:1px solid #78350f; border-radius:8px; padding:10px 12px;">
+        <div style="color:#fbbf24; font-size:11px; font-weight:bold; margin-bottom:6px;">Conversion Optimizer</div>
+        <div style="color:#fcd34d; font-size:11px; line-height:1.8;">Plans CTA placements, sticky elements, click-to-call, exit-intent, form positions across pages.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px; background:#1c1400; border:1px solid #92400e; border-radius:8px; padding:10px 14px; color:#fde68a; font-size:12px;">
+      All agents report back → coordinator synthesizes into <code style="color:#fff;">build-plan.md</code> → user sees summary → build begins
+    </div>
+  </div>
+
+  <!-- BUILD PHASES -->
+  <div style="background:#0f172a; border:1px solid #d97706; border-radius:10px; padding:20px 24px; margin-bottom:14px;">
+    <div style="color:#fbbf24; font-size:11px; text-transform:uppercase; letter-spacing:1px; margin-bottom:14px;">Phase B — sequential build (each phase = 1 commit)</div>
+
+    <div style="display:flex; flex-direction:column; gap:8px; font-family:monospace; font-size:12px;">
+      <div style="display:flex; gap:10px; align-items:flex-start;">
+        <div style="background:#92400e; color:#fff; border-radius:4px; padding:2px 8px; font-size:11px; white-space:nowrap; margin-top:2px;">B1</div>
+        <div style="color:#fcd34d;"><span style="color:#fff;">Scaffold</span> — init framework, install deps, configure Tailwind/CSS vars from design-system.md, folder structure, env file template</div>
+      </div>
+      <div style="display:flex; gap:10px; align-items:flex-start;">
+        <div style="background:#92400e; color:#fff; border-radius:4px; padding:2px 8px; font-size:11px; white-space:nowrap; margin-top:2px;">B2</div>
+        <div style="color:#fcd34d;"><span style="color:#fff;">Shared components</span> — header (sticky, logo, phone, CTA), footer (contact, service area, socials), mobile sticky CTA bar, layout wrapper</div>
+      </div>
+      <div style="display:flex; gap:10px; align-items:flex-start;">
+        <div style="background:#92400e; color:#fff; border-radius:4px; padding:2px 8px; font-size:11px; white-space:nowrap; margin-top:2px;">B3</div>
+        <div style="color:#fcd34d;"><span style="color:#fff;">Homepage</span> — hero, lead capture form, offer section, services grid, trust signals, testimonials, service area, final CTA. All copy wired from site-plan.</div>
+      </div>
+      <div style="display:flex; gap:10px; align-items:flex-start;">
+        <div style="background:#92400e; color:#fff; border-radius:4px; padding:2px 8px; font-size:11px; white-space:nowrap; margin-top:2px;">B4</div>
+        <div style="color:#fcd34d;"><span style="color:#fff;">Inner pages</span> — Services, About, Contact, Service Area pages per site-plan.md hierarchy</div>
+      </div>
+      <div style="display:flex; gap:10px; align-items:flex-start;">
+        <div style="background:#92400e; color:#fff; border-radius:4px; padding:2px 8px; font-size:11px; white-space:nowrap; margin-top:2px;">B5</div>
+        <div style="color:#fcd34d;"><span style="color:#fff;">SEO layer</span> — meta tags, schema markup (LocalBusiness JSON-LD), sitemap.xml, robots.txt, OG tags</div>
+      </div>
+      <div style="display:flex; gap:10px; align-items:flex-start;">
+        <div style="background:#78350f; color:#fde68a; border-radius:4px; padding:2px 8px; font-size:11px; white-space:nowrap; margin-top:2px;">B6*</div>
+        <div style="color:#fcd34d;"><span style="color:#fde68a;">Auth + Supabase</span> — only if selected. Sign up/in pages, RLS policies, env wiring, protected routes</div>
+      </div>
+      <div style="display:flex; gap:10px; align-items:flex-start;">
+        <div style="background:#92400e; color:#fff; border-radius:4px; padding:2px 8px; font-size:11px; white-space:nowrap; margin-top:2px;">B7</div>
+        <div style="color:#fcd34d;"><span style="color:#fff;">Deploy prep</span> — netlify.toml or vercel.json, redirect rules, form handling config, build test</div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px; background:#1c1400; border:1px solid #92400e; border-radius:8px; padding:10px 14px; color:#fde68a; font-size:12px; line-height:1.8;">
+      State saved to <code style="color:#fff;">.web-studio/state.json</code> after each phase — resumable if interrupted<br/>
+      B6 is skipped entirely when no auth/database selected
+    </div>
+  </div>
+
+  <div style="margin-top:8px;">
+    <div class="options">
+      <div class="option" data-choice="good" onclick="toggleSelect(this)">
+        <div class="letter">✓</div>
+        <div class="content"><h3>This looks right</h3><p>Move to Section 5: site-deploy + GitHub Projects companion</p></div>
+      </div>
+      <div class="option" data-choice="adjust" onclick="toggleSelect(this)">
+        <div class="letter">✎</div>
+        <div class="content"><h3>Adjust something</h3><p>Tell me below</p></div>
+      </div>
+    </div>
+  </div>
+</div>

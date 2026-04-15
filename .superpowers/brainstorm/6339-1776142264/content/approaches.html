@@ -1,0 +1,40 @@
+<h2>One key design decision remains — how site-builder works internally</h2>
+<p class="subtitle">The other skills (site-discovery, site-planner, etc.) are straightforward. The builder is the complex one.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Parallel Research → Phased Build <span style="font-size:12px;color:#a78bfa;">(Recommended)</span></h3>
+      <p>Mirrors the <code>develop-team</code> pattern. 5–6 parallel research agents first (stack explorer, component analyzer, Supabase schema designer, auth flow mapper, SEO structure mapper, copy integrator), then phased implementation with per-page commits and test generation.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Catches edge cases before writing code</li><li>Supabase schema and auth planned before any UI</li><li>Resumable via state.json</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>More upfront time before first file is written</li><li>More complex to implement</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Sequential Phase-by-Phase Build</h3>
+      <p>No parallel research agents. site-builder executes pages one by one: scaffold → homepage → core pages → auth pages → Supabase wiring → deploy prep. Each phase produces a commit.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Simpler to reason about</li><li>Faster to start producing files</li><li>Easier to implement and maintain</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>No holistic upfront planning</li><li>Schema decisions may need revisiting mid-build</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Hybrid: Lightweight Research → Fast Build</h3>
+      <p>A single architect agent does a 10-minute holistic review of the project context (not 5–6 parallel agents), produces a build plan, then sequential phased implementation begins. Middle ground between speed and planning depth.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Architectural coherence without full research overhead</li><li>Faster than full parallel approach</li><li>Simpler than Option A</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>One agent may miss domain-specific concerns</li><li>Less parallelism = slower than Option B</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
