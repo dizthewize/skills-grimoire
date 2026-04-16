@@ -143,7 +143,7 @@ ORCHESTRATOR (main session)
 
 ### Phase Execution Order — STRICT SEQUENTIAL
 
-**You MUST execute phases 0 -> 1 -> 1.5 -> 2 -> 3 -> 4 -> 5 -> 5.5 -> 6 -> 7 -> 6.5 -> 8 -> 9 in order. Do NOT skip or reorder phases.** (Phase 0 always runs — it asks the user their branch preference when `branch=ask` (default), or sets up worktree when `branch=worktree`. Phase 1.5 skips when `skip-verify=true`. Phase 5.5 skips when `skip-qa-check=true`. Phase 6.5 only runs when worktree was chosen — it merges the worktree branch into main AFTER deployment succeeds.)
+**You MUST execute phases 0 -> 1 -> 1.5 -> 2 -> 3 -> 4 -> 5 -> 5.2 -> 5.5 -> 6 -> 6.2 -> 7 -> 6.5 -> 8 -> 9 in order. Do NOT skip or reorder phases.** (Phase 0 always runs — it asks the user their branch preference when `branch=ask` (default), or sets up worktree when `branch=worktree`. Phase 1.5 skips when `skip-verify=true`. Phase 5.2 and 5 both skip when `skip-review=true`. Phase 5.5 skips when `skip-qa-check=true`. Phase 6.2 skips when `skip-review=true`. Phase 6.5 only runs when worktree was chosen — it merges the worktree branch into main AFTER deployment succeeds.)
 
 ### Parameter Gate — How to Check Skip Flags
 
@@ -152,7 +152,9 @@ Before each skippable phase, perform this literal check on the invocation argume
 ```
 Phase 1.5: Was `skip-verify=true` in the user's invocation? YES -> skip. NO -> run it.
 Phase 5:   Was `skip-review=true` in the user's invocation? YES -> skip. NO -> run it.
+Phase 5.2: Was `skip-review=true` in the user's invocation? YES -> skip. NO -> run it.
 Phase 5.5: Was `skip-qa-check=true` in the user's invocation? YES -> skip. NO -> run it.
+Phase 6.2: Was `skip-review=true` in the user's invocation? YES -> skip. NO -> run it.
 Phase 7:   Was `skip-deploy=true` in the user's invocation? YES -> skip. NO -> run it.
 ```
 
@@ -190,6 +192,9 @@ Before moving to Phase 9, verify ALL of these are done:
 - [ ] **QA verify ran**: Bug reproduced in headless browser (or `skip-verify=true`)
 - [ ] **Research done**: Bug was investigated AND user acknowledged findings with diagram
 - [ ] **Review ran**: 3 agents were spawned (or `skip-review=true` was explicitly set)
+- [ ] **Review-fix ran**: review-fix loop completed (or `skip-review=true`)
+- [ ] **Review-team ran**: adversarial PR review completed (or `skip-review=true`)
+- [ ] **Review findings reported**: Phase 9 summary includes review-fix strategic items and review-team findings
 - [ ] **Critical/high findings fixed**: All critical and high review findings addressed
 - [ ] **QA check ran**: Fix verified in headless browser (or `skip-qa-check=true`)
 - [ ] **Committed**: Changes committed with conventional commit message
