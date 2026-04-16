@@ -116,6 +116,12 @@ ORCHESTRATOR (main session)
 |   Handle remote-ahead: stash -> pull --rebase -> stash pop -> push
 |   git push to remote — local-only commit = incomplete
 |
++-- Phase 6.2: REVIEW-TEAM <- adversarial PR review (unless skip-review=true)
+|   Requires PR URL from Phase 6 push — runs post-push, not before
+|   Spawns 5 reviewers: 4 specialists + Devil's Advocate
+|   Findings non-blocking for deployment — reported in Phase 9 Summary
+|   -> Invokes /review-team {pr-url} issue={issue-number}
+|
 +-- Phase 6.5: WORKTREE MERGE (if branch=worktree, runs AFTER Phase 7)
 |   Merge worktree branch into main, push, clean up worktree + branch
 |   Must use absolute paths (Bash tool resets cwd after cd)
@@ -573,6 +579,26 @@ git push origin <current-branch>
 If pushed to a feature branch, offer to create a PR.
 
 Capture the commit hash: `git rev-parse --short HEAD`
+
+### Phase 6.2: Review-Team (Adversarial PR Review)
+
+**Skip if `skip-review=true`.**
+
+After the PR is pushed in Phase 6, invoke review-team for adversarial multi-specialist review. review-team requires a PR URL — this is why it runs post-push.
+
+Get the PR URL:
+```bash
+gh pr view --json url --jq '.url'
+```
+
+Then invoke:
+```bash
+/review-team {pr-url} issue={issue-number}
+```
+
+The `issue=` parameter gives review-team access to the acceptance criteria from the GitHub issue (and from `.gh-issue/context.json` if present and < 30 min old).
+
+review-team spawns 5 reviewers (4 domain specialists + Devil's Advocate) and produces findings. Findings are **non-blocking** — Phase 7 deployment monitoring proceeds regardless. Any required fixes from review-team are reported in Phase 9 Summary for the user to action separately.
 
 ### Phase 7: Deployment Monitor
 
