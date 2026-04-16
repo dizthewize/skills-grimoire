@@ -384,12 +384,20 @@ Create `.gh-issue/` directory if needed, then write:
     { "number": 110, "title": "...", "state": "closed" }
   ],
   "projectStatus": "In Progress",
+  "generatedSpec": {
+    "acceptanceCriteria": ["User can complete checkout on mobile without form errors", "Submit button remains enabled during validation"],
+    "expectedBehavior": "The checkout form submits successfully on mobile viewports (320px–768px).",
+    "actualBehavior": "The submit button becomes unclickable on viewports below 768px due to an overlapping element.",
+    "edgeCases": ["iOS Safari 16", "Android Chrome with zoom enabled", "Landscape orientation on small phones"],
+    "technicalContext": "Affects CheckoutForm component. Likely a z-index or pointer-events issue in the mobile breakpoint styles."
+  },
+  "generatedAt": "2026-04-14T08:30:00Z",
   "fetchedAt": "2026-04-14T08:30:00Z",
   "repo": "owner/repo"
 }
 ```
 
-> **Null fields:** Write `milestone.dueOn` as `null` (not omitted) when the milestone has no due date. If `milestone` itself is null (issue not in a milestone), write `"milestone": null`.
+> **Null fields:** Write `milestone.dueOn` as `null` (not omitted) when the milestone has no due date. If `milestone` itself is null (issue not in a milestone), write `"milestone": null`. If generation was skipped (`output=display`, `generate=false`, or body too sparse), write `"generatedSpec": null` and omit `"generatedAt"`.
 
 **For milestone mode**, the JSON is structured as:
 
@@ -433,6 +441,12 @@ When `due_on` is null in the GitHub API response, write `dueOn` explicitly as `n
   "fetchedAt": "2026-04-14T08:30:00Z",
   "repo": "owner/repo"
 }
+```
+
+After writing the file, auto-update `.gitignore` if needed:
+
+```bash
+grep -q "\.gh-issue/" .gitignore 2>/dev/null || echo ".gh-issue/" >> .gitignore
 ```
 
 After writing, report:
