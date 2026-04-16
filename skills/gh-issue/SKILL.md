@@ -27,6 +27,7 @@ Fetch, enrich, and display rich context for a GitHub issue or milestone. Surface
 | `type` | `auto` | `issue` \| `milestone` \| `auto` (detected from argument shape) |
 | `output` | `both` | `display` (print to terminal only) \| `file` (write `.gh-issue/context.json` only) \| `both` |
 | `repo` | (current) | Override repo: `owner/repo` — defaults to current directory's GitHub remote |
+| `generate` | `true` | Set `false` to skip AI generation and comment posting (pure read mode). Also suppressed by `output=display`. |
 
 ## Invocation
 
@@ -57,11 +58,20 @@ ORCHESTRATOR (main session)
 |   Related issues: scan body for #N references, fetch each
 |   Project board:  gh project item-list (if project configured)
 |
++-- Phase 2.5: GENERATE TASK SPEC (unless output=display or generate=false)
+|   AI generates acceptance criteria, expected vs. actual behavior, edge cases, technical context
+|   Uses all data from Phase 1 and Phase 2 as input
+|
++-- Phase 2.6: POST COMMENT TO GITHUB (unless output=display or generate=false)
+|   Posts structured comment with <!-- gh-issue:generated --> marker via gh issue comment
+|   Old generated comments preserved as history — always posts fresh
+|
 +-- Phase 3: DISPLAY
 |   Format structured output for terminal
 |
 +-- Phase 4: WRITE FILE (unless output=display)
-|   Write .gh-issue/context.json
+|   Write .gh-issue/context.json (includes generatedSpec fields)
+|   Auto-update .gitignore to include .gh-issue/
 |   Report: "Context written to .gh-issue/context.json — /fix-issue and /develop-team will use it automatically"
 ```
 
