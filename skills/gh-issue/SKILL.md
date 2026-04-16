@@ -455,6 +455,7 @@ After writing, report:
 Context written to .gh-issue/context.json
 
 /fix-issue and /develop-team will automatically use this context (valid for 30 minutes).
+If context.json expires, they will fall back to the generated comment on the issue.
 To refresh: run /gh-issue {number} again.
 ```
 
@@ -462,12 +463,23 @@ To refresh: run /gh-issue {number} again.
 
 ## How Downstream Skills Use the Context File
 
-Both `/fix-issue` and `/develop-team` check for `.gh-issue/context.json` at the start of their Phase 1 (Read Issue / Gather Context). If the file exists AND `fetchedAt` is within 30 minutes, they use it instead of fetching fresh from the GitHub API. This saves ~3 API calls and surfaces richer context (linked PRs, related issues) that those skills don't fetch themselves.
+Both `/fix-issue` and `/develop-team` check for `.gh-issue/context.json` at the start of their Phase 1. If the file exists AND `fetchedAt` is within 30 minutes, they use it instead of fetching fresh. This surfaces richer context (linked PRs, related issues, generated spec) that those skills don't fetch themselves.
+
+**Fallback when context.json is absent or stale:** downstream skills look for the most recent gh-issue generated comment on the issue:
+
+```bash
+gh issue view {number} --comments --json comments \
+  --jq '[.comments[] | select(.body | startswith("<!-- gh-issue:generated -->"))] | last'
+```
+
+If a generated comment is found, the `acceptanceCriteria`, `expectedBehavior`, and `edgeCases` sections are parsed from the comment body and used as the task spec context.
+
+If neither context.json nor a generated comment exists, downstream skills fall back to extracting acceptance criteria from the issue body directly (looking for `## Acceptance Criteria`, `### AC`, or `- [ ]` checklists).
 
 **To force a fresh fetch** in downstream skills, either:
 - Delete `.gh-issue/context.json`
 - Re-run `/gh-issue {number}` to refresh it
-- The downstream skill always accepts `skip-gh-context=true` to bypass it
+- Pass `skip-gh-context=true` to the downstream skill to bypass both context.json and the comment fallback
 
 ---
 
