@@ -99,6 +99,12 @@ ORCHESTRATOR (main session)
 |   If critical/high findings: fix -> re-review (max 2 cycles)
 |   NEVER skip review because "change looks trivial"
 |
++-- Phase 5.2: REVIEW-FIX LOOP <- automated multi-reviewer fix (unless skip-review=true)
+|   Spawns 8 specialist reviewers in parallel, auto-fixes quick-fix items
+|   Commits fixes as "fix: address code review findings", up to 2 iterations
+|   Strategic items accumulated and reported in Phase 9
+|   -> Invokes /review-fix max-iterations=2 base-commit=HEAD~1
+|
 +-- Phase 5.5: QA CHECK <- headless browser fix verification (unless skip-qa-check=true)
 |   Re-provision test user, re-run same steps as Phase 1.5
 |   Verify the bug is resolved — expected behavior now works
@@ -437,6 +443,24 @@ Pick 3-5 agents from this pool based on what the fix actually touches:
 - No issues: Note "No issues found" in summary
 
 **Iteration limit**: Max 2 fix-then-re-review cycles.
+
+### Phase 5.2: Review-Fix Loop
+
+**Skip if `skip-review=true`.**
+
+After inline Phase 5 review agents complete, run the automated multi-reviewer fix loop to catch remaining issues and auto-fix quick-fix items before QA.
+
+```bash
+/review-fix max-iterations=2 base-commit=HEAD~1
+```
+
+review-fix spawns 8 specialist reviewers in parallel (Frontend Designer, Product Manager, QA Engineer, System Architect, Senior Developer, Code Maintainability, Reusable Components, Dead Code Hunter). It:
+1. Auto-fixes quick-fix items (bugs, type errors, unused imports, missing hover states, etc.)
+2. Commits each round of fixes as `fix: address code review findings`
+3. Repeats until no quick-fix items remain (max 2 iterations)
+4. Accumulates strategic items (major refactors, scope questions) for Phase 9 Summary
+
+After review-fix completes, proceed to Phase 5.5 QA Check.
 
 ### Phase 5.5: QA Check (Headless Browser Fix Verification)
 
