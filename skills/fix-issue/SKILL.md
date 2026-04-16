@@ -238,7 +238,17 @@ Extract:
 
 If the fetch fails, ask the user to describe the bug manually and continue.
 
-**Check for `.gh-issue/context.json`** — if the `/gh-issue` skill was run first, load this file instead of fetching fresh. Prefer it if it's less than 30 minutes old (check `fetchedAt`).
+**Check for `.gh-issue/context.json`** — if the `/gh-issue` skill was run first, load this file instead of fetching fresh. Prefer it if it is less than 30 minutes old (check `fetchedAt`).
+
+Fields consumed from `context.json`:
+- `number`, `title`, `body` → issue description and acceptance criteria for Phase 5 review
+- `labels`, `assignees` → used in Phase 8 GitHub Handoff
+- `milestone` → `{ number, title, dueOn, openIssues, closedIssues }` — if present, Phase 8 assigns the issue to this milestone
+- `linkedPRs` → checked in Phase 2 research for past fix attempts
+- `relatedIssues` → checked in Phase 2 research for related context
+- `generatedSpec.acceptanceCriteria` → passed as acceptance criteria context to Phase 5 review agents and Phase 6.2 review-team
+
+If `context.json` is absent or stale, fetch fresh and extract acceptance criteria manually from the issue body (look for sections titled "Acceptance Criteria", "Expected Behavior", or `- [ ]` checklists).
 
 ### Phase 1.5: QA Verify (Headless Browser Bug Reproduction)
 
