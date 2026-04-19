@@ -99,6 +99,12 @@ ORCHESTRATOR (main session)
 |   If critical/high findings: fix -> re-review (max 2 cycles)
 |   NEVER skip review because "change looks trivial"
 |
++-- Phase 5.2: REVIEW-FIX LOOP <- automated multi-reviewer fix (unless skip-review=true)
+|   Spawns 8 specialist reviewers in parallel, auto-fixes quick-fix items
+|   Commits fixes as "fix: address code review findings", up to 2 iterations
+|   Strategic items accumulated and reported in Phase 9
+|   -> Invokes /review-fix max-iterations=2 base-commit=HEAD~1
+|
 +-- Phase 5.5: QA CHECK <- headless browser fix verification (unless skip-qa-check=true)
 |   Re-provision test user, re-run same steps as Phase 1.5
 |   Verify the bug is resolved — expected behavior now works
@@ -109,6 +115,12 @@ ORCHESTRATOR (main session)
 |   Branch strategy: ask user, main, or new fix branch
 |   Handle remote-ahead: stash -> pull --rebase -> stash pop -> push
 |   git push to remote — local-only commit = incomplete
+|
++-- Phase 6.2: REVIEW-TEAM <- adversarial PR review (unless skip-review=true)
+|   Requires PR URL from Phase 6 push — runs post-push, not before
+|   Spawns 5 reviewers: 4 specialists + Devil's Advocate
+|   Findings non-blocking for deployment — reported in Phase 9 Summary
+|   -> Invokes /review-team {pr-url} issue={issue-number}
 |
 +-- Phase 6.5: WORKTREE MERGE (if branch=worktree, runs AFTER Phase 7)
 |   Merge worktree branch into main, push, clean up worktree + branch
@@ -131,7 +143,7 @@ ORCHESTRATOR (main session)
 
 ### Phase Execution Order — STRICT SEQUENTIAL
 
-**You MUST execute phases 0 -> 1 -> 1.5 -> 2 -> 3 -> 4 -> 5 -> 5.5 -> 6 -> 7 -> 6.5 -> 8 -> 9 in order. Do NOT skip or reorder phases.** (Phase 0 always runs — it asks the user their branch preference when `branch=ask` (default), or sets up worktree when `branch=worktree`. Phase 1.5 skips when `skip-verify=true`. Phase 5.5 skips when `skip-qa-check=true`. Phase 6.5 only runs when worktree was chosen — it merges the worktree branch into main AFTER deployment succeeds.)
+**You MUST execute phases 0 -> 1 -> 1.5 -> 2 -> 3 -> 4 -> 5 -> 5.2 -> 5.5 -> 6 -> 6.2 -> 7 -> 6.5 -> 8 -> 9 in order. Do NOT skip or reorder phases.** (Phase 0 always runs — it asks the user their branch preference when `branch=ask` (default), or sets up worktree when `branch=worktree`. Phase 1.5 skips when `skip-verify=true`. Phase 5.2 and 5 both skip when `skip-review=true`. Phase 5.5 skips when `skip-qa-check=true`. Phase 6.2 skips when `skip-review=true`. Phase 6.5 only runs when worktree was chosen — it merges the worktree branch into main AFTER deployment succeeds.)
 
 ### Parameter Gate — How to Check Skip Flags
 
@@ -140,7 +152,9 @@ Before each skippable phase, perform this literal check on the invocation argume
 ```
 Phase 1.5: Was `skip-verify=true` in the user's invocation? YES -> skip. NO -> run it.
 Phase 5:   Was `skip-review=true` in the user's invocation? YES -> skip. NO -> run it.
+Phase 5.2: Was `skip-review=true` in the user's invocation? YES -> skip. NO -> run it.
 Phase 5.5: Was `skip-qa-check=true` in the user's invocation? YES -> skip. NO -> run it.
+Phase 6.2: Was `skip-review=true` in the user's invocation? YES -> skip. NO -> run it.
 Phase 7:   Was `skip-deploy=true` in the user's invocation? YES -> skip. NO -> run it.
 ```
 
@@ -178,6 +192,9 @@ Before moving to Phase 9, verify ALL of these are done:
 - [ ] **QA verify ran**: Bug reproduced in headless browser (or `skip-verify=true`)
 - [ ] **Research done**: Bug was investigated AND user acknowledged findings with diagram
 - [ ] **Review ran**: 3 agents were spawned (or `skip-review=true` was explicitly set)
+- [ ] **Review-fix ran**: review-fix loop completed (or `skip-review=true`)
+- [ ] **Review-team ran**: adversarial PR review completed (or `skip-review=true`)
+- [ ] **Review findings reported**: Phase 9 summary includes review-fix strategic items and review-team findings
 - [ ] **Critical/high findings fixed**: All critical and high review findings addressed
 - [ ] **QA check ran**: Fix verified in headless browser (or `skip-qa-check=true`)
 - [ ] **Committed**: Changes committed with conventional commit message
@@ -238,7 +255,17 @@ Extract:
 
 If the fetch fails, ask the user to describe the bug manually and continue.
 
-**Check for `.gh-issue/context.json`** — if the `/gh-issue` skill was run first, load this file instead of fetching fresh. Prefer it if it's less than 30 minutes old (check `fetchedAt`).
+**Check for `.gh-issue/context.json`** — if the `/gh-issue` skill was run first, load this file instead of fetching fresh. Prefer it if it is less than 30 minutes old (check `fetchedAt`).
+
+Fields consumed from `context.json`:
+- `number`, `title`, `body` → issue description and acceptance criteria for Phase 5 review
+- `labels`, `assignees` → used in Phase 8 GitHub Handoff
+- `milestone` → `{ number, title, dueOn, openIssues, closedIssues }` — if present, Phase 8 assigns the issue to this milestone
+- `linkedPRs` → checked in Phase 2 research for past fix attempts
+- `relatedIssues` → checked in Phase 2 research for related context
+- `generatedSpec.acceptanceCriteria` → passed as acceptance criteria context to Phase 5 review agents and Phase 6.2 review-team
+
+If `context.json` is absent or stale, fetch fresh and extract acceptance criteria manually from the issue body (look for sections titled "Acceptance Criteria", "Expected Behavior", or `- [ ]` checklists).
 
 ### Phase 1.5: QA Verify (Headless Browser Bug Reproduction)
 
@@ -428,6 +455,24 @@ Pick 3-5 agents from this pool based on what the fix actually touches:
 
 **Iteration limit**: Max 2 fix-then-re-review cycles.
 
+### Phase 5.2: Review-Fix Loop
+
+**Skip if `skip-review=true`.**
+
+After inline Phase 5 review agents complete, run the automated multi-reviewer fix loop to catch remaining issues and auto-fix quick-fix items before QA.
+
+```bash
+/review-fix max-iterations=2 base-commit=HEAD~1
+```
+
+review-fix spawns 8 specialist reviewers in parallel (Frontend Designer, Product Manager, QA Engineer, System Architect, Senior Developer, Code Maintainability, Reusable Components, Dead Code Hunter). It:
+1. Auto-fixes quick-fix items (bugs, type errors, unused imports, missing hover states, etc.)
+2. Commits each round of fixes as `fix: address code review findings`
+3. Repeats until no quick-fix items remain (max 2 iterations)
+4. Accumulates strategic items (major refactors, scope questions) for Phase 9 Summary
+
+After review-fix completes, proceed to Phase 5.5 QA Check.
+
 ### Phase 5.5: QA Check (Headless Browser Fix Verification)
 
 **PARAMETER CHECK: Read back the user's invocation arguments. Is `skip-qa-check=true` literally present?**
@@ -539,6 +584,26 @@ git push origin <current-branch>
 If pushed to a feature branch, offer to create a PR.
 
 Capture the commit hash: `git rev-parse --short HEAD`
+
+### Phase 6.2: Review-Team (Adversarial PR Review)
+
+**Skip if `skip-review=true`.**
+
+After the PR is pushed in Phase 6, invoke review-team for adversarial multi-specialist review. review-team requires a PR URL — this is why it runs post-push.
+
+Get the PR URL:
+```bash
+gh pr view --json url --jq '.url'
+```
+
+Then invoke:
+```bash
+/review-team {pr-url} issue={issue-number}
+```
+
+The `issue=` parameter gives review-team access to the acceptance criteria from the GitHub issue (and from `.gh-issue/context.json` if present and < 30 min old).
+
+review-team spawns 5 reviewers (4 domain specialists + Devil's Advocate) and produces findings. Findings are **non-blocking** — Phase 7 deployment monitoring proceeds regardless. Any required fixes from review-team are reported in Phase 9 Summary for the user to action separately.
 
 ### Phase 7: Deployment Monitor
 

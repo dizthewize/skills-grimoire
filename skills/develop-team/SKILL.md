@@ -68,14 +68,16 @@ ORCHESTRATOR (main session - manages state, cross-references outputs)
 |   DB schema pre-scan (if DB tools available, scan related tables)
 |   Classify: ui-heavy | full-stack | backend-only | async-heavy
 |
-+-- Phase 2: RESEARCH (4-6 parallel agents, run_in_background: true)
++-- Phase 2: RESEARCH (Agent Team — 4-6 parallel teammates, run_in_background: true)
+|   TeamCreate("develop-research-{id}") → spawn team members → TeamDelete
 |   Agent 1: Deep Codebase Explorer    (system-architect)          [always]
 |   Agent 2: CLAUDE.md Compliance Mapper (code-refactorer)         [always]
 |   Agent 3: Requirements Mapper       (product-strategy-advisor)  [always]
 |   Agent 4: Design System Integrator  (premium-ux-designer)       [if ui-heavy|full-stack]
 |   Agent 5: Async Flow Analyzer       (system-architect)          [if async-heavy]
 |   Agent 6: DB Migration Analyzer     (system-architect)          [if DB changes needed]
-|   (auto-proceed — pause only on blockers)
+|   Agents SendMessage findings (or type:"blocker") to team lead.
+|   Auto-proceed when all findings arrive; pause on any blocker message.
 |
 +-- Phase 3: PLANNING — synthesize into plan + design spec + test plan + migration plan
 |   (auto-proceed — plan-only=true pauses here)
@@ -102,7 +104,8 @@ ORCHESTRATOR (main session - manages state, cross-references outputs)
 2. Parse parameters: `type`, `auto-commit`, `skip-review`, `skip-tests`, `skip-pr`, `skip-migrations`, `plan-only`
 3. Create `.develop-team/` directory if needed
 4. Check for existing `state.json` — if found, offer to resume from last completed phase
-5. Initialize state file
+5. **Stale-team cleanup (resume path only):** If loaded `state.team.name` exists and `state.team.status != "closed"`, attempt `TeamDelete(state.team.name)` before starting fresh. Prevents orphan teams from prior crashes. Reset `state.team` to the inactive stub.
+6. Initialize state file
 
 **State file at `.develop-team/state.json`:** See `references/state-schema.md` for full schema and backward compatibility notes.
 
@@ -167,9 +170,21 @@ If `type` != `auto`, use directly. Otherwise, scan combined ticket text for keyw
 
 **Logic:** UI > 2x backend → `ui-heavy`. Backend > 2x UI and UI=0 → `backend-only`. Async >= 2 → `async-heavy`. Else → `full-stack`.
 
-### Phase 2: Research (4-6 Parallel Sub-Agents)
+#### Create Research Team
 
-Spawn all applicable agents with `run_in_background: true`. Each receives ticket context, spec file, and past-ticket context.
+At the end of Phase 1 (before spawning any research agents), create the Agent Team that will hold the parallel research fan-out:
+
+```
+TeamCreate:
+  team_name: "develop-research-{issueNumber}"
+  description: "Develop Team research fan-out for #{issueNumber} — {featureType}"
+```
+
+For freeform tasks (no issue number), use a short hash or timestamp in place of `{issueNumber}`. Store the team name and timestamp in `state.team` (`name`, `status: "active"`, `createdAt`). The team is scoped narrowly to Phase 2 — it is deleted before Phase 3 begins, so it never spans the long-running implementation loop.
+
+### Phase 2: Research (Agent Team — 4-6 Parallel Members)
+
+Spawn all applicable agents as **team members** using the Task tool with `team_name: state.team.name` and `run_in_background: true`. Each teammate receives ticket context, spec file, and past-ticket context, and is instructed to deliver findings (or signal a blocker) via `SendMessage` — see `references/agent-prompts.md` for the shared Output Delivery block.
 
 | Agent | Sub-Agent Type | Condition | Returns |
 |-------|---------------|-----------|---------|
@@ -182,15 +197,22 @@ Spawn all applicable agents with `run_in_background: true`. Each receives ticket
 
 For full agent prompts, read `references/agent-prompts.md`.
 
-#### Post-Research: Auto-Proceed with Blocker Detection
+#### Post-Research: Collect Findings and Detect Blockers
 
-Collect results via `TaskOutput`. Auto-proceed UNLESS a blocker is detected.
+Collect results via `SendMessage` (fall back to `TaskOutput` if a teammate's message doesn't arrive). Each teammate sends one of two messages:
 
-**Blockers** (pause and ask user only if):
+- `SendMessage(type: "findings", payload: <agent JSON output>)` — normal path
+- `SendMessage(type: "blocker", reason: "...", details: "...")` — halts that agent
+
+Record each incoming message in `state.research.*` (findings) or `state.team.blockers[]` (blockers). Auto-proceed UNLESS at least one blocker message arrived.
+
+**Blocker message triggers** (the agent is instructed to send one when):
 - Research agents recommend incompatible approaches
 - Feature requires tables with no migration plan to create them
 - Acceptance criteria are ambiguous or contradictory
 - A research agent completely failed (total failure, not just partial)
+
+On any blocker: pause, present `state.team.blockers` to the user, ask for a resolution before continuing.
 
 If no blockers, log summary and proceed directly:
 ```
@@ -199,6 +221,16 @@ Research complete ({N} agents, 0 blockers)
   Requirements Mapper: {N} phases, {N} tasks | Design/Async/Migration: {status}
 Proceeding to planning...
 ```
+
+#### Team Shutdown
+
+Before Phase 3:
+
+1. `SendMessage(type: "shutdown_request")` to each research teammate.
+2. `TeamDelete(state.team.name)`.
+3. Set `state.team.status = "closed"` and `state.team.deletedAt = <now>`.
+
+Phase 4 is deliberately NOT team-wrapped — per-phase implementation is sequential and needs no cross-agent coordination, so a team there would add complexity without payoff.
 
 ### Phase 3: Planning (Inline)
 
