@@ -22,7 +22,8 @@ Full schema for `.develop-team/state.json`.
   "migrations": { "planned": [], "applied": [], "skipped": false, "localFiles": [] },
   "refactor": { "delegated": false, "fixedItems": 0, "strategicItems": 0, "commit": null },
   "review": { "delegated": false, "iterations": 0, "quickFixResolved": 0, "strategicItems": 0, "commits": [] },
-  "pullRequest": { "created": false, "url": null, "number": null, "skipped": false }
+  "pullRequest": { "created": false, "url": null, "number": null, "skipped": false },
+  "team": { "name": null, "status": "inactive", "createdAt": null, "deletedAt": null, "blockers": [] }
 }
 ```
 
@@ -43,7 +44,10 @@ Full schema for `.develop-team/state.json`.
 | `implementation.commits` | Commit hashes with phase labels |
 | `tests.perPhase` | `{phase, generated, passed, failed, testFiles[]}` |
 | `migrations.*` | Planned SQL, applied status, local file paths |
+| `team.name` | Name of the Phase 2 research team (e.g., `"develop-research-123"`) or null when not active |
+| `team.status` | `"inactive"`, `"active"`, or `"closed"` — used for stale-team cleanup on resume |
+| `team.blockers` | Array of `{agent, reason, details}` entries captured from `SendMessage(type: "blocker", ...)` |
 
 ## Backward Compatibility
 
-Old state files missing new fields (`pastTicketContext`, `designSpec`, `migrations`, `tests`, `pullRequest`) still load — missing fields default to null/empty.
+Old state files missing new fields (`pastTicketContext`, `designSpec`, `migrations`, `tests`, `pullRequest`, `team`) still load — missing fields default to null/empty or to the inactive stub for `team`.

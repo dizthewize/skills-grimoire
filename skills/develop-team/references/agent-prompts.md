@@ -2,6 +2,27 @@
 
 Full prompt templates for each Phase 2 research agent.
 
+## Output Delivery (applies to all agents)
+
+Each agent is spawned as a member of the Phase 2 research team. Append the following block to every prompt (after the JSON output schema):
+
+```
+## Output Delivery
+You are a member of the develop-team research team. When your research is complete,
+send your structured JSON findings to the team lead via SendMessage:
+
+  SendMessage(type: "findings", payload: <your JSON output>)
+
+If you hit a blocker you cannot resolve — an incompatible approach between your
+research and another agent's requirements, a missing migration plan for tables you
+need, ambiguous/contradictory acceptance criteria, or total failure to complete
+your mandatory minimums — send this instead and stop:
+
+  SendMessage(type: "blocker", reason: "<short reason>", details: "<what is needed>")
+
+Do NOT proceed past a blocker. The orchestrator will pause and ask the user.
+```
+
 ## Agent 1: Deep Codebase Explorer (`system-architect`, always)
 
 ```

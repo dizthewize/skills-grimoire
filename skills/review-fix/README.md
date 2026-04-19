@@ -2,6 +2,8 @@
 
 Automated review-fix loop that iterates until your code is clean. Spawns 8 reviewers in parallel, fixes quick-fix items automatically, and accumulates strategic items for your decision at the end.
 
+Uses **Agent Teams** — the 8 reviewers and the fixer share a team per iteration so reviewers can reconcile overlapping findings via SendMessage and the fixer can read the "why" behind each finding.
+
 ## Quick Start
 
 ```

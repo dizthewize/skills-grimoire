@@ -26,9 +26,12 @@ Orchestrate an automated review-fix cycle that iterates until your code is clean
 ## Architecture
 
 ```
-ORCHESTRATOR (main session - manages state only)
+ORCHESTRATOR (main session = team lead)
 |
-+-- REVIEW PHASE (8 parallel sub-agents, each with fresh 200k context)
++-- PER ITERATION:
+|   TeamCreate("review-fix-{branch}-iter{N}") → spawn 8 reviewers + 1 fixer → TeamDelete
+|
++-- REVIEW PHASE (8 parallel team members, each with fresh 200k context)
 |   +-- premium-ux-designer
 |   +-- product-strategy-advisor
 |   +-- general-purpose
@@ -37,12 +40,15 @@ ORCHESTRATOR (main session - manages state only)
 |   +-- code-refactorer
 |   +-- Explore (reusable components)
 |   +-- Explore (dead code)
+|   Reviewers SendMessage findings to team lead.
+|   Team lead issues calibration_request messages to overlap pairs
+|   (Architect+Developer for security/perf; Maintainability+DeadCodeHunter).
 |
-+-- FIX PHASE (single sub-agent, fresh 200k context)
-|   +-- General agent with fix prompt + file context
++-- FIX PHASE (fixer joins same team, fresh 200k context)
+|   +-- general-purpose fixer — reads reviewer SendMessage history for "why"
 |
 +-- STATE FILE (.review-fix/state.json)
-    +-- Tracks iterations, strategic items, fixed items, commits
+    +-- Tracks iterations, strategic items, fixed items, commits, teamName, calibrationEvents
 ```
 
 ---
@@ -63,9 +69,12 @@ Create/update the state file at `.review-fix/state.json`:
   "commits": [],
   "status": "in_progress",
   "startedAt": "2025-01-18T10:00:00Z",
-  "branchName": "feature/example"
+  "branchName": "feature/example",
+  "teamName": null
 }
 ```
+
+**Stale-team cleanup (resume path only):** If loaded state has a non-null `teamName` from a prior crashed run, attempt `TeamDelete(teamName)` before starting fresh, then clear the field. Prevents orphan teams.
 
 ### Step 1: Extract Branch Context
 
@@ -97,14 +106,26 @@ git log --oneline "$BASE_COMMIT"..HEAD
 git diff "$BASE_COMMIT"..HEAD --no-color
 ```
 
-### Step 2: Spawn 8 Reviewer Sub-Agents IN PARALLEL
+#### Create Iteration Team
 
-Use the Task tool to spawn all 8 reviewers simultaneously with `run_in_background: true`.
+Before spawning reviewers, create an Agent Team scoped to this iteration:
+
+```
+TeamCreate:
+  team_name: "review-fix-{branchName}-iter{N}"
+  description: "Review-fix iteration {N} on {branchName}"
+```
+
+Store `state.teamName`. **One team per iteration, not one across all iterations** — each iteration is a fresh review cycle; reusing a team would leak findings/messages across iterations and break the clean-slate invariant.
+
+### Step 2: Spawn 8 Reviewer Team Members IN PARALLEL
+
+Use the Task tool to spawn all 8 reviewers simultaneously as members of the iteration team: pass `team_name: state.teamName` and `run_in_background: true` on every Task call.
 
 Each reviewer receives:
 1. The branch context (diff, changed files, commits)
 2. Their specific review focus
-3. Instructions to return JSON findings
+3. Instructions to send findings JSON to the team lead via `SendMessage(type: "findings", payload: <JSON array>)` (team lead = main session)
 
 #### Reviewer Prompts
 
@@ -324,17 +345,22 @@ Mark as "strategic" for:
 Return findings as JSON array. MAX 10 findings.
 ```
 
-### Step 3: Collect and Aggregate Results
+### Step 3: Collect, Calibrate, and Aggregate Results
 
-After all agents complete:
+After all reviewers send their findings:
 
-1. **Use TaskOutput** to retrieve results from each agent
-2. **Parse JSON findings** from each response
-3. **Handle errors** - If an agent fails, log it and continue with others
-4. **Deduplicate** - Remove similar findings across personas
+1. **Collect via SendMessage** — the team lead receives one `type: "findings"` message per reviewer. Fall back to `TaskOutput` only if a message doesn't arrive within the timeout.
+2. **Parse JSON findings** from each message payload.
+3. **Handle errors** — if a reviewer fails (no message, no output), log it and continue with the others.
+4. **Dedup via calibration** — finally implement the dedup intent. Identify overlap clusters between reviewers whose domains overlap:
+   - **Security:** System Architect ↔ Senior Developer
+   - **Performance:** Senior Developer ↔ System Architect
+   - **Dead code:** Code Maintainability ↔ Dead Code Hunter
+
+   For each cluster where both reviewers flagged similar files/lines, the team lead sends `SendMessage(type: "calibration_request", findings: [<their overlapping findings>])` to both reviewers. Each responds with `SendMessage(type: "calibration_response", merged: <single canonical finding with agreed severity>)`. Record the exchange in this iteration's `calibrationEvents` log. Non-overlapping findings pass through unchanged.
 5. **Separate by type**:
-   - `quick-fix` items -> Generate fix prompt for this iteration
-   - `strategic` items -> Append to `state.strategicItems`
+   - `quick-fix` items → Generate fix prompt for this iteration
+   - `strategic` items → Append to `state.strategicItems`
 
 ### Step 4: Check Exit Conditions
 
@@ -407,15 +433,17 @@ After completing all fixes, run the project's build and lint commands to verify.
 Report any errors encountered.
 ```
 
-### Step 6: Fix Phase (Fresh Sub-Agent)
+### Step 6: Fix Phase (Fixer Joins the Iteration Team)
 
-Spawn a single fix agent with:
-- The fix prompt from Step 5
-- `run_in_background: false` (wait for completion)
-- Fresh 200k context window
+Spawn a single fixer agent as a member of the same iteration team. Pass `team_name: state.teamName` on the Task call; keep `run_in_background: false` to wait for completion. Fresh 200k context window.
 
 ```
 Sub-agent: general-purpose (or appropriate fixer type)
+
+You are a member of the review-fix iteration team. The team lead has forwarded
+the fix prompt below. If any finding is ambiguous, read the reviewers' SendMessage
+history (type: "findings" and type: "calibration_response") to recover the
+original reasoning — don't guess.
 
 {The fix prompt generated in Step 5}
 
@@ -443,11 +471,17 @@ Update state.json with commit hash:
 }
 ```
 
-### Step 8: Loop or Complete
+### Step 8: Shut Down Iteration Team, Then Loop or Complete
+
+Before either looping or completing, tear down the iteration team:
+
+1. `SendMessage(type: "shutdown_request")` to all 9 teammates (8 reviewers + fixer).
+2. `TeamDelete(state.teamName)`.
+3. Clear `state.teamName = null`.
 
 **If more iterations needed:**
 - Increment `state.iteration`
-- Go back to Step 1
+- Go back to Step 1 (which will `TeamCreate` a fresh team for the next iteration)
 
 **If complete:**
 - Update `state.status: "completed"`
@@ -510,6 +544,7 @@ For items marked "Add to backlog", create:
   "status": "in_progress",
   "startedAt": "2025-01-18T10:00:00Z",
   "branchName": "feature/example",
+  "teamName": null,
   "strategicItems": [
     {
       "severity": "important",
@@ -567,6 +602,15 @@ Each iteration creates a log file:
   "totalFindings": 20,
   "quickFixItems": [],
   "strategicItems": [],
+  "calibrationEvents": [
+    {
+      "cluster": "security",
+      "reviewers": ["architect", "developer"],
+      "originalFindingsCount": 2,
+      "mergedFinding": { "file": "...", "line": 0, "severity": "important", "issue": "..." }
+    }
+  ],
+  "teamName": "review-fix-feature-example-iter1",
   "fixPrompt": "...",
   "fixResult": "success|failure",
   "buildResult": "pass|fail",
@@ -600,15 +644,18 @@ When this skill is invoked:
 ```
 for iteration in 1..maxIterations:
   1. Extract branch context
-  2. Spawn 8 reviewers IN PARALLEL (run_in_background: true)
-  3. Wait for all reviewers (TaskOutput)
-  4. Aggregate findings
-  5. If no quick-fix items -> exit loop
-  6. Generate fix prompt
-  7. Spawn fix agent (run_in_background: false)
-  8. Run build/lint
-  9. Commit if auto-commit enabled
-  10. Update state
+  2. TeamCreate("review-fix-{branch}-iter{N}")
+  3. Spawn 8 reviewers as team members (team_name, run_in_background: true)
+  4. Collect findings via SendMessage (TaskOutput fallback on timeout)
+  5. Calibrate overlaps via SendMessage(type:"calibration_request") to reviewer pairs
+  6. Aggregate findings
+  7. If no quick-fix items -> shutdown team, exit loop
+  8. Generate fix prompt
+  9. Spawn fixer as team member (team_name, run_in_background: false)
+  10. Run build/lint
+  11. Commit if auto-commit enabled
+  12. SendMessage(type:"shutdown_request") to all teammates, then TeamDelete
+  13. Update state
 ```
 
 ### 4. Strategic Review
