@@ -9,7 +9,7 @@ Automate the full lifecycle of a GitHub issue bug: read the issue, implement the
 
 ## Prerequisites
 
-**Read `CONFIG.md` at the start of every run.** This file contains project-specific settings (GitHub repo, team members, label names, project board config, QA credentials). If `CONFIG.md` doesn't exist, warn the user and point them to `CONFIG.template.md`.
+**`CONFIG.md` and `.gh-issue/context.json` are preloaded in `## Preloaded Context` below** — parse settings from there at Phase 0. If `CONFIG.md` shows `{"error":...}`, warn the user and point them to `CONFIG.template.md`.
 
 ## When to Use
 
@@ -205,6 +205,14 @@ Before moving to Phase 9, verify ALL of these are done:
 
 **If any item is missing, go back and complete it before proceeding to Phase 9.**
 
+## Preloaded Context
+
+CONFIG.md:
+!`cat CONFIG.md 2>/dev/null || echo '{"error":"CONFIG.md not found — copy CONFIG.template.md"}'`
+
+.gh-issue/context.json:
+!`cat .gh-issue/context.json 2>/dev/null || echo '{"error":"no gh-issue context — run /gh-issue {issueNumber} first, or fetch fresh in Phase 1"}'`
+
 ---
 
 ## Workflow
@@ -213,7 +221,7 @@ Before moving to Phase 9, verify ALL of these are done:
 
 **This phase ALWAYS runs first — before reading the issue or doing any work.**
 
-**First: Read `CONFIG.md`** to load project-specific settings (team members, label names, deployment config, QA credentials). If not found, warn user and point to `CONFIG.template.md`.
+**First: Parse CONFIG from `## Preloaded Context` above** — project-specific settings are already loaded. If the preloaded value shows `{"error":...}`, warn user and point to `CONFIG.template.md`.
 
 If the `branch` parameter was explicitly set (`main`, `new`, or `worktree`), use that value. Otherwise (default `ask`), prompt the user:
 
@@ -239,7 +247,7 @@ Store the resolved branch strategy — Phase 6 and Phase 6.5 need it for commit/
 
 ### Phase 1: Read Issue
 
-Fetch the GitHub issue details using the `gh` CLI:
+**Parse `.gh-issue/context.json` from `## Preloaded Context` above** — already loaded. Use directly if `fetchedAt` is less than 30 minutes old. If it shows `{"error":...}` or `fetchedAt` is more than 30 minutes old, fetch fresh:
 
 ```bash
 gh issue view {issueNumber} --json number,title,body,labels,assignees,milestone,state,comments
@@ -254,8 +262,6 @@ Extract:
 - **Comments**: Any discussion, additional context, or previous attempts
 
 If the fetch fails, ask the user to describe the bug manually and continue.
-
-**Check for `.gh-issue/context.json`** — if the `/gh-issue` skill was run first, load this file instead of fetching fresh. Prefer it if it is less than 30 minutes old (check `fetchedAt`).
 
 Fields consumed from `context.json`:
 - `number`, `title`, `body` → issue description and acceptance criteria for Phase 5 review

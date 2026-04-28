@@ -51,13 +51,20 @@ ORCHESTRATOR (main session = team lead)
     +-- Tracks iterations, strategic items, fixed items, commits, teamName, calibrationEvents
 ```
 
+## Preloaded Context
+
+.review-fix/state.json (resume path):
+!`cat .review-fix/state.json 2>/dev/null || echo '{"error":"no existing state — fresh run"}'`
+
 ---
 
 ## Workflow
 
 ### Step 0: Initialize State
 
-Create/update the state file at `.review-fix/state.json`:
+Check preloaded `.review-fix/state.json` from `## Preloaded Context` above — if it shows `{"error":...}`, this is a fresh run; create the state file below. If it has valid JSON, this is a resume — read `iteration`, `maxIterations`, `strategicItems`, and `teamName` from it instead of initializing fresh.
+
+State file at `.review-fix/state.json`:
 
 ```json
 {

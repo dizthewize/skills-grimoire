@@ -94,6 +94,14 @@ ORCHESTRATOR (main session - manages state, cross-references outputs)
 +-- STATE: .develop-team/state.json
 ```
 
+## Preloaded Context
+
+.gh-issue/context.json:
+!`cat .gh-issue/context.json 2>/dev/null || echo '{"error":"no gh-issue context — run /gh-issue {issueNumber} first, or fetch fresh in Phase 1"}'`
+
+.develop-team/state.json (resume path):
+!`cat .develop-team/state.json 2>/dev/null || echo '{"error":"no existing state — fresh run"}'`
+
 ---
 
 ## Workflow
@@ -103,7 +111,7 @@ ORCHESTRATOR (main session - manages state, cross-references outputs)
 1. Parse `$ARGUMENTS`: GitHub issue number (e.g. `123` or `#123`), or freeform task description
 2. Parse parameters: `type`, `auto-commit`, `skip-review`, `skip-tests`, `skip-pr`, `skip-migrations`, `plan-only`
 3. Create `.develop-team/` directory if needed
-4. Check for existing `state.json` — if found, offer to resume from last completed phase
+4. Parse `.develop-team/state.json` from `## Preloaded Context` above — if it shows `{"error":...}`, fresh run; otherwise offer to resume from last completed phase
 5. **Stale-team cleanup (resume path only):** If loaded `state.team.name` exists and `state.team.status != "closed"`, attempt `TeamDelete(state.team.name)` before starting fresh. Prevents orphan teams from prior crashes. Reset `state.team` to the inactive stub.
 6. Initialize state file
 
@@ -113,7 +121,7 @@ ORCHESTRATOR (main session - manages state, cross-references outputs)
 
 #### If issue number provided:
 
-First, check for `.gh-issue/context.json` — if present and less than 30 minutes old (`fetchedAt`), use it directly. Otherwise fetch fresh:
+First, parse `.gh-issue/context.json` from `## Preloaded Context` above — if it shows `{"error":...}` or `fetchedAt` is more than 30 minutes old, fetch fresh:
 
 ```bash
 gh issue view {number} --json number,title,body,labels,assignees,milestone,state,comments

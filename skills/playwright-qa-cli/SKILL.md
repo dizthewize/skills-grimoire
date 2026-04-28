@@ -2,11 +2,17 @@
 name: playwright-qa-cli
 description: "Automated QA testing using playwright-cli (CLI tool, NOT MCP tools). Provisions a test user, opens a headless browser, logs in, navigates to target pages, takes screenshots, and generates a REPORT.md. Two modes: VERIFY (reproduce a bug before fixing) and CHECK (confirm a fix works). Use this skill whenever the user says 'QA this', 'test this fix', 'verify this bug', 'smoke test', 'check if this works', 'reproduce this issue', 'run playwright QA', or 'playwright-qa-cli'. Also triggered from /fix-ticket at pre-fix and post-fix stages. Works for any page or user flow — not limited to specific features."
 allowed-tools: Bash(playwright-cli:*), Bash(npx:playwright-cli:*)
+context: fork
 ---
 
 # Playwright QA (CLI Variant)
 
 Automated headless-browser QA using `playwright-cli` bash commands. Provisions a test user, logs in, navigates to target pages, screenshots each step, generates REPORT.md, cleans up.
+
+## Preloaded Context
+
+CONFIG.md:
+!`cat CONFIG.md 2>/dev/null || echo '{"error":"CONFIG.md not found — copy CONFIG.example.md to CONFIG.md and fill in your values"}'`
 
 ## CRITICAL: No MCP Tools
 
@@ -32,7 +38,7 @@ export PATH="$HOME/.npm-global/bin:$PATH" && playwright-cli ...
 
 ## Configuration
 
-All project-specific settings are defined in `CONFIG.md` at the root of this skill directory. Before first use, copy `CONFIG.example.md` to `CONFIG.md` and fill in your values.
+All project-specific settings are preloaded from `CONFIG.md` in `## Preloaded Context` above. If it shows `{"error":...}`, copy `CONFIG.example.md` to `CONFIG.md`, fill in your values, and re-invoke the skill.
 
 | Setting | Source |
 |---------|--------|

@@ -96,6 +96,14 @@ ORCHESTRATOR (main session - team lead, manages state + synthesis)
 
 **Why `code-refactorer` for Devil's Advocate**: Needs strong code reading ability to open every file reviewers reference and verify claims against actual source. Can trace patterns across the codebase ("Is this really a bug?", "Does this pattern exist elsewhere?", "Is the reviewer quoting this line correctly?").
 
+## Preloaded Context
+
+.gh-issue/context.json (ticket context, if available):
+!`cat .gh-issue/context.json 2>/dev/null || echo '{"error":"no gh-issue context — using PR metadata and issue= param only"}'`
+
+.review-team/state.json (resume path):
+!`cat .review-team/state.json 2>/dev/null || echo '{"error":"no existing state — fresh run"}'`
+
 ---
 
 ## Workflow
@@ -136,11 +144,10 @@ If `gh pr view` fails, ask the user to confirm auth (`gh auth status`) and URL.
 
 4. **Issue/ticket auto-detection**: Resolve issue context for acceptance criteria validation using this priority order:
 
-   **a) `issue=` parameter provided**: Fetch GitHub issue directly:
+   **a) `issue=` parameter provided**: Parse `.gh-issue/context.json` from `## Preloaded Context` above first — use directly if not showing `{"error":...}` and `fetchedAt` is less than 30 minutes old. Otherwise fetch fresh:
    ```bash
    gh issue view {issueNumber} --json number,title,body,labels,milestone
    ```
-   Also check `.gh-issue/context.json` — if present and less than 30 minutes old, use it instead.
 
    **b) `ticket=` parameter provided (Jira)**: Fetch via Jira MCP:
    - Path: `/rest/api/3/issue/{key}`
@@ -185,7 +192,7 @@ If `gh pr view` fails, ask the user to confirm auth (`gh auth status`) and URL.
 }
 ```
 
-7. Check for existing `state.json` — if found, offer to resume:
+7. Check preloaded `.review-team/state.json` from `## Preloaded Context` above — if it shows `{"error":...}`, fresh run; otherwise offer to resume:
 
 ```
 AskUserQuestion:
