@@ -24,4 +24,4 @@ cp -r marketingskills/skills/<skill> ~/.claude/skills/    # or ~/.agents/skills/
 | `pricing` | §6 Scope & packaging | Value-metric, Good-Better-Best, tier structure — when a spec touches monetization or packaging |
 | `offers` *(partial)* | §6 / §2 | Value framing and packaging construction |
 
-> **Reference, don't absorb:** `pricing` and `offers` are growth/Treasurer-owned and `product-marketing`/`marketing-psychology` are growth-owned — Architect consumes their output as input to a spec, but the production stays with the owning role. Generate `.agents/product-marketing.md` once and Scout, Strategist, and Architect all benefit.
+> **Reference, don't absorb:** `pricing`, `offers`, `product-marketing`, and `marketing-psychology` are growth/monetization concerns — consume their output as input to a spec, but leave the production to those skills. Generate `.agents/product-marketing.md` once and the market, product, and growth skills all benefit.

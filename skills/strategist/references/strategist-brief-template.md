@@ -1,6 +1,6 @@
 # Strategist Brief: [Campaign / Initiative]
 
-**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Author:** Strategist (growth) &nbsp;·&nbsp; **Status:** Draft | In Review | Approved
+**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Author:** Strategist &nbsp;·&nbsp; **Status:** Draft | In Review | Approved
 **Funnel stage:** [Acquisition | Activation | Retention | Referral | Revenue] &nbsp;·&nbsp; **North Star:** [the metric this ladders up to]
 
 ---
@@ -53,7 +53,7 @@
 
 ## 3. Campaign / Launch Plan
 
-Phase the work; each phase has an owner and an exit signal. (For copy, hand off to Herald — note it, don't draft it here.)
+Phase the work; each phase has an owner and an exit signal. (For copy, hand off to copywriting — note it, don't draft it here.)
 
 | Phase | Timing | Activities | Channel | Owner | Exit signal |
 |-------|--------|-----------|---------|-------|-------------|
@@ -61,7 +61,7 @@ Phase the work; each phase has an owner and an exit signal. (For copy, hand off 
 | Launch | [T-0] | [announce, push] | | | |
 | Post-launch | [T+X] | [nurture, retarget, iterate] | | | |
 
-**Copy to commission (→ Herald):** [List the assets that need words written — Strategist specs the brief, Herald writes.]
+**Copy to commission:** [List the assets that need words written — this brief specs them; copywriting writes the words.]
 
 ---
 
@@ -120,7 +120,7 @@ Each row is a falsifiable bet, ranked by **ICE = (Impact + Confidence + Ease) / 
 ## 8. Budget & Resourcing (if applicable)
 
 - **[Line item / channel]:** [spend, expected return logic]
-- **Hand-offs:** [Herald for copy, Observer for user input, Treasurer for revenue read]
+- **Hand-offs:** [copywriting for the words, user research for user input, finance for the revenue read]
 
 ---
 

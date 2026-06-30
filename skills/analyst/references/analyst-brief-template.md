@@ -1,6 +1,6 @@
 # Analyst Brief: [Technology / Decision]
 
-**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Prepared by:** Analyst (tech-research)
+**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Prepared by:** Analyst
 **Context:** [1-2 sentences describing what this brief is evaluating and why.]
 **Confidence:** [High / Medium / Low] — [one phrase on why, e.g. "rate limits undocumented for the enterprise tier"]
 
@@ -162,7 +162,7 @@ Score each criterion (✅ strong · ⚠️ adequate · ❌ weak) so the trade-of
 ## 5. Risks & Open Questions
 
 - **[Risk]:** [Impact and how to de-risk — e.g. spike, prototype, contract term.]
-- **[Open question]:** [What's unverified, why it matters, and — if outside Analyst's domain — who owns it (Engineer / Architect / Scout / Commander).]
+- **[Open question]:** [What's unverified, why it matters, and — if outside this skill's scope (implementation, product decisions, market research) — note that.]
 
 ---
 

@@ -1,6 +1,6 @@
 # Scout Brief: [Topic]
 
-**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Prepared by:** Scout (market-research)
+**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Prepared by:** Scout
 **Context:** [1-2 sentences describing the product or initiative this research supports.]
 **Confidence:** [High / Medium / Low] — [one phrase on why, e.g. "thin public pricing data on Player C"]
 
@@ -149,7 +149,7 @@ Rate each signal **strong / moderate / weak** so the reader can weight them.
 2. **[Risk]:** [Detail.]
 
 ### 6.4 Unknowns Requiring Further Research
-1. **[Unknown]:** [What needs to be answered, why it matters, and — if outside Scout's domain — who owns it (Observer/Analyst/Herald/Commander).]
+1. **[Unknown]:** [What needs to be answered, why it matters, and — if outside this skill's scope (user research, technical evaluation, content) — note that.]
 2. **[Unknown]:** [Detail.]
 
 ---

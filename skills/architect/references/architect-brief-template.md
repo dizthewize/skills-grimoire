@@ -1,7 +1,7 @@
 # Architect Brief: [Feature / Initiative]
 
-**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Author:** Architect (product) &nbsp;·&nbsp; **Status:** Draft | In Review | Approved
-**Stakeholders:** [Who must sign off / who is impacted — e.g. Eng lead, Design, Commander]
+**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Author:** Architect &nbsp;·&nbsp; **Status:** Draft | In Review | Approved
+**Stakeholders:** [Who must sign off / who is impacted — e.g. Eng lead, Design, leadership]
 
 ---
 

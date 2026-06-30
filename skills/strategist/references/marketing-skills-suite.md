@@ -25,7 +25,7 @@ Also installable via the Claude Code plugin system, a git submodule, or SkillKit
 
 ## Foundation file (read this first)
 
-Most suite skills look for a shared context doc — **`.agents/product-marketing.md`** (or `.claude/product-marketing.md`) — and read it before asking questions. The suite's **`product-marketing`** skill creates it. If you import the suite, generate this file first; every other skill (and Strategist's own briefs) gets sharper for it. Strategist can also point Observer/Scout findings into it.
+Most suite skills look for a shared context doc — **`.agents/product-marketing.md`** (or `.claude/product-marketing.md`) — and read it before asking questions. The suite's **`product-marketing`** skill creates it. If you import the suite, generate this file first; every other skill (and Strategist's own briefs) gets sharper for it. User-research and market findings can also feed into it.
 
 ## Which skills produce which Strategist brief section
 
@@ -34,7 +34,7 @@ These are the high-value ones — verified by reading their SKILL.md. Each is a 
 | Brief section | Imported skill | What it produces |
 |---|---|---|
 | §3 Campaign / Launch Plan | `launch` | Full launch plan via the ORB framework (owned/rented/borrowed channels), phased |
-| §4 Email Sequence / Drip | `emails` | Sequence design — type, trigger, per-email purpose/goal (also drafts copy → that part is Herald's) |
+| §4 Email Sequence / Drip | `emails` | Sequence design — type, trigger, per-email purpose/goal (also drafts copy → that part is a copywriting concern) |
 | §5 SEO Plan | `seo-audit` → `programmatic-seo`, `schema`, `ai-seo` | Technical + on-page audit and prioritized fixes; scaled page templates; structured data |
 | §6 Growth Experiments | `ab-testing` | Hypothesis-driven test design, single-variable rigor, pre-set sample size, ICE-ranked backlog |
 | §2 Strategy & Positioning | `offers`, `marketing-psychology` | Offer construction (value stack, guarantee, scarcity); behavioral-science angles |
@@ -51,7 +51,7 @@ These are the high-value ones — verified by reading their SKILL.md. Each is a 
 >
 > **`marketing-plan` is a near-superset of the whole brief.** It outputs a 13-section, AARRR-framed, Notion-paste-ready markdown plan and cross-references the other suite skills. If imported and the user wants a *full* marketing plan (not a focused brief), prefer `marketing-plan` over re-deriving it in Strategist's template — or use Strategist for the strategy spine and let `marketing-plan` expand it.
 >
-> **Copy-producing skills bleed into Herald's lane.** `ad-creative`, `cold-email`, and the RSA output of `ads`/the email bodies in `emails` generate *finished copy*. Strategist may invoke them for structure, but treat the actual words as Herald's deliverable per the routing rules.
+> **Copy-producing skills cross into copywriting.** `ad-creative`, `cold-email`, and the RSA output of `ads`/the email bodies in `emails` generate *finished copy*. Strategist may invoke them for structure, but treat the actual words as a copywriting deliverable, out of this skill's scope.
 
 ## Strategist-relevant skills (import these for growth depth)
 
@@ -88,15 +88,15 @@ Grouped by Strategist's duties. Reach for one when the brief needs more than the
 - `ab-testing` — experiment design and programs
 - `analytics` — tracking setup and audit
 
-## Overlaps — route, don't absorb
+## Overlaps — reference, don't absorb
 
-Some suite skills belong to other fleet roles. If imported, prefer the owning role:
+Some suite skills sit in an adjacent concern, not growth strategy. If imported, use them for their own job:
 
-| Suite skill | Belongs to |
+| Suite skill | Adjacent concern |
 |---|---|
-| `copywriting`, `copy-editing`, `content-strategy`, `social`, `image`, `video` | **Herald** (content) |
-| `customer-research` | **Observer** (user-research) |
-| `pricing`, `revops`, `sales-enablement` | **Treasurer** (revenue) / sales |
-| `competitors`, `competitor-profiling` | **Scout** (market-research) |
+| `copywriting`, `copy-editing`, `content-strategy`, `social`, `image`, `video` | **Content / copywriting** |
+| `customer-research` | **User research** |
+| `pricing`, `revops`, `sales-enablement` | **Revenue / sales** |
+| `competitors`, `competitor-profiling` | **Market research** |
 
-Strategist may *reference* these for strategy, but the production/analysis belongs to the owning role.
+Strategist may *reference* these for strategy, but the production/analysis is out of this skill's scope.

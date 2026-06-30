@@ -51,7 +51,7 @@ Define the variant vs. control, the **minimum detectable effect** and rough samp
 3. Translate attributes → **value** the customer cares about.
 4. Name the **target segment** that cares most.
 5. Frame the **market category** that makes the value obvious.
-Output the positioning statement in §2. (Market-truth inputs come from Scout; user-truth from Observer.)
+Output the positioning statement in §2. (Market-truth inputs come from market research; user-truth from user research.)
 
 ---
 
@@ -61,7 +61,7 @@ Output the positioning statement in §2. (Market-truth inputs come from Scout; u
 - Start from the **trigger** (signup, inactivity, cart abandon) and the **goal metric**, not the number of emails.
 - Each send has one purpose and one CTA; later sends fire **conditionally** (skip if the goal action is already done).
 - Define the **exit/goal-met** condition so users don't get nagged after converting.
-- Strategist designs the sequence *map*; the email body copy is Herald's.
+- This skill designs the sequence *map*; the email body copy is a separate copywriting concern.
 
 **SEO**
 - Target by **search intent** (informational vs. commercial), not just volume.
@@ -70,13 +70,13 @@ Output the positioning statement in §2. (Market-truth inputs come from Scout; u
 
 **Launch**
 - Three beats: **pre-launch** (build list, tease, seed proof), **launch** (coordinated push across channels in a tight window), **post-launch** (nurture, retarget, iterate on what converted).
-- Every phase has an owner and an **exit signal**. Spec the copy assets needed and hand them to Herald.
+- Every phase has an owner and an **exit signal**. Spec the copy assets needed and hand them off to copywriting.
 
 ---
 
 ## External marketing skills
 
-A 47-skill marketing suite — **coreyhaines31/marketingskills** — covers many of these tactics in depth. **It is NOT installed by default; it must be imported before use.** See `references/marketing-skills-suite.md` for the relevant skills, the import commands, and which map to Strategist vs. route to another fleet role. When a request would benefit from a specialized skill (e.g. detailed `ads`, `cro`, `programmatic-seo`), check whether it's been imported; if not, tell the user it needs importing first rather than assuming it's available.
+A 47-skill marketing suite — **coreyhaines31/marketingskills** — covers many of these tactics in depth. **It is NOT installed by default; it must be imported before use.** See `references/marketing-skills-suite.md` for the relevant skills, the import commands, and which map to growth work vs. an adjacent concern. When a request would benefit from a specialized skill (e.g. detailed `ads`, `cro`, `programmatic-seo`), check whether it's been imported; if not, tell the user it needs importing first rather than assuming it's available.
 
 ---
 
@@ -89,6 +89,6 @@ Before the brief ships:
 - [ ] Each experiment/campaign has a **falsifiable hypothesis** and a **success bar**.
 - [ ] Experiments are **ICE-ranked** with visible inputs, not a flat list.
 - [ ] §7 Measurement Plan has a **primary metric, a guardrail, and a decision rule**.
-- [ ] Copy assets are **specced and handed to Herald**, not drafted here.
+- [ ] Copy assets are **specced and handed off to copywriting**, not drafted here.
 - [ ] Positioning (if present) names the alternative it differentiates against.
 - [ ] Any specialized external skill referenced is flagged as **needing import** if not present.

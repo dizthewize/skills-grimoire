@@ -20,7 +20,7 @@ cp -r marketingskills/skills/<skill> ~/.claude/skills/    # or ~/.agents/skills/
 | Skill | Feeds Scout section | What it produces |
 |---|---|---|
 | `competitor-profiling` | §2 Competitive Landscape (per-player blocks + §2.1 matrix) | Scrapes a competitor's URLs (Firecrawl) + SEO/market data (DataForSEO) into a structured, facts-over-opinions profile doc with an At-a-Glance summary |
-| `competitors` *(partial)* | §2 framing only | Builds "vs" / alternative comparison logic — but its **output is a published SEO/sales page**, which is content production (Herald/Strategist). Borrow the framing; route the page out. |
+| `competitors` *(partial)* | §2 framing only | Builds "vs" / alternative comparison logic — but its **output is a published SEO/sales page**, which is content production, outside this skill's scope. Borrow the framing; leave the page itself out. |
 | `product-marketing` *(foundation)* | §2 Positioning inputs | Creates `.agents/product-marketing.md` (differentiation, competitive landscape, switching dynamics) — shared context that sharpens positioning reads |
 
-> **Route, don't absorb:** `competitor-profiling` is Scout's work even though it lives in a marketing repo. `customer-research` from that suite is **Observer's** (user-research), not Scout's — don't pull it in here.
+> **Stay in scope:** `competitor-profiling` is squarely competitive-intelligence work even though it lives in a marketing repo. `customer-research` from that suite is **user research** — out of scope here; don't pull it in.
