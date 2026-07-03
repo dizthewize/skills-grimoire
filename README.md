@@ -12,6 +12,16 @@ GitHub issue and development lifecycle skills for Claude Code. Covers the full l
 | `/review-team` | PR review with a configurable team of specialist agents |
 | `/build-with-agent-team` | Build a project from a plan doc using Agent Teams — lead defines contracts upfront, spawns specialist agents in parallel tmux panes, coordinates integration |
 
+## Utility Skills
+
+Standalone helpers outside the GitHub/dev-lifecycle loop.
+
+| Skill | Description |
+|-------|-------------|
+| `/docs-to-pdf` | Convert Markdown docs (briefs, PRDs, tech specs) to styled A4 PDFs and, optionally, email them as attachments via Resend |
+
+Requires Node with global `marked` + `playwright` (Chromium); the email step needs `RESEND_API_KEY`.
+
 ## Install
 
 ```bash
