@@ -63,6 +63,24 @@ Each story needs criteria for the happy path **and** the important error/edge ca
 
 ---
 
+## Open-question triage (run before the spec ships)
+
+Open questions are where an unverified dependency hides in plain sight. Sort every one into exactly one bucket:
+
+| Bucket | Test | Disposition |
+|---|---|---|
+| **Blocking pre-check** | An AC's exit criterion depends on the answer — it names a vendor, model, API, or prerequisite the spec commits to building on | **Not an open question.** Resolve it *now*; the phase cannot go Ready until it is. |
+| **Priority question** | The answer changes sequencing or scope, but nothing breaks either way | Log with an owner and a decide-by date |
+| **Nice to know** | No decision hangs on it | Log, no owner needed |
+
+**The mechanical check:** take the set of vendors, models, APIs and prerequisites named anywhere in your ACs and release plan. Grep your own open questions for those names. Any hit is a blocking pre-check, not a question.
+
+Why this needs to be mechanical rather than a judgement call: the failure looks *diligent* from both sides. A question like *"can vendor X meet our quality bar?"* is a reasonable thing to log, and a task titled *"build the pipeline on vendor X"* with *"AC-N met"* as its exit criterion is a reasonable thing to schedule. Nobody reads them together, so the spec authorises building on a dependency nobody confirmed — and "can it?" is answered only after the work is built. Resolving one lookup up front is the whole cost of avoiding that.
+
+If the answer needs research beyond a lookup, that is an **Analyst** request (feasibility + a reachability probe against the real credentials) — not a line item to defer.
+
+---
+
 ## Quality checklist
 
 Before marking a spec ready:
@@ -74,4 +92,5 @@ Before marking a spec ready:
 - [ ] Prioritization uses a named framework with visible inputs.
 - [ ] Trade-offs end in a **recommendation**, not an open question.
 - [ ] Dependencies and open questions each have an owner.
+- [ ] **Open questions triaged against the ACs** — none that an acceptance criterion depends on is still unresolved (see Open-question triage).
 - [ ] Assumptions are stated so reviewers can challenge them.

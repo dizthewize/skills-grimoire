@@ -113,7 +113,41 @@ Per the global rule: **read the official docs before forming an opinion.** Wrong
 
 ---
 
-## Confidence grading
+## Reachability probe
+
+Docs prove a product exists. They do not prove **your** credentials can call it. This is a separate check, and it is cheap — run it for anything gated behind a key before recommending it.
+
+**Why it is not optional.** The two most expensive integration failures look identical to success on paper: a model fully documented but not enabled for your account, and one the provider's own list endpoint returns while every call 404s. Both yield a feature that cannot work *at all* — discovered only after it is built.
+
+**The technique.** Send a request that is deliberately invalid in a cheap way — a bogus parameter value, a malformed size, `max_tokens: 1`. You are reading the **error**, not the result:
+
+- `model_not_found` · `does not exist` · `no longer available` → **unavailable to this account**, whatever the docs say.
+- `invalid parameter` · `unsupported value` → **reachable**; the credential works and the surface exists.
+- `401` / `403` → a credential/scope problem, not an availability answer. Fix the key and re-probe.
+
+Invalid requests are rejected before billing on most APIs, so this is usually free. Exception: **queue-based APIs** that accept a submission and validate later — there a probe enqueues real (paid) work, so probe with a valid id and read the queued result instead.
+
+**Availability is not compatibility.** Models within one family routinely differ on which sampling and token parameters they accept, so a reachable model id can still 400 on the exact call you designed. Probe the **request shape** you intend to send, not just the name.
+
+**Record it.** Per tool: *Reachable on our account: yes/no — checked YYYY-MM-DD*, tagged `[Verified]`. Anything unprobed stays `[Docs]` — say so rather than implying you tested it.
+
+---
+
+## Perishable facts → implementation constants
+
+The failure this prevents: a correct number in a brief becomes a hardcoded constant, loses its provenance, and is trusted long after it stops being true. Prices change, models retire, API versions sunset — and nothing in the code says where the value came from or when it was checked.
+
+Any figure a reader will hardcode goes in the brief's **Constants handed to implementation** table:
+
+| What | Value | **Unit** | Checked | Re-verify by | Source |
+|---|---|---|---|---|---|
+| e.g. model input price | 2.50 | **USD per 1M tokens** | 2026-07-29 | 2026-10-29 | [url] |
+
+Three rules:
+
+- **Write the unit out.** `$5/$15` is not a unit. A correct figure in an unstated unit becomes an incorrect constant, and unit errors survive review because the digits look right.
+- **Set a re-verify date, not just a checked date.** Dating a fact records decay; it does not prevent it. Default to 3 months for pricing and model ids, sooner where the brief itself flags version churn as a risk.
+- **If the brief names volatility as a top risk, every constant inherits a short horizon.** A brief that says "API version churn is HIGH" and then hands over undated version numbers has documented the danger without defending against it.
 
 Tag non-obvious claims inline so the reader can weight them:
 
@@ -130,6 +164,8 @@ Vendor marketing claims are not `[Docs]` — treat them as claims and verify, or
 Before the brief ships:
 
 - [ ] Official **docs were read** for every tool evaluated (not blog summaries).
+- [ ] Every credential-gated tool was **probed with the real key** — reachability stated per tool, unprobed ones marked `[Docs]`, not `[Verified]`.
+- [ ] Every figure destined to be hardcoded is in the **Constants** table with its **unit spelled out** and a **re-verify date**.
 - [ ] Decision criteria are stated **and weighted** before the recommendation.
 - [ ] Any "X vs. Y" pick is backed by a **weighted decision matrix** with visible scores.
 - [ ] Every library has a **health score** (cadence, maintainers, license, governance).

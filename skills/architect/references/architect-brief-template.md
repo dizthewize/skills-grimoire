@@ -161,7 +161,17 @@ Score with an explicit framework (RICE shown; swap for MoSCoW or value/effort �
 ### 10.1 Dependencies
 - **[System / Team]:** [What's needed, by when, who owns it]
 
-### 10.2 Open Questions
+### 10.2 Blocking Pre-Checks *(resolve before this spec ships)*
+
+Questions an **acceptance criterion depends on** — anything naming a vendor, model, API or prerequisite an AC's exit criterion is built on. These are not open questions; a spec that ships with one unresolved authorises building on a dependency nobody confirmed.
+
+| # | Question | Depends-on AC | Answer | Resolved |
+|---|----------|---------------|--------|:--------:|
+| 1 | [e.g. can vendor X actually produce this, on our account?] | AC-N | [the verified answer] | ☐ |
+
+> Run the mechanical check: list every vendor/model/API named in your ACs and release plan, then grep your own open questions for those names. Any hit belongs in this table, not §10.3. If answering needs real research, that is an **Analyst** request (feasibility + reachability probe against the real credentials) — not a deferral.
+
+### 10.3 Open Questions *(logged — nothing is built on these)*
 1. **[Question]** — Owner: [name or TBD] — [why it blocks / what it changes]
 
 ---

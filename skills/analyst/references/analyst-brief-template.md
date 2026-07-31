@@ -38,6 +38,9 @@
 
 **Maintenance & health.** [Last release date, release cadence, open-issue/PR backlog, # maintainers, license, governance (company-backed / community / single-maintainer). A dying dependency is a future migration.]
 
+**Reachable on our account.** [yes / no / **not probed** — checked YYYY-MM-DD.] `[Verified]`
+> Documented ≠ enabled for this key, and a provider's list endpoint is a claim, not proof. Quote the probe's actual response, not just a verdict. If unprobed, write "not probed" and downgrade the capability claims below to `[Docs]`.
+
 **Auth model.** [How auth works, scopes, token types, and any approval gates.] `[Docs]`
 
 **Rate limits / tiers.** [Access tiers, limits per tier, and what each unlocks.]
@@ -159,14 +162,28 @@ Score each criterion (✅ strong · ⚠️ adequate · ❌ weak) so the trade-of
 
 ---
 
-## 5. Risks & Open Questions
+## 5. Constants Handed to Implementation
+
+Every figure below will be **hardcoded by whoever reads this brief**. Once it reaches a constant it loses its provenance, so it is recorded here with the unit spelled out and a date to re-check it. Fill this whenever the brief hands over a price, limit, model id, or API version.
+
+| What | Value | **Unit (spell it out)** | Checked | Re-verify by | Source |
+|------|-------|-------------------------|---------|--------------|--------|
+| [e.g. model input price] | | [e.g. USD per 1M tokens] | YYYY-MM-DD | YYYY-MM-DD | [URL] |
+| [e.g. API version] | | [e.g. path segment] | YYYY-MM-DD | YYYY-MM-DD | [URL] |
+
+- **Units are not optional.** `$5/$15` is a shorthand, not a unit — and a correct number in an unstated unit becomes a wrong constant that survives review because the digits look right.
+- **Default re-verify horizon: 3 months** for pricing and model ids. Shorter if §6 flags version churn as a risk — a brief that names volatility as HIGH and then hands over undated versions has documented the danger without defending against it.
+
+---
+
+## 6. Risks & Open Questions
 
 - **[Risk]:** [Impact and how to de-risk — e.g. spike, prototype, contract term.]
 - **[Open question]:** [What's unverified, why it matters, and — if outside this skill's scope (implementation, product decisions, market research) — note that.]
 
 ---
 
-## 6. Sources
+## 7. Sources
 
 List every source once, with the date accessed.
 

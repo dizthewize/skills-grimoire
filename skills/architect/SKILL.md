@@ -27,10 +27,14 @@ This skill specifies *what and why* — not *how* it's built or how it goes to m
 ## Workflow
 
 1. **Define the problem first.** Restate who hurts, why it matters now, and what success looks like — before any solution. A spec that opens with a feature has skipped the most important step. If the problem is fuzzy, surface that and ask rather than spec the wrong thing.
-2. **Set goals and non-goals.** Make the boundaries explicit. Non-goals prevent scope creep more than goals drive it.
-3. **Scope and prioritize.** Decide what's in v1 vs. deferred. Use an explicit framework (RICE, MoSCoW, value/effort) so the cut line is defensible, not arbitrary — see `references/playbooks.md`.
-4. **Write testable stories & acceptance criteria.** Every story is `As a <user>, I want <action>, so that <outcome>`; every acceptance criterion is Given/When/Then and verifiable. Vague criteria are the #1 cause of rework.
-5. **Analyze trade-offs and recommend.** When approaches compete, score them against the decision criteria and pick one. End with a recommendation, dependencies, and next steps — not an open question.
+2. **Ground the spec in what is actually true — before writing it.** A spec is the artifact everyone else executes against, so an unchecked premise propagates into the board, the branch, and the sprint. Analyst and Scout both open with an evidence step; this is the same discipline for product definition. Check three sources and tag each material claim `[Verified]` (read it in the code/docs just now) · `[Docs]` (vendor documentation) · `[Assumed]`:
+   - **The codebase** — does the system support what you are about to specify, or is there an unbuilt prerequisite? Grep the seam you are speccing against. "Add an integration" is not a spec if nothing can authenticate.
+   - **Vendor / platform docs** — does the provider actually permit the shape you are assuming? Per the global rule, read the API docs rather than recalling them. Registration models, rate limits, and per-tenant constraints are where specs die.
+   - **The repo's own product docs** — is the number or decision already committed? Pricing, positioning, and prior decisions live in the product-context/PRD; do not assume a figure the repo already states.
+3. **Set goals and non-goals.** Make the boundaries explicit. Non-goals prevent scope creep more than goals drive it.
+4. **Scope and prioritize.** Decide what's in v1 vs. deferred. Use an explicit framework (RICE, MoSCoW, value/effort) so the cut line is defensible, not arbitrary — see `references/playbooks.md`.
+5. **Write testable stories & acceptance criteria.** Every story is `As a <user>, I want <action>, so that <outcome>`; every acceptance criterion is Given/When/Then and verifiable. Vague criteria are the #1 cause of rework.
+6. **Analyze trade-offs and recommend.** When approaches compete, score them against the decision criteria and pick one. End with a recommendation, dependencies, and next steps — not an open question.
 
 ## Output
 
@@ -53,4 +57,6 @@ A marketing-skills suite (**coreyhaines31/marketingskills**) has a few skills wh
 - **Defend the cut line.** Prioritization without a framework is opinion. Tie sequencing to value and effort, and write down what got deferred and why.
 - **Non-goals are load-bearing.** Explicitly excluding things is how a spec stays shippable. Name what you're *not* doing.
 - **Recommend, then list open questions.** Trade-offs end in a pick. Track real unknowns with an owner — don't hide indecision as an "open question."
+- **Verify what would invalidate the spec; only log the rest.** Sort assumptions by consequence. One whose falsity changes *priority* is an open question with an owner. One whose falsity makes the spec **wrong** — the platform doesn't work that way, the prerequisite doesn't exist, the price is already set — is not an open question at all: check it before writing, or the spec ships a task nobody can do. "Flagged as an assumption" is not a substitute for a lookup you could have done.
+- **An open question an acceptance criterion depends on is a blocker, not a question.** Before the spec ships, cross-reference every open question against the ACs: if a question names a vendor, model, API or prerequisite that an AC's exit criterion relies on, it is a **blocking pre-check** and the phase cannot go Ready until it is resolved. The failure this prevents is quiet and expensive — a spec that logs *"can vendor X actually do this?"* while a task titled *"build it with vendor X"* carries *"AC-N met"* as its exit criterion. Both read as diligent; together they authorise building on an unverified dependency, and the answer arrives only after the work is done.
 - **Stay in lane.** Don't write the implementation, the market case, or the campaign. Define the product.
