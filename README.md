@@ -1,6 +1,6 @@
 # skills-grimoire
 
-GitHub issue and development lifecycle skills for Claude Code. Covers the full loop from fetching issue context through fixing, reviewing, and handing off to QA.
+GitHub issue and development lifecycle skills for Claude Code. Covers the full loop from fetching issue context through fixing, reviewing, and handing off to QA — plus the product/research lenses that decide *what* to build before any of that starts.
 
 ## Skills
 
@@ -11,6 +11,25 @@ GitHub issue and development lifecycle skills for Claude Code. Covers the full l
 | `/develop-team` | Feature development with parallel specialist agents |
 | `/review-team` | PR review with a configurable team of specialist agents |
 | `/build-with-agent-team` | Build a project from a plan doc using Agent Teams — lead defines contracts upfront, spawns specialist agents in parallel tmux panes, coordinates integration |
+| `/review-fix` | Review-fix loop — 8 reviewers in parallel; auto-fixes quick items and accumulates strategic ones for you |
+| `/playwright-qa-cli` | Headless-browser QA via `playwright-cli` (not MCP) — provisions a test user, logs in, navigates, screenshots |
+
+## Product & Research Lenses
+
+Four analyst lenses plus an orchestrator. Each writes a timestamped brief to `<lens>-briefs/`, so a decision keeps its dated record.
+
+| Skill | Description |
+|-------|-------------|
+| `/commander` | Multi-lens orchestrator — runs Scout, Analyst, Architect and Strategist together, then synthesizes a verdict |
+| `/scout` | Market lens — competitor research, feature tracking, market trends |
+| `/analyst` | Technical lens — evaluate a library/framework, compare stacks, build-vs-buy |
+| `/architect` | Product lens — PRDs, roadmaps, user stories, acceptance criteria, scope trade-offs |
+| `/strategist` | Growth lens — marketing strategy, campaigns, email sequences, pricing/packaging |
+
+**`/architect` has two output modes**, and the difference matters if you use the [web-studio-skills](https://github.com/dizthewize/web-studio-skills) feature pipeline:
+
+- **Brief mode** (default) — one feature or initiative → a timestamped, immutable `architect-briefs/architect-brief_<ts>_<slug>.md`.
+- **PRD mode** — the product itself → the **living** `docs/PRD.md`, updated in place. This is the artifact `feature-discovery`, `feature-studio` and `increment-studio` ground on and that `/prd-sync` refuses to run without — and architect is the skill they name as its author. Its §13 Capabilities and §14 Decision Record are the sections `/prd-sync` folds shipped features back into.
 
 ## Utility Skills
 

@@ -192,7 +192,31 @@ Questions an **acceptance criterion depends on** — anything naming a vendor, m
 
 ---
 
-## 13. Next Steps
+## 13. Capabilities *(PRD mode — required; omit in a dated brief)*
+
+What the product **does today**, as shipped. Distinct from §6 Feature Scope, which is what *this initiative* adds — this is the standing inventory a reader consults to answer "does it already do X?".
+
+`feature-discovery` reads this to place a new feature in the product, and `/prd-sync` appends here as features ship. **Emit the section even when empty** — a new product has none yet, and an absent heading makes the write-back invent a structure instead of extending yours.
+
+| Capability | What it does | Serves (job / user) | Spec |
+|------------|--------------|---------------------|------|
+| [e.g. Unified inbox] | [one line] | [the job it serves] | [`feature-specs/<slug>`] |
+
+---
+
+## 14. Decision Record *(PRD mode — required; omit in a dated brief)*
+
+Why the product is the way it is. Each entry: what was decided, the reasoning, and what it ruled out. Rationale that lives only in a per-feature `context.md` is invisible to anyone scoping the next feature — this is where it survives.
+
+`/prd-sync` adds an entry per shipped feature; add your own for decisions that were never a feature (a repositioning, a dropped channel, a pricing model).
+
+| Date | Decision | Why | Ruled out | Source |
+|------|----------|-----|-----------|--------|
+| YYYY-MM-DD | [what was decided] | [the reasoning] | [the alternative and why not] | [`feature-specs/<slug>` or a brief] |
+
+---
+
+## 15. Next Steps
 1. [Actionable next step] — Owner: [name]
 2. [Actionable next step] — Owner: [name]
 3. [Actionable next step] — Owner: [name]
