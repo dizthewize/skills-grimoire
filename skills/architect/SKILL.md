@@ -1,6 +1,6 @@
 ---
 name: architect
-description: Product management and feature-specification analyst. Use when the user needs a product roadmap, a PRD or feature spec, backlog prioritization, sprint planning, user stories with acceptance criteria, or feature scoping and trade-off analysis. Triggers on requests like "write a PRD for X", "spec out this feature", "prioritize the backlog", "plan the sprint", "write user stories for Y", "what should we cut from scope", "should we build A or B", or any product-definition / prioritization question. Outputs a timestamped markdown brief. Does NOT cover writing code, marketing copy/campaigns, or competitive market research.
+description: Product management and feature-specification analyst. Use when the user needs a product roadmap, a PRD or feature spec, backlog prioritization, sprint planning, user stories with acceptance criteria, or feature scoping and trade-off analysis. Triggers on requests like "write a PRD for X", "spec out this feature", "prioritize the backlog", "plan the sprint", "write user stories for Y", "what should we cut from scope", "should we build A or B", or any product-definition / prioritization question. Two output modes — a timestamped, immutable brief in architect-briefs/ for one feature or initiative (default), or the LIVING product PRD at docs/PRD.md when the request is the product itself. PRD mode matters because docs/PRD.md is the artifact the feature pipeline grounds on (feature-discovery, feature-studio, increment-studio) and /prd-sync refuses to run without — and this skill is the one they name as its author. Does NOT cover writing code, marketing copy/campaigns, or competitive market research.
 ---
 
 # Architect — Product Definition & Prioritization
@@ -38,11 +38,25 @@ This skill specifies *what and why* — not *how* it's built or how it goes to m
 
 ## Output
 
-Architect always writes the spec to a **timestamped markdown file**, then summarizes it in chat with the file path. Do not return the spec only inline.
+Architect writes the spec to a markdown file, then summarizes it in chat with the file path. Do not return the spec only inline. **Which file depends on whether the request is one initiative or the product itself** — the two have opposite lifecycles, and writing one as the other is why the PRD in a feature pipeline goes missing.
 
-- **Template:** every spec uses `references/architect-brief-template.md` — a full PRD structure. Copy it and fill the sections the request needs (a backlog-prioritization request won't need every section; a full PRD will).
+- **Template (both modes):** `references/architect-brief-template.md` — a full PRD structure. Copy it and fill the sections the request needs (a backlog-prioritization request won't need every section; a full PRD will).
+
+**Brief mode (default) — one feature, initiative, or decision.**
+
 - **Filename:** `architect-briefs/architect-brief_<YYYY-MM-DD_HHMM>_<slug>.md`, where `<slug>` is a short kebab-case topic (e.g. `onboarding-redesign`). Create the directory if absent, unless the user names another location.
 - **Timestamp from the system, not memory:** `date +"%Y-%m-%d_%H%M"` for the filename, `date +%F` for the brief's `**Date:**` header.
+- **Dated briefs are immutable.** Never overwrite one; a revision is a new dated file.
+
+**PRD mode — the product-level source of truth. Write `docs/PRD.md`.**
+
+Use this when the request is *the PRD* rather than a brief about one thing: "write the PRD", "define the product", or any request that will be **built on** by the feature pipeline. It is a **living document, updated in place — not timestamped, not immutable.**
+
+This is the artifact the rest of the toolchain reads and none of them can create: `feature-discovery` grounds every new feature on it, `feature-studio` and `increment-studio` load it as context, and `/prd-sync` refuses to run without it (*"the PRD is human-owned; create it first"*) — naming **this skill** as its author. A product PRD written to a dated `architect-briefs/` path satisfies none of them, because they all read `docs/PRD.md`.
+
+In PRD mode, **§13 Capabilities and §14 Decision Record are required** — they are the living sections `/prd-sync` folds shipped features back into. Emit them even when empty (a new product has no shipped capabilities yet); an absent section makes the write-back invent structure instead of extending yours. Also keep §1 Problem Statement, §2 Goals/Non-Goals, §3 User Stories and §5 Acceptance Criteria filled: those are precisely what `feature-discovery` pulls from, so a PRD that skips them sends every later feature back to asking the user what the product is for.
+
+Updating an existing `docs/PRD.md`: **preserve its headings and voice** — downstream skills ground on the structure, so restructuring it silently breaks them.
 
 The request type changes which sections go deep, not the structure — see the per-request emphasis table in `references/playbooks.md`, which also holds the prioritization frameworks, story/acceptance-criteria patterns, and quality checklist. Always fill §0 TL;DR, §1 Problem Statement, and Scope.
 
