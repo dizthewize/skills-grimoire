@@ -1,6 +1,6 @@
 # Strategist Brief: [Campaign / Initiative]
 
-**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Author:** Strategist &nbsp;·&nbsp; **Status:** Draft | In Review | Approved &nbsp;·&nbsp; **Read time:** ~[N] min
+**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Author:** Strategist &nbsp;·&nbsp; **Read time:** ~[N] min
 **Written for:** [Who reads this — their expertise *and* what they don't know about this product. A plan written for an outside marketing partner and one written for yourself are different documents.]
 **Funnel stage:** [Acquisition | Activation | Retention | Referral | Revenue] &nbsp;·&nbsp; **North Star:** [the single metric everything here ladders up to]
 
