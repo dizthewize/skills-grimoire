@@ -3,6 +3,7 @@
 **Date:** YYYY-MM-DD &nbsp;·&nbsp; **Author:** Strategist &nbsp;·&nbsp; **Read time:** ~[N] min
 **Written for:** [Who reads this — their expertise *and* what they don't know about this product. A plan written for an outside marketing partner and one written for yourself are different documents.]
 **Funnel stage:** [Acquisition | Activation | Retention | Referral | Revenue] &nbsp;·&nbsp; **North Star:** [the single metric everything here ladders up to]
+**Decision status:** [`Draft` — no decision taken yet · `Accepted YYYY-MM-DD` — <what was decided> · `Superseded by <brief>` — <what changed>. Dated briefs are never rewritten, so this line is how a reader learns the plan's fate without opening every later file.]
 
 **In one line:** [The whole plan in one sentence, no jargon and no acronyms. Write this **last** — if it won't compress, the strategy isn't settled.]
 

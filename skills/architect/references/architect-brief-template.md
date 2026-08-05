@@ -3,6 +3,7 @@
 **Date:** YYYY-MM-DD &nbsp;·&nbsp; **Author:** Architect &nbsp;·&nbsp; **Read time:** ~[N] min
 **Written for:** [Who reads this — their expertise *and* what they don't know about this product. This line fixes the vocabulary for the whole spec.]
 **Stakeholders:** [Who must sign off / who is impacted — e.g. Eng lead, Design, leadership]
+**Decision status:** [`Draft` — no decision taken yet · `Accepted YYYY-MM-DD` — <what was decided> · `Superseded by <brief>` — <what changed>. Dated briefs are never rewritten, so this line is how a reader learns the spec's fate without opening every later file. *(PRD mode: omit — a living document has no single decision status.)*]
 
 **In one line:** [The whole spec in one sentence, no jargon and no acronyms. Write this **last** — if it won't compress, the scope isn't settled.]
 

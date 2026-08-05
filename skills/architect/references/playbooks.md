@@ -100,3 +100,4 @@ Before marking a spec ready:
 - [ ] Every business-cost or metric figure has a **"which means" clause**.
 - [ ] No cross-reference is a **bare filename** — each names the conclusion the other doc reached.
 - [ ] The `In one line` header survives the outsider test: a reader who knows nothing about this product understands what is being built.
+- [ ] **Decision status** is set on a dated brief — `Draft`, `Accepted <date>`, or `Superseded by <brief>`. Omit it in PRD mode; a living document has no single status.

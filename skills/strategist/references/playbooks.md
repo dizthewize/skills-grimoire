@@ -98,3 +98,4 @@ Before the brief ships:
 - [ ] Every baseline and target figure has a **"which means" clause**.
 - [ ] No cross-reference is a **bare filename** — each names the conclusion the other brief reached.
 - [ ] The `In one line` header survives the outsider test: a reader who knows nothing about this product understands the plan.
+- [ ] **Decision status** is set — `Draft`, `Accepted <date>`, or `Superseded by <brief>`. Since dated briefs are never rewritten, this is the only place a reader learns whether the plan was adopted.

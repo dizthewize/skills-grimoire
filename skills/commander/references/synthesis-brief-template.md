@@ -4,6 +4,7 @@
 **Lenses run:** [Scout / Analyst / Architect / Strategist]
 **Written for:** [Who reads this — their expertise *and* what they don't know about this product. The synthesis is the brief most likely to be handed to someone outside the project; write it for them.]
 **Decision question:** [The one-line question this evaluation answers.]
+**Decision status:** [`Draft` — verdict not yet acted on · `Accepted YYYY-MM-DD` — <what was decided> · `Superseded by <brief>` — <what changed>. A synthesis whose verdict was adopted and one still awaiting a call read identically without this line, and the second is far more common.]
 
 **In one line:** [The verdict and its single strongest reason, in one sentence, no jargon and no acronyms. Write this **last**.]
 

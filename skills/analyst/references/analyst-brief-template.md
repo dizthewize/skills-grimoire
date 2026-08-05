@@ -3,6 +3,7 @@
 **Date:** YYYY-MM-DD &nbsp;·&nbsp; **Prepared by:** Analyst &nbsp;·&nbsp; **Read time:** ~[N] min
 **Written for:** [Who reads this — their expertise *and* what they don't know about this product. A brief written for an outside engineer and one written for a non-technical founder are different documents; this line decides which you are writing.]
 **Decision it feeds:** [The one decision this brief exists to inform.]
+**Decision status:** [`Draft` — no decision taken yet · `Accepted YYYY-MM-DD` — <what was decided> · `Superseded by <brief>` — <what changed>. Dated briefs are never rewritten, so this line is how a reader learns the recommendation's fate without opening every later file.]
 **Context:** [1-2 sentences on what is being evaluated and why — written so a stranger understands it.]
 **Confidence:** [High / Medium / Low] — [one phrase on why, e.g. "rate limits undocumented for the enterprise tier"]
 
