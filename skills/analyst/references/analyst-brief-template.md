@@ -1,16 +1,23 @@
 # Analyst Brief: [Technology / Decision]
 
-**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Prepared by:** Analyst
-**Context:** [1-2 sentences describing what this brief is evaluating and why.]
+**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Prepared by:** Analyst &nbsp;·&nbsp; **Read time:** ~[N] min
+**Written for:** [Who reads this — their expertise *and* what they don't know about this product. A brief written for an outside engineer and one written for a non-technical founder are different documents; this line decides which you are writing.]
+**Decision it feeds:** [The one decision this brief exists to inform.]
+**Context:** [1-2 sentences on what is being evaluated and why — written so a stranger understands it.]
 **Confidence:** [High / Medium / Low] — [one phrase on why, e.g. "rate limits undocumented for the enterprise tier"]
 
-> **Confidence tags** — mark non-obvious claims inline: `[Verified]` tested/observed first-hand · `[Docs]` stated in official docs · `[Inferred]` Analyst's analysis. Never present `[Inferred]` as fact.
+**In one line:** [The whole recommendation in one sentence, no jargon and no acronyms. Write this **last** — if it won't compress, the thinking isn't finished.]
+
+> **Confidence tags** — mark non-obvious claims: `[Verified]` tested/observed first-hand · `[Docs]` stated in official docs · `[Inferred]` Analyst's analysis. Never present `[Inferred]` as fact.
+> Put the tag at the **end** of the claim, at most one per bullet. A tag dropped mid-sentence breaks the reading line, and a paragraph carrying four of them stops being prose.
 
 ---
 
 ## 0. Bottom Line Up Front
 
-[2-3 sentences: the recommendation, the single reason it wins, and the biggest risk or trade-off accepted.]
+**≤120 words.** The recommendation, the single reason it wins, and the biggest trade-off accepted. A reader who stops here still gets the answer. Save the proof for §1–§4.
+
+[Write it. One idea per sentence; bold at most one phrase per paragraph.]
 
 **Recommendation:** [Choose X / BUILD / BUY / HYBRID] — [one-line rationale tied to the top decision criterion.]
 
@@ -34,7 +41,7 @@
 
 ### 1.2 [Tool / Platform A] · *checked YYYY-MM-DD*
 
-**What it is.** [What the tool is, its primary use case, and current version.]
+**What it is.** [What the tool is, its primary use case, and current version — in one plain sentence a non-specialist could repeat.]
 
 **Maintenance & health.** [Last release date, release cadence, open-issue/PR backlog, # maintainers, license, governance (company-backed / community / single-maintainer). A dying dependency is a future migration.]
 
@@ -141,7 +148,7 @@ Score each criterion (✅ strong · ⚠️ adequate · ❌ weak) so the trade-of
 
 **Hybrid option.** [How combining build and buy captures the benefits of both.]
 
-**Recommendation: BUILD / BUY / HYBRID.** [Rationale tied to the constraints above, including the break-even point where the answer would flip.]
+**Recommendation: BUILD / BUY / HYBRID.** [Rationale tied to the constraints above, including the break-even point where the answer would flip — stated in plain terms, e.g. "buying wins until roughly 40,000 calls a month, after which building pays for itself within a year."]
 
 **Sources**
 - [URL] (accessed YYYY-MM-DD)
@@ -183,7 +190,19 @@ Every figure below will be **hardcoded by whoever reads this brief**. Once it re
 
 ---
 
-## 7. Sources
+## 7. Glossary
+
+Every term of art used above, in one plain sentence each. **If a reader outside this project would have to look it up, it belongs here** — including the terms that feel too obvious to define, because those are the ones writers skip and readers stumble on. Protocol names, vendor-specific nouns, and billing units all count.
+
+| Term | Plain meaning |
+|------|---------------|
+| **[e.g. A2P 10DLC]** | [the US carrier registration a business must complete before it can send text messages at volume] |
+| **[e.g. warm transfer]** | [handing a live call to a human with the context of what was already said, rather than restarting] |
+| **[e.g. COGS]** | [cost of goods sold — what it costs us to deliver the service, before any other expense] |
+
+---
+
+## 8. Sources
 
 List every source once, with the date accessed.
 

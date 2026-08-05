@@ -22,7 +22,7 @@ Per-duty research guidance. The **output format is always `scout-brief-template.
 | **Landscape mapping** | §2.1 Overview Matrix, §5 Whitespace, §1.1 Summary | §3, §6 |
 | **Positioning research** | §2 per-player Positioning blocks, §5 Whitespace (positioning gaps) | §3, §4 |
 
-Always fill §0 Bottom Line Up Front, §6 Risks, and §8 Sources regardless of duty.
+Always fill §0 Bottom Line Up Front, §6 Risks, §8 Glossary, and §9 Sources regardless of duty.
 
 ---
 
@@ -125,3 +125,9 @@ Before the brief ships:
 - [ ] Every non-obvious claim has a source URL **and** an evidence tag.
 - [ ] Dates are on every fact; anything stale is flagged.
 - [ ] Competitor **strengths** are reported, not just weaknesses (neutrality check).
+- [ ] The header names a **reader** (`Written for`) and the brief is written in that reader's vocabulary.
+- [ ] Every acronym and term of art is **spelled out at first use** and listed in §8 Glossary.
+- [ ] §0 is **≤120 words**, and every headline stat has a **"which means" clause**.
+- [ ] Evidence tags sit at the **end** of claims, one per bullet — not mid-sentence.
+- [ ] No cross-reference is a **bare filename** — each names the conclusion the other brief reached.
+- [ ] The `In one line` header survives the outsider test: a reader who knows nothing about this product understands it.

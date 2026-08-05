@@ -17,13 +17,13 @@ Per-request research guidance. The **output format is always `analyst-brief-temp
 
 | Request | Go deep on | Skip / keep light |
 |---|---|---|
-| **Library / framework evaluation** | §1 Feasibility (esp. Maintenance & health), §5 Risks | §2, §3 |
+| **Library / framework evaluation** | §1 Feasibility (esp. Maintenance & health), §6 Risks | §2, §3 |
 | **Stack comparison** | §2 Stack Comparison (matrix + recommendation), §0 criteria | §3 |
 | **Build-vs-buy** | §3 Build-vs-Buy (incl. break-even point), §0 criteria | §1 detail |
 | **API feasibility / docs review** | §1 per-tool blocks (auth, limits, endpoints, gotchas) | §2, §3 |
-| **Tool recommendation w/ trade-offs** | §2.4 matrix, §0 Recommendation, §5 Risks | §3 |
+| **Tool recommendation w/ trade-offs** | §2.4 matrix, §0 Recommendation, §6 Risks | §3 |
 
-Always fill §0 Bottom Line Up Front (with explicit decision criteria), the Recommendation, and §6 Sources.
+Always fill §0 Bottom Line Up Front (with explicit decision criteria), the Recommendation, §7 Glossary, and §8 Sources.
 
 ---
 
@@ -98,7 +98,7 @@ Classify the decision before agonizing over it:
 When docs can't answer feasibility, propose a **time-boxed spike** (e.g. 1–2 days) instead of guessing:
 - Define the **one question** it must answer and the **pass/fail bar** up front.
 - Scope to the riskiest unknown only (the auth flow, the rate limit at load, the migration).
-- Output: a `[Verified]` finding + throwaway code, not production work. Record it in §5 Risks.
+- Output: a `[Verified]` finding + throwaway code, not production work. Record it in §6 Risks.
 
 ---
 
@@ -173,3 +173,9 @@ Before the brief ships:
 - [ ] The decision's **reversibility** (one-way / two-way door) is classified.
 - [ ] Unresolved feasibility unknowns have a **spike proposed**, not a guess.
 - [ ] §0 ends in a clear **recommendation**; every non-obvious claim has a source + confidence tag.
+- [ ] The header names a **reader** (`Written for`) and the brief is written in that reader's vocabulary.
+- [ ] Every acronym and term of art is **spelled out at first use** and listed in §7 Glossary — protocol names, vendor nouns, and billing units included.
+- [ ] §0 is **≤120 words**, and every headline figure has a **"which means" clause**.
+- [ ] Confidence tags sit at the **end** of claims, one per bullet — not mid-sentence.
+- [ ] No cross-reference is a **bare filename** — each names the conclusion the other brief reached.
+- [ ] The `In one line` header survives the outsider test: a reader who knows nothing about this stack understands the recommendation.

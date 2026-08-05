@@ -1,19 +1,26 @@
 # Scout Brief: [Topic]
 
-**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Prepared by:** Scout
-**Context:** [1-2 sentences describing the product or initiative this research supports.]
+**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Prepared by:** Scout &nbsp;·&nbsp; **Read time:** ~[N] min
+**Written for:** [Who reads this — their expertise *and* what they don't know about this product. This line fixes the vocabulary for the whole brief; write it before anything else.]
+**Decision it feeds:** [The one decision this brief exists to inform.]
+**Context:** [1-2 sentences describing the product or initiative this research supports — written so a stranger understands it.]
 **Confidence:** [High / Medium / Low] — [one phrase on why, e.g. "thin public pricing data on Player C"]
 
-> **Evidence tags** — mark non-obvious claims inline: `[Confirmed]` first-party/observed · `[Reported]` secondary source · `[Inferred]` Scout's analysis. Never present `[Inferred]` as fact.
+**In one line:** [The entire brief in one sentence, no jargon and no acronyms. Write this **last** — if it won't compress, the thinking isn't finished. This is the sentence a reader will quote to someone else.]
+
+> **Evidence tags** — mark non-obvious claims: `[Confirmed]` first-party/observed · `[Reported]` secondary source · `[Inferred]` Scout's analysis. Never present `[Inferred]` as fact.
+> Put the tag at the **end** of the claim, at most one per bullet. A tag dropped mid-sentence breaks the reading line, and a paragraph carrying four of them stops being prose.
 
 ---
 
 ## 0. Bottom Line Up Front
 
-[2-3 sentences. The single most decision-relevant finding, the clearest opportunity, and the biggest risk. A reader who stops here should still get the takeaway.]
+**≤120 words.** The most decision-relevant finding, the clearest opportunity, and the biggest risk — in that order. A reader who stops here still gets the takeaway. If it runs long, the detail belongs in §1–§5; this section is not the place to prove the case, only to state it.
+
+[Write it. Short paragraphs — one idea per sentence, three sentences per paragraph. Bold at most one phrase.]
 
 **Key takeaways**
-1. [Takeaway with the evidence behind it.]
+1. [One sentence, then the evidence behind it. Tag at the end.]
 2. [Takeaway.]
 3. [Takeaway.]
 
@@ -31,14 +38,16 @@
 
 ### 1.2 Market Size and Growth
 
-- **[Label]:** [Stat with source inline.] `[Reported]`
-- **[Label]:** [Stat with source inline.]
-- **[Label]:** [Stat with source inline.]
+Every headline number gets a **"which means" clause** — the figure is the fact, the clause is the reason it is in the brief.
+
+- **[Label]:** [Stat with source inline.] — which means [the plain-language consequence]. `[Reported]`
+- **[Label]:** [Stat with source inline.] — which means [consequence].
+- **[Label]:** [Stat with source inline.] — which means [consequence].
 
 ### 1.3 Adoption and Behavior Shifts
 
-- **[Label]:** [Trend with source inline.]
-- **[Label]:** [Trend with source inline.]
+- **[Label]:** [Trend with source inline.] — which means [consequence].
+- **[Label]:** [Trend with source inline.] — which means [consequence].
 
 ---
 
@@ -92,7 +101,7 @@ Legend: ✅ Yes · ⚠️ Partial · ❌ No · ❓ Unknown/unverified
 | [Feature] | | | | |
 | [Feature] | | | | |
 
-*Notes:* [Clarify any ⚠️ Partial / ❓ Unknown cells that need context. Call out the single most important gap — the capability nobody serves well.]
+*Notes:* [Clarify any ⚠️ Partial / ❓ Unknown cells that need context. Call out the single most important gap — the capability nobody serves well. Name each capability in words a buyer would use, not an internal codename.]
 
 ---
 
@@ -163,7 +172,19 @@ What to monitor going forward, so the next refresh starts from the right questio
 
 ---
 
-## 8. Sources
+## 8. Glossary
+
+Every term of art used above, in one plain sentence each. **If a reader outside this project would have to look it up, it belongs here** — including the terms that feel too obvious to define, because those are the ones writers skip and readers stumble on.
+
+| Term | Plain meaning |
+|------|---------------|
+| **[e.g. TAM / SAM / SOM]** | [the whole market / the slice we could serve / the slice we could realistically win] |
+| **[e.g. CAGR]** | [compound annual growth rate — the steady yearly % a market would grow at to get from the start figure to the end one] |
+| **[e.g. ARPU]** | [average revenue per user — what a typical customer pays per month] |
+
+---
+
+## 9. Sources
 
 List every source once, with the date accessed. Group by topic for scanability.
 

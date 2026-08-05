@@ -68,13 +68,17 @@ After each phase, capture a compact hand-off (not the whole brief) to feed forwa
 
 ```
 ### Hand-off: <specialist> → <next>
-- Bottom line: <one line>
+- Bottom line: <one line — must stand alone, without the sub-brief>
+- Verdict: 🟢 supports / 🟡 only with changes / 🔴 argues against
+- Evidence: High / Med / Low  ← copied from the sub-brief's own Confidence line
 - Carries forward: <2–4 facts the next lens must respect>
 - Open flags: <unknowns / risks the next lens should weigh>
 - Brief: <path to the saved sub-brief>
 ```
 
-Example — Scout → Architect: "Bottom line: real demand, crowded mid-market, white space in self-serve SMB. Carries forward: target the SMB self-serve segment; must beat <competitor> on setup time. Open flags: demand softest in EU."
+**Verdict and Evidence are separate fields and stay separate all the way into the synthesis table.** The sub-brief already states its own confidence; carrying only the colour forward destroys it, and the synthesis then cannot tell a conclusion nobody could source from one backed by primary research.
+
+Example — Scout → Architect: "Bottom line: real demand, crowded mid-market, white space in self-serve SMB. Verdict: 🟡. Evidence: Med — sizing is computed, not reported. Carries forward: target the SMB self-serve segment; must beat <competitor> on setup time. Open flags: demand softest in EU."
 
 ---
 

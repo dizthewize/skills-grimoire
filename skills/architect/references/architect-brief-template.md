@@ -1,13 +1,18 @@
 # Architect Brief: [Feature / Initiative]
 
-**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Author:** Architect &nbsp;·&nbsp; **Status:** Draft | In Review | Approved
+**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Author:** Architect &nbsp;·&nbsp; **Read time:** ~[N] min
+**Written for:** [Who reads this — their expertise *and* what they don't know about this product. This line fixes the vocabulary for the whole spec.]
 **Stakeholders:** [Who must sign off / who is impacted — e.g. Eng lead, Design, leadership]
+
+**In one line:** [The whole spec in one sentence, no jargon and no acronyms. Write this **last** — if it won't compress, the scope isn't settled.]
+
+*(PRD mode: keep `Written for` and `In one line`; drop `Date` and `Read time` — the PRD is a living document, not a dated one.)*
 
 ---
 
-## 0. TL;DR
+## 0. Bottom Line Up Front
 
-[3-4 sentences a busy reader can stop at: the problem, what's being built, the recommended approach, and the target outcome. If this section reads well, the rest is detail.]
+[3-4 sentences a busy reader can stop at: the problem, what's being built, the recommended approach, and the target outcome. If this section reads well, the rest is detail. One idea per sentence; bold at most one phrase.]
 
 **Assumptions:** [The 2-3 beliefs this spec rests on. If one is wrong, the spec changes — flag them so reviewers can challenge them.]
 
@@ -31,14 +36,14 @@
 
 **Current workaround.** [What users do today and why it's insufficient.]
 
-**Business cost.** [What the problem costs in revenue, retention, or velocity. Quantify where possible.]
+**Business cost.** [What the problem costs in revenue, retention, or velocity. Quantify where possible, and give each figure a "which means" clause.]
 
 ---
 
 ## 2. Goals / Non-Goals
 
 ### 2.1 Goals
-1. **[Goal label]:** [What we're trying to achieve — tie to a success metric in §9.]
+1. **[Goal label]:** [What we're trying to achieve — tie to a success metric in §12.]
 2. **[Goal label]:** [Description.]
 
 ### 2.2 Non-Goals
@@ -49,10 +54,12 @@
 
 ## 3. User Stories
 
-| ID | Priority | Story | Acceptance Criteria |
+| ID | Priority | Story | Acceptance criteria |
 |----|----------|-------|---------------------|
-| US-1 | Must | As a [user type], I want to [action] so that [outcome] | [Measurable, testable criteria] |
-| US-2 | Should | As a [user type], I want to [action] so that [outcome] | [Measurable, testable criteria] |
+| US-1 | Must | As a [user type], I want to [action] so that [outcome] | AC-1, AC-2 |
+| US-2 | Should | As a [user type], I want to [action] so that [outcome] | AC-3 |
+
+**Criteria live in §5 and only in §5.** This column carries their ids, never a restatement — two copies of the same criterion drift apart, and the copy a reviewer reads is not always the copy a builder builds to. A story with no id here has no acceptance criteria yet, which is itself the finding.
 
 ---
 
@@ -71,7 +78,7 @@
 
 ## 5. Acceptance Criteria
 
-Every criterion must be pass/fail by someone who didn't write it. Given/When/Then, no "should be fast / intuitive."
+The single home for acceptance. Every criterion must be pass/fail by someone who didn't write it. Given/When/Then, no "should be fast / intuitive."
 
 ### AC-1: [Feature or Story Area]
 - **Given** [the precondition or starting state]
@@ -152,7 +159,7 @@ Score with an explicit framework (RICE shown; swap for MoSCoW or value/effort �
 | [Item] | | | | | | P0 |
 | [Item] | | | | | | P1 |
 
-*RICE = (Reach × Impact × Confidence) / Effort. Show the inputs so the ranking is auditable.*
+*RICE = (Reach × Impact × Confidence) / Effort — a score for ranking work, where the inputs are shown so anyone can audit the ranking rather than trust it.*
 
 ---
 
@@ -220,3 +227,15 @@ Why the product is the way it is. Each entry: what was decided, the reasoning, a
 1. [Actionable next step] — Owner: [name]
 2. [Actionable next step] — Owner: [name]
 3. [Actionable next step] — Owner: [name]
+
+---
+
+## 16. Glossary
+
+Every term of art used above, in one plain sentence each. **If a reader outside this project would have to look it up, it belongs here** — including the terms that feel too obvious to define, because those are the ones writers skip and readers stumble on. Prioritization frameworks, internal feature codenames, and role abbreviations all count.
+
+| Term | Plain meaning |
+|------|---------------|
+| **[e.g. RICE]** | [a way of ranking work by reach × impact × confidence ÷ effort, so the order is arguable rather than arbitrary] |
+| **[e.g. AC]** | [acceptance criterion — a pass/fail test that says whether the thing was actually built] |
+| **[e.g. ICP]** | [ideal customer profile — the specific kind of buyer the product is built for] |
