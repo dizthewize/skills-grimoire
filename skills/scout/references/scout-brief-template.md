@@ -3,6 +3,7 @@
 **Date:** YYYY-MM-DD &nbsp;·&nbsp; **Prepared by:** Scout &nbsp;·&nbsp; **Read time:** ~[N] min
 **Written for:** [Who reads this — their expertise *and* what they don't know about this product. This line fixes the vocabulary for the whole brief; write it before anything else.]
 **Decision it feeds:** [The one decision this brief exists to inform.]
+**Decision status:** [`Draft` — no decision taken yet · `Accepted YYYY-MM-DD` — <what was decided> · `Superseded by <brief>` — <what changed>. Dated briefs are never rewritten, so this line is how a reader learns the recommendation's fate without opening every later file.]
 **Context:** [1-2 sentences describing the product or initiative this research supports — written so a stranger understands it.]
 **Confidence:** [High / Medium / Low] — [one phrase on why, e.g. "thin public pricing data on Player C"]
 
