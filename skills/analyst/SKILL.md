@@ -33,6 +33,7 @@ This skill recommends *what to use and why* — not whether to build it or how t
 5. **Decide with a framework.** Don't free-form the pick — use a **weighted decision matrix** for X-vs-Y, and **TCO + break-even** for build-vs-buy. Fill `references/analyst-brief-template.md`; let the request type decide which sections go deep. Lead with the Bottom Line Up Front and a clear recommendation.
 6. **Hand off the perishable facts explicitly.** Any figure the reader will hardcode — price per token/request, rate limit, model id, API version — goes in the brief's **Constants handed to implementation** table with its **unit written out**, the date checked, and a re-verify date. A number that reaches a constant loses its provenance; this table is what lets someone re-check it in six months instead of trusting it forever.
 7. **Cite, grade & check.** Every non-obvious claim gets a source URL and a confidence tag (`[Verified]`/`[Docs]`/`[Inferred]`). List all sources, then run the quality checklist in `references/playbooks.md`.
+8. **Make it readable by an outsider.** Fill §7 Glossary, write the `In one line` header last, and re-read §0 as someone who does not work on this stack. See *Rules of communication* below — a technical brief that only its author can parse cannot be challenged by the person best placed to challenge it.
 
 ## Output
 
@@ -56,3 +57,16 @@ The request type changes which sections go deep, not the structure — see the p
 - **Surface the gotchas.** The valuable output is the rate limit, the auth gate, the breaking change, the hidden cost at scale — the things that bite after you've committed.
 - **Distinguish verified from claimed.** Tag what you confirmed in docs/testing vs. what a vendor asserts vs. your own inference. Date version-specific facts; they go stale fast.
 - **Stay in lane.** Don't write the implementation, decide what to build, or make the market case. Supply the technical intelligence.
+
+## Rules of communication
+
+Rigor decides whether a brief is *right*; these decide whether anyone can *act* on it. A technical brief is often reviewed by someone who is not a specialist in this particular stack — a founder, a domain expert, an outside engineer — and jargon is what stops them from catching the error only they would have caught.
+
+- **Name the reader, then write to them.** The header's `Written for` line is not decoration; it fixes the vocabulary for the whole document. A brief for an outside engineer and one for a non-technical founder are different documents.
+- **Spell out every term of art at first use** — `A2P 10DLC (the US carrier registration a business must complete before it can text at volume)` — then list it in §7 Glossary. Protocol names, vendor-specific nouns, and billing units are the three that get skipped.
+- **One idea per sentence. Three sentences per paragraph.** A dense §0 is the most common failure: a reader who bounces off the first paragraph never reaches the evidence that would have convinced them.
+- **Bold at most one phrase per paragraph.** When a third of the text is bold, none of it is emphasis.
+- **Give every headline figure a "which means" clause.** `$0.07/min` is a fact; *"which means a 5-minute call costs about 35 cents, so a 20% margin needs a $0.44 price"* is the reason it is in the brief. This applies doubly to a break-even point — state it as a plain threshold, not an equation.
+- **Keep the tag out of the sentence.** Confidence tags go at the **end** of a claim, at most one per bullet — never mid-sentence, where they break the reading line.
+- **Never cross-reference by filename alone.** Name the prior brief *and* the one-line conclusion it reached. The reader holding this file cannot open that one.
+- **Write the `In one line` header last.** If the recommendation won't compress into one jargon-free sentence, the thinking isn't finished — and that sentence is the only part some readers will ever quote to someone else.

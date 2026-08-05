@@ -1,13 +1,16 @@
 # Strategist Brief: [Campaign / Initiative]
 
-**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Author:** Strategist &nbsp;·&nbsp; **Status:** Draft | In Review | Approved
-**Funnel stage:** [Acquisition | Activation | Retention | Referral | Revenue] &nbsp;·&nbsp; **North Star:** [the metric this ladders up to]
+**Date:** YYYY-MM-DD &nbsp;·&nbsp; **Author:** Strategist &nbsp;·&nbsp; **Status:** Draft | In Review | Approved &nbsp;·&nbsp; **Read time:** ~[N] min
+**Written for:** [Who reads this — their expertise *and* what they don't know about this product. A plan written for an outside marketing partner and one written for yourself are different documents.]
+**Funnel stage:** [Acquisition | Activation | Retention | Referral | Revenue] &nbsp;·&nbsp; **North Star:** [the single metric everything here ladders up to]
+
+**In one line:** [The whole plan in one sentence, no jargon and no acronyms. Write this **last** — if it won't compress, the strategy isn't settled.]
 
 ---
 
 ## 0. Bottom Line Up Front
 
-[3-4 sentences a busy reader can stop at: the goal, the core strategy, the single biggest bet, and the target metric movement.]
+[3-4 sentences a busy reader can stop at: the goal, the core strategy, the single biggest bet, and the target metric movement. One idea per sentence; bold at most one phrase.]
 
 **Primary objective:** [Move <metric> from <baseline> to <target> by <date>.]
 **Hypothesis:** We believe [change] will [effect on metric] because [reason]; we'll know when [success bar].
@@ -18,9 +21,9 @@
 
 ## 1. Situation & Funnel Diagnosis
 
-**Where we are.** [Current state, baseline numbers, what's working / not.]
+**Where we are.** [Current state, baseline numbers, what's working / not. Give each figure a "which means" clause — the number is the fact, the clause is why it's here.]
 
-**Funnel snapshot (AARRR).** Find the leak before prescribing.
+**Funnel snapshot.** The five stages a customer moves through — **Acquisition** (they find us), **Activation** (they get value the first time), **Retention** (they keep coming back), **Referral** (they bring others), **Revenue** (they pay). Often shortened to **AARRR**. Find the leak before prescribing.
 
 | Stage | Current metric | Benchmark | Gap |
 |-------|---------------|-----------|-----|
@@ -30,9 +33,9 @@
 | Referral | | | |
 | Revenue | | | |
 
-**Binding constraint.** [The one stage where fixing the leak yields the most — this is where the plan focuses.]
+**Binding constraint.** [The one stage where fixing the leak yields the most — this is where the plan focuses. Say it in plain terms: "people sign up but never send their first message," not "activation is the constraint."]
 
-**Target audience / ICP.** [Who we're reaching, the segment and its trigger to act.]
+**Target audience.** [Who we're reaching — the segment, and the trigger that makes them act. This is the *ideal customer profile* (ICP): the specific kind of buyer worth building the plan around.]
 
 ---
 
@@ -95,7 +98,7 @@ Phase the work; each phase has an owner and an exit signal. (For copy, hand off 
 
 ## 6. Growth Experiments
 
-Each row is a falsifiable bet, ranked by **ICE = (Impact + Confidence + Ease) / 3** (score each 1–10). Sort descending; run top-down.
+Each row is a falsifiable bet, ranked by **ICE** — a score that averages **Impact** (how much it moves the metric), **Confidence** (how sure we are), and **Ease** (how cheap it is to run), each rated 1–10. Sort descending; run top-down.
 
 | Experiment (hypothesis) | Funnel stage | Metric | Impact | Confidence | Ease | ICE |
 |-------------------------|--------------|--------|:------:|:----------:|:----:|:---:|
@@ -135,3 +138,16 @@ Each row is a falsifiable bet, ranked by **ICE = (Impact + Confidence + Ease) / 
 1. [Actionable next step] — Owner: [name]
 2. [Actionable next step] — Owner: [name]
 3. [Actionable next step] — Owner: [name]
+
+---
+
+## 11. Glossary
+
+Every term of art used above, in one plain sentence each. **If a reader outside this project would have to look it up, it belongs here** — including the terms that feel too obvious to define, because those are the ones writers skip and readers stumble on. Growth work is unusually acronym-dense, so this section is rarely empty.
+
+| Term | Plain meaning |
+|------|---------------|
+| **[e.g. AARRR]** | [the five stages a customer moves through: acquisition, activation, retention, referral, revenue] |
+| **[e.g. ICP]** | [ideal customer profile — the specific kind of buyer this plan is built around] |
+| **[e.g. North Star]** | [the one metric the whole plan is meant to move, chosen so that moving it means the business is genuinely working] |
+| **[e.g. CAC / LTV]** | [what it costs to win a customer / what that customer is worth over their whole life as a customer] |

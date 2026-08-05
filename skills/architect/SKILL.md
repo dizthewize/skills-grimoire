@@ -33,7 +33,7 @@ This skill specifies *what and why* — not *how* it's built or how it goes to m
    - **The repo's own product docs** — is the number or decision already committed? Pricing, positioning, and prior decisions live in the product-context/PRD; do not assume a figure the repo already states.
 3. **Set goals and non-goals.** Make the boundaries explicit. Non-goals prevent scope creep more than goals drive it.
 4. **Scope and prioritize.** Decide what's in v1 vs. deferred. Use an explicit framework (RICE, MoSCoW, value/effort) so the cut line is defensible, not arbitrary — see `references/playbooks.md`.
-5. **Write testable stories & acceptance criteria.** Every story is `As a <user>, I want <action>, so that <outcome>`; every acceptance criterion is Given/When/Then and verifiable. Vague criteria are the #1 cause of rework.
+5. **Write testable stories & acceptance criteria.** Every story is `As a <user>, I want <action>, so that <outcome>`; every acceptance criterion is Given/When/Then and verifiable. Vague criteria are the #1 cause of rework. **Acceptance lives in §5 and only in §5** — §3's story table carries AC ids, never restated criteria, because two copies of one criterion drift and the copy a reviewer approves is not always the copy a builder builds to.
 6. **Analyze trade-offs and recommend.** When approaches compete, score them against the decision criteria and pick one. End with a recommendation, dependencies, and next steps — not an open question.
 
 ## Output
@@ -58,7 +58,7 @@ In PRD mode, **§13 Capabilities and §14 Decision Record are required** — the
 
 Updating an existing `docs/PRD.md`: **preserve its headings and voice** — downstream skills ground on the structure, so restructuring it silently breaks them.
 
-The request type changes which sections go deep, not the structure — see the per-request emphasis table in `references/playbooks.md`, which also holds the prioritization frameworks, story/acceptance-criteria patterns, and quality checklist. Always fill §0 TL;DR, §1 Problem Statement, and Scope.
+The request type changes which sections go deep, not the structure — see the per-request emphasis table in `references/playbooks.md`, which also holds the prioritization frameworks, story/acceptance-criteria patterns, and quality checklist. Always fill §0 Bottom Line Up Front, §1 Problem Statement, Scope, and §16 Glossary.
 
 ## Optional: external marketing skills
 
@@ -74,3 +74,15 @@ A marketing-skills suite (**coreyhaines31/marketingskills**) has a few skills wh
 - **Verify what would invalidate the spec; only log the rest.** Sort assumptions by consequence. One whose falsity changes *priority* is an open question with an owner. One whose falsity makes the spec **wrong** — the platform doesn't work that way, the prerequisite doesn't exist, the price is already set — is not an open question at all: check it before writing, or the spec ships a task nobody can do. "Flagged as an assumption" is not a substitute for a lookup you could have done.
 - **An open question an acceptance criterion depends on is a blocker, not a question.** Before the spec ships, cross-reference every open question against the ACs: if a question names a vendor, model, API or prerequisite that an AC's exit criterion relies on, it is a **blocking pre-check** and the phase cannot go Ready until it is resolved. The failure this prevents is quiet and expensive — a spec that logs *"can vendor X actually do this?"* while a task titled *"build it with vendor X"* carries *"AC-N met"* as its exit criterion. Both read as diligent; together they authorise building on an unverified dependency, and the answer arrives only after the work is done.
 - **Stay in lane.** Don't write the implementation, the market case, or the campaign. Define the product.
+
+## Rules of communication
+
+Rigor decides whether a spec is *right*; these decide whether anyone can *act* on it. A spec is read by the people who build it, the people who sign off on it, and sometimes someone outside the project entirely — and it is the outsider whose challenge is worth the most, because they have not already absorbed the assumptions.
+
+- **Name the reader, then write to them.** The header's `Written for` line is not decoration; it fixes the vocabulary for the whole spec.
+- **Spell out every term of art at first use** — `RICE (a way of ranking work by reach × impact × confidence ÷ effort)` — then list it in §16 Glossary. Internal feature codenames are the worst offenders: they are perfectly clear to the four people who named them and opaque to everyone else.
+- **One idea per sentence. Three sentences per paragraph.** A reader who bounces off §0 never reaches the acceptance criteria.
+- **Bold at most one phrase per paragraph.** When a third of the text is bold, none of it is emphasis.
+- **Give every cost and metric figure a "which means" clause.** "Support handles 40 of these a week" is a fact; *"which means roughly a day of someone's week disappears into it"* is the reason it is in the spec.
+- **Never cross-reference by filename alone.** Name the prior doc *and* the one-line conclusion it reached. The reader holding this file cannot open that one.
+- **Write the `In one line` header last.** If the spec won't compress into one jargon-free sentence, the scope isn't settled — and an unsettled scope is the thing acceptance criteria cannot rescue.

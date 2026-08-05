@@ -92,3 +92,9 @@ Before the brief ships:
 - [ ] Copy assets are **specced and handed off to copywriting**, not drafted here.
 - [ ] Positioning (if present) names the alternative it differentiates against.
 - [ ] Any specialized external skill referenced is flagged as **needing import** if not present.
+- [ ] The header names a **reader** (`Written for`) and the plan is written in that reader's vocabulary.
+- [ ] Every acronym and term of art is **spelled out at first use** and listed in §11 Glossary — growth writing is the most acronym-dense of the lenses, so this check bites hardest here.
+- [ ] The **binding constraint is stated in plain terms** ("people sign up but never send their first message"), not as a stage name.
+- [ ] Every baseline and target figure has a **"which means" clause**.
+- [ ] No cross-reference is a **bare filename** — each names the conclusion the other brief reached.
+- [ ] The `In one line` header survives the outsider test: a reader who knows nothing about this product understands the plan.

@@ -26,6 +26,8 @@ Four analyst lenses plus an orchestrator. Each writes a timestamped brief to `<l
 | `/architect` | Product lens — PRDs, roadmaps, user stories, acceptance criteria, scope trade-offs |
 | `/strategist` | Growth lens — marketing strategy, campaigns, email sequences, pricing/packaging |
 
+**Every lens brief is written to be readable by someone outside the project** — so a brief can be handed to an advisor, a partner, or a domain expert for their insight without a translation pass. Each template opens with a `Written for` line (which fixes the vocabulary), a one-sentence jargon-free summary, and a reading time; each closes with a **Glossary** of every term of art it used. The skills' *Rules of communication* carry the rest: spell out acronyms at first use, one idea per sentence, bold at most one phrase per paragraph, give every headline number a "which means" clause, and never cross-reference another brief by filename alone. Evidence and confidence tags still appear on every non-obvious claim — they just sit at the end of a claim rather than mid-sentence.
+
 **`/architect` has two output modes**, and the difference matters if you use the [web-studio-skills](https://github.com/dizthewize/web-studio-skills) feature pipeline:
 
 - **Brief mode** (default) — one feature or initiative → a timestamped, immutable `architect-briefs/architect-brief_<ts>_<slug>.md`.

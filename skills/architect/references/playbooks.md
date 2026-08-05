@@ -16,13 +16,13 @@ Per-request guidance. The **output format is always `architect-brief-template.md
 | Request | Go deep on | Skip / keep light |
 |---|---|---|
 | **Full PRD / feature spec** | §1 Problem, §2 Goals, §3–5 Stories/FR/AC, §6 Scope, §12 Metrics | — (use all) |
-| **Roadmap** | §0 TL;DR, §8 Release Plan, §6 Scope, §9 Prioritization | §4, §5 |
+| **Roadmap** | §0 Bottom Line Up Front, §8 Release Plan, §6 Scope, §9 Prioritization | §4, §5 |
 | **Backlog prioritization** | §9 Prioritization (scored), §6 Scope | §1 detail, §4, §5 |
 | **Sprint planning** | §8 Release Plan, §3 Stories, §10 Dependencies | §7 |
 | **User stories / acceptance criteria** | §3 Stories, §5 Acceptance Criteria, §4 FR | §7, §8, §9 |
 | **Feature scoping / trade-off** | §6 Scope, §7 Trade-off (matrix + recommendation), §2 Non-Goals | §3, §9 |
 
-Always fill §0 TL;DR (with assumptions), §1 Problem Statement, and §6 Scope.
+Always fill §0 Bottom Line Up Front (with assumptions), §1 Problem Statement, §6 Scope, and §16 Glossary.
 
 ---
 
@@ -94,3 +94,9 @@ Before marking a spec ready:
 - [ ] Dependencies and open questions each have an owner.
 - [ ] **Open questions triaged against the ACs** — none that an acceptance criterion depends on is still unresolved (see Open-question triage).
 - [ ] Assumptions are stated so reviewers can challenge them.
+- [ ] **Acceptance criteria appear in §5 and nowhere else** — §3's story table carries AC ids, never restated criteria.
+- [ ] The header names a **reader** (`Written for`) and the spec is written in that reader's vocabulary.
+- [ ] Every acronym and term of art is **spelled out at first use** and listed in §16 Glossary — internal feature codenames included.
+- [ ] Every business-cost or metric figure has a **"which means" clause**.
+- [ ] No cross-reference is a **bare filename** — each names the conclusion the other doc reached.
+- [ ] The `In one line` header survives the outsider test: a reader who knows nothing about this product understands what is being built.

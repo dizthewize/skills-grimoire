@@ -40,7 +40,7 @@ Strategist always writes the plan to a **timestamped markdown file**, then summa
 - **Filename:** `strategist-briefs/strategist-brief_<YYYY-MM-DD_HHMM>_<slug>.md`, where `<slug>` is a short kebab-case topic (e.g. `q3-launch-plan`). Create the directory if absent, unless the user names another location.
 - **Timestamp from the system, not memory:** `date +"%Y-%m-%d_%H%M"` for the filename, `date +%F` for the brief's `**Date:**` header.
 
-The request type changes which sections go deep, not the structure — see the per-request emphasis table in `references/playbooks.md`, which also holds the growth frameworks (AARRR, ICE, positioning, experiment design, email/SEO/launch patterns) and a quality checklist. Always fill §0 Bottom Line Up Front, the funnel stage + target metric, and the measurement plan.
+The request type changes which sections go deep, not the structure — see the per-request emphasis table in `references/playbooks.md`, which also holds the growth frameworks (AARRR, ICE, positioning, experiment design, email/SEO/launch patterns) and a quality checklist. Always fill §0 Bottom Line Up Front, the funnel stage + target metric, the measurement plan, and §11 Glossary.
 
 ## Optional: external marketing-skills suite
 
@@ -54,3 +54,16 @@ A 47-skill marketing suite (**coreyhaines31/marketingskills**) deepens many tact
 - **Prioritize, don't list.** Rank with ICE and show the inputs — a scored backlog beats a wish list.
 - **Design the structure, not the words.** Sequences, funnels, and launches get mapped here; final copy is a separate copywriting concern. Don't write the article or the email body.
 - **Stay in lane.** Don't synthesize user feedback or report revenue. Supply the growth strategy.
+
+## Rules of communication
+
+Rigor decides whether a plan is *right*; these decide whether anyone can *act* on it. Growth writing is the most acronym-dense of the lenses — AARRR, ICE, ICP, CAC, LTV, North Star — and a growth plan is unusually likely to be handed to an outside partner, an agency, or a contractor who does not share that vocabulary.
+
+- **Name the reader, then write to them.** The header's `Written for` line is not decoration; it fixes the vocabulary for the whole plan.
+- **Spell out every framework acronym at first use** — including in table headers, which is where they hide — then list them in §11 Glossary. A column headed `ICE` with no expansion is a table only its author can rank by.
+- **State the binding constraint in plain terms.** *"People sign up but never send their first message"* tells a reader what is broken. *"Activation is the binding constraint"* tells them you own a framework.
+- **One idea per sentence. Three sentences per paragraph.** A reader who bounces off §0 never reaches the experiment that would have changed their mind.
+- **Bold at most one phrase per paragraph.** When a third of the text is bold, none of it is emphasis.
+- **Give every baseline and target a "which means" clause.** "Activation 22% → 35%" is a fact; *"which means roughly one in three new signups reaches value instead of one in five"* is the reason it is in the plan.
+- **Never cross-reference by filename alone.** Name the prior brief *and* the one-line conclusion it reached.
+- **Write the `In one line` header last.** If the plan won't compress into one jargon-free sentence, the strategy isn't settled — it's a list of tactics.
